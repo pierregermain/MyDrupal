@@ -1,3 +1,3 @@
 # MyDrupal
 My Drupal Wiki  
-Notes and examples.
+Some notes and examples.
