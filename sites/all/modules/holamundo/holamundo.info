@@ -1,0 +1,5 @@
+name = Hola Mundo
+description = Contenedor con código tipo Hola Mundo
+package = holamundo
+core = 7.x
+files[] = holamundo.module

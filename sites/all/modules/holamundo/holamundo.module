@@ -1,0 +1,12 @@
+<?php
+/**
+* Holamundo con código tipo Hola Mundo 
+* Implements hook_help()
+*/
+function holamundo_help($path,$arg) {
+
+    if ($path == 'admin') {
+          $output = '<p>' . t('Hola Mundo') . '</p>';
+          return $output;
+    }
+}
