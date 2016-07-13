@@ -4,4 +4,5 @@ Some notes and examples.
 
 # Automatización de Testing en Drupal
 
-Por hacer
+Tutorial
+https://www.drupal.org/simpletest-tutorial-drupal7
