@@ -1,10 +1,5 @@
 # MyDrupal
-My Drupal Wiki  
-Some notes and examples.
+Have a look at my Drupal Wiki
+https://github.com/pierregermain/MyDrupal/wiki
 
-# Automatización de Testing en Drupal
 
-Simpletest
-https://www.drupal.org/simpletest-tutorial-drupal7  
-PHPUnit
-https://www.drupal.org/phpunit
