@@ -1,0 +1,22 @@
+<?php
+
+/*
+ * Implements hook_form_alter
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Symfony\Components\HttpFoundation\Request;
+
+function newdemo_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+  // Hacer no obligatorio el título de un Form
+  //$form['title']['widget'][0]['value']['#required'] = 0;
+
+  // Hacer invisible el Titulo en el Form
+  //$form['title']['widget'][0]['value']['#type'] = 'hidden';
+
+  // Debug del Form
+  //kint($form);
+
+}
+
