@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Implements hook_theme()
+ */
+function ajax_demo_theme($existing, $type, $theme, $path) {
+  return [
+    'ajax_demo' => [],
+  ];
+}

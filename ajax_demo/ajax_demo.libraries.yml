@@ -1,0 +1,14 @@
+ajax:
+  version: 1.x
+  js:
+    js/ajax_demo.js: {}
+  css:
+    module:
+      css/ajax.css: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings
+    - core/drupal
+    - core/drupal.ajax
+    - core/views.ajax

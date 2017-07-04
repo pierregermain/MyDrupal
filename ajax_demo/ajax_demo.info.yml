@@ -1,0 +1,5 @@
+name: Ajax Integrantes
+description: 'Vista por Ajax para mostar usuarios dado un link. Se necesita crear una vista tipo embed y mover el bloque creado desde la UI de Drupal a una region.'
+type: module
+package: custom
+core: 8.x

@@ -1,0 +1,31 @@
+.views-col {
+    cursor: pointer;
+}
+ 
+.views-col :hover {
+    //background-color: #eeeeee;
+}
+ 
+.js-view-dom-id-ajax-integrantes {
+    background-color: white;
+}
+
+#block-ajaxviewblock {
+
+  display: none;
+  position: fixed;
+  top: 20%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  padding: 10px;
+  border: 5px solid #9f70d0;
+  background-color: white;
+  z-index: 1002;
+  overflow: auto;
+
+}
+
+.popup-cerrar{
+  font-size: 2em;
+}
