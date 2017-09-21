@@ -1,4 +1,4 @@
 core = "7.x"
 description = "Ffw Search Functionality"
-name = "ffw Search"
-package = "Ffw Agency"
+name = "Ffw Search"
+package = "Ffw"
