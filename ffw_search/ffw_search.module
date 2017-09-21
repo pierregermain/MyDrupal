@@ -1,0 +1,106 @@
+<?php
+
+/**
+ * @file
+ * Custom Ffw Search Functionality.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+
+function ffw_search_menu() {
+  $items['search/node/%'] = array(
+    'page callback' => 'ffw_search_do_search',
+    'page arguments' => array(2),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implements page callback().
+ */
+function ffw_search_page() {
+  return '';
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function ffw_search_block_info() {
+
+  $blocks['ffw_search_block_form'] = array(
+    'info' => t('Ffw - Search'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function ffw_search_block_view($delta = '') {
+
+  $block = array();
+  switch ($delta) {
+    case 'ffw_search_block_form':
+      $block['title'] = "Ffw search";
+      $block['content'] = drupal_get_form('ffw_search_search_box_form');
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Implements search_box_form().
+ */
+function ffw_search_search_box_form($form,&$form_state) {
+
+  $form['search_field'] = array(
+    '#title' => '',
+    '#type' => 'textfield',
+    '#size' => '18',
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Search'),
+  );
+  return $form;
+}
+
+/**
+ * Implements hook_form_validate().
+ */
+function ffw_search_search_box_form_validate(&$form, &$form_state) {
+
+  if (strlen($form_state['values']['search_field']) < 3) {
+    form_set_error('search_field', t("The search term must be longer than 3 characters."));
+  }
+}
+
+/**
+ * Implements hook_form_submit().
+ */
+function ffw_search_search_box_form_submit(&$form, &$form_state) {
+  //drupal_goto('search/node/' . $form_state['values']['search_field']);
+  $form_state['redirect'] = 'search/node/' . trim($form_state['values']['search_field']);
+}
+
+/**
+ * Auxiliary Function
+ */
+function ffw_search_do_search($search_field) {
+
+  // set the page title
+  drupal_set_title('Ffw Search Results');
+
+  // get the search results
+  $results = module_invoke('node', 'search_execute', $search_field );
+  return theme('search_results', array('results' => $results));
+}
+
