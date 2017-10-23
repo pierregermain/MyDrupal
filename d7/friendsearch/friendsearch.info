@@ -1,0 +1,8 @@
+name = Friendsearch
+description = Friend Search for the Friend content type.
+package = Custom node type
+core = 7.x
+
+dependencies[] = friend
+
+files[] = friendsearch.module

@@ -1,0 +1,221 @@
+<?php
+/**
+ * Implements hook_node_info()
+ */
+function friend_node_info() {
+  return array(
+    'friend' => array(
+      'name' => t('Friend'),
+      'base' => 'friend',
+      'description' => t('You can define new Friends here'),
+      'has_title' => TRUE,
+      'title_label' => t('Friend title')
+    )
+  );
+}
+/**
+ * Implement hook_form()
+ */
+function friend_form($node, $form_state) {
+  return node_content_form($node, $form_state);
+}
+/**
+ * Implement hook_form_alter()
+ */
+function friend_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'friend_node_form') {
+    // Escodemos el check de enviado
+    $form['field_email_send']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function friend_cron() {
+
+  // Look up last time _friend_function() was run compared to 1 day ago.
+  if (variable_get('friend_mail_function_last_run', 0) <= strtotime('-1 day')) {
+    // Run my function
+    _friend_mail_function();
+
+    //Store the time when _friend_mail_function() was last run.
+    variable_set('friend_mail_function_last_run', time());
+  }
+}
+
+function _friend_mail_function(){
+
+  // Obtener los NID's de Friends
+  $nids = _friend_get_nids();
+
+  // Obtener campos necesarios para mandar mail
+  if (!empty($nids)) {
+    $nids = _friend_get_fields($nids);
+  }
+
+  // Para cada Friend vemos si hay que mandar un mail
+  foreach ($nids as $value) {
+
+    $email_send = $value->field_email_send['und'][0]['value'];
+    $birthday = $value->field_birthday['und'][0]['value'];// Formato: 2016-09-24 16:15:00
+    $birthday_timestamp = strtotime($birthday);
+    $email = $value->field_email['und'][0]['email'];
+    $name = $value->field_first_name['und'][0]['value'];
+
+    // Calcular Próximo Cumpleaños días antes del siguiente cumpleaños
+    $next_birthday = _friend_next_birthday($birthday_timestamp);
+
+    // Si el cumpleaños se acerca y no se ha mandado email
+    if ( $next_birthday <= strtotime('+3 days') && ($email_send == 0)){
+
+      // Mandar Mail
+      $return_value = _friend_send_mail($email,$name);
+
+      // Si se ha procesado el mail a nivel de PHP independientemente que se hay mandado
+      // ponemos el check de enviado a true
+      if ($return_value == TRUE) {
+
+        $node = node_load($value->nid);
+        $node_wrapper = entity_metadata_wrapper('node', $node);
+        $node_wrapper->field_email_send->set(1);
+        $node_wrapper->save();
+
+      }
+
+    }
+    // Si el próximo cumpleaños es dentro de mucho tiempo
+    if ( $next_birthday >= strtotime('+11 month') && ($email_send == 1)){
+
+      $node = node_load($value->nid);
+      $node_wrapper = entity_metadata_wrapper('node', $node);
+      $node_wrapper->field_email_send->set(0);
+      $node_wrapper->save();
+
+    }
+
+  }
+}
+
+/**
+ * Implements hook_mail for module_name.
+ */
+function friend_mail($key, &$message, $params) {
+  switch ($key) {
+  case 'friend_key':
+    $message['subject'] = $params['subject'];
+    $message['body'][] = $params['body'];
+    break;
+  }
+}
+/**
+ * Implements hook_entity_info_alter().
+ */
+function friend_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['friend_display'] = array( 
+    'label' => t('Friend Display'),
+    'custom settings' => TRUE,
+  );
+}
+/**
+ * Implements hook_entity_view_mode_alter() // for switching the view mode
+ */
+function friend_entity_view_mode_alter(&$view_mode, $context) {
+  if ($context['entity_type'] == 'node' && $context['entity']->type == 'friend') {
+    $view_mode = 'friend_display';
+  }
+}
+function _friend_next_birthday($birthday) {
+
+  dpm($birthday,'input');
+
+  $birthday_day = date('j', $birthday);
+  $birthday_month = date('n', $birthday);
+  $birthday_year = date('Y', $birthday);
+
+  dpm($birthday_day,'day');
+  dpm($birthday_month,'month');
+  dpm($birthday_year,'year');
+
+  $today_day = date("j");
+  $today_month = date("n");
+  $today_year = date("Y");
+  $next_year = date("Y") + 1;
+
+
+  if($today_month <= $birthday_month) {
+    if($today_month == $birthday_month) {
+      if($birthday_day > $today_day) {
+        return (strtotime($birthday_day."-".$birthday_month."-".$today_year));
+      }
+      else {
+        return (strtotime($birthday_day."-".$birthday_month."-".$next_year));
+      }
+    }
+    else {
+      return (strtotime($birthday_day."-".$birthday_month."-".$today_year));
+    }
+  }
+  else {
+    return (strtotime($birthday_day."-".$birthday_month."-".$next_year));
+  }
+}
+
+function _friend_send_mail($email,$name){
+  // Send Mail
+  $message = 'Hola .'.$name.', Tu cumpleaños es dentro de poco.';
+  // Send the email.
+  $params = array(
+    'subject' => t('Tu Cumpleaños es dentro de poco'),
+    'body' => check_markup(
+      t($message),
+      'plain_text'
+    ),
+  );
+  $return_value = drupal_mail('friend', 'friend_key', $email, language_default(), $params);
+  return $return_value['send'];
+}
+
+function _friend_get_nids(){
+  $node_type = 'friend';
+  $nids = db_query("SELECT nid FROM {node} WHERE type = :type", array(':type' => $node_type))
+    ->fetchCol();
+  return $nids;
+}
+
+function _friend_get_fields($nids){
+
+  // Birthday: Get the field meta data for the field_id.
+  $field_name_birthday = 'field_birthday';
+  $field_info_birthday = field_info_field($field_name_birthday);
+  $field_id_birthday = $field_info_birthday['id'];
+
+  // Email: Get the field meta data for the field_id.
+  $field_name_email = 'field_email';
+  $field_info_email = field_info_field($field_name_email);
+  $field_id_email = $field_info_email['id'];
+
+  // Email Send Check: Get the field meta data for the field_id.
+  $field_name_email_send = 'field_email_send';
+  $field_info_email_send = field_info_field($field_name_email_send);
+  $field_id_email_send = $field_info_email_send['id'];
+
+  // First Name: Get the field meta data for the field_id.
+  $field_name_first_name = 'field_first_name';
+  $field_info_first_name = field_info_field($field_name_first_name);
+  $field_id_first_name = $field_info_first_name['id'];
+
+  // Load up the properties from the node table.
+  //$nids = array(51, 52, 53);
+  $sql = 'SELECT * FROM {node} WHERE nid IN (:nids)';
+  $nodes = db_query($sql, array(':nids' => $nids))->fetchAllAssoc('nid');
+
+  // Attach the single field to all nodes.
+  // Note that returned entities may contain data for other fields, for example if they are read from a cache.
+  field_attach_load('node', $nodes, FIELD_LOAD_CURRENT, array('field_id' => $field_id_birthday));
+  field_attach_load('node', $nodes, FIELD_LOAD_CURRENT, array('field_id' => $field_id_email));
+  field_attach_load('node', $nodes, FIELD_LOAD_CURRENT, array('field_id' => $field_id_email_send));
+  field_attach_load('node', $nodes, FIELD_LOAD_CURRENT, array('field_id' => $field_id_first_name));
+
+  return $nodes;
+}

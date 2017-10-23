@@ -1,0 +1,16 @@
+name = Friend
+description = Friend content type. To delete all nodes do from the terminal drush delete-all friend
+package = Custom node type
+core = 7.x
+
+dependencies[] = date
+dependencies[] = email
+dependencies[] = image
+dependencies[] = text
+dependencies[] = entity
+; disable these in production
+dependencies[] = features
+dependencies[] = delete_all
+
+files[] = friend.install
+files[] = friend.module

@@ -1,0 +1,93 @@
+<?php
+function friendsearch_menu() {
+  $items['search_friends'] = array(
+    'title' => 'Search Friends',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('friendsearch_form'),
+    'access arguments' => array('access content'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['friendsearch-autocomplete-engine'] = array(
+    'page callback' => 'friendsearch_autocomplete',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+function friendsearch_form($form, &$form_state) {
+  $form = array();
+
+  $form['names'] = array(
+    '#title' => t('Friends'),
+    '#type' => 'textfield',
+    '#maxlength' => 60,
+    '#autocomplete_path' => 'friendsearch-autocomplete-engine',
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+  );
+
+  return $form;
+}
+/**
+ * Implements hook_form_submit().
+ */
+function friendsearch_form_submit(&$form, &$form_state) {
+  $form_state['redirect'] = '/node/' . trim($form_state['values']['names']);
+}
+
+function friendsearch_autocomplete($text) {
+  //function friendsearch_init(){
+  $results = array();
+
+  //$text = 'pierre';
+
+  // Query contra el content type friends
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'friend')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_first_name', 'value', $text . '%', 'like')
+    ->fieldOrderBy('field_first_name', 'value', 'ASC')
+    ->range(0, 10)
+    ->addMetaData('account', user_load(1));
+  $result = $query->execute();
+
+  // Obtener array de nids
+  if (isset($result['node'])) {
+    $nids = array_keys($result['node']);
+  } 
+
+  // Obtener Nombres para cada nid
+  if (isset($nids)){
+    $field_name_first_name = 'field_first_name';
+    $field_info_first_name = field_info_field($field_name_first_name);
+    $field_id_first_name = $field_info_first_name['id'];
+
+    $field_name_name = 'field_name';
+    $field_info_name = field_info_field($field_name_name);
+    $field_id_name = $field_info_name['id'];
+
+    // Load up the properties from the node table.
+    $sql = 'SELECT * FROM {node} WHERE nid IN (:nids)';
+    $nodes = db_query($sql, array(':nids' => $nids))->fetchAllAssoc('nid');
+
+    field_attach_load('node', $nodes, FIELD_LOAD_CURRENT, array('field_id' => $field_id_first_name));
+    field_attach_load('node', $nodes, FIELD_LOAD_CURRENT, array('field_id' => $field_id_name));
+
+    // Construcción del array de nombres
+    foreach ($nodes as $value) {
+      // Obtenemos los valores necesarios para construir el Json
+      $first_name = $value->field_first_name['und'][0]['value'];
+      $name = $value->field_name['und'][0]['value'];
+      $link  = $value->nid;
+
+      $results[$link] = check_plain($first_name.' '.$name);
+    }
+  }
+  // Devolvemos el array en forma de json
+  drupal_json_output($results);
+}
