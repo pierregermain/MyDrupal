@@ -1,0 +1,12 @@
+# Define the menu links for this module
+
+entity.content_entity_example_colorstr.collection:
+  title: 'Content Entity Example: Colorstrs Listing'
+  route_name: entity.content_entity_example_colorstr.collection
+  description: 'List Colorstrs'
+  weight: 10
+content_entity_example_colorstr.admin.structure.settings:
+  title: Colorstr Settings
+  description: 'Configure Colorstr entity'
+  route_name:  content_entity_example.colorstr_settings
+  parent: system.admin_structure

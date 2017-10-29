@@ -1,0 +1,58 @@
+# This file brings everything together. Very nifty!
+
+# Route name can be used in several places; e.g. links, redirects, and local
+# actions.
+entity.content_entity_example_colorstr.canonical:
+  path: '/content_entity_example_colorstr/{content_entity_example_colorstr}'
+  defaults:
+  # Calls the view controller, defined in the annotation of the colorstr entity
+    _entity_view: 'content_entity_example_colorstr'
+    _title: 'Colorstr Content'
+  requirements:
+  # Calls the access controller of the entity, $operation 'view'
+    _entity_access: 'content_entity_example_colorstr.view'
+
+entity.content_entity_example_colorstr.collection:
+  path: '/content_entity_example_colorstr/list'
+  defaults:
+  # Calls the list controller, defined in the annotation of the colorstr entity.
+    _entity_list: 'content_entity_example_colorstr'
+    _title: 'Colorstr List'
+  requirements:
+  # Checks for permission directly.
+    _permission: 'view colorstr entity'
+
+content_entity_example.colorstr_add:
+  path: '/content_entity_example_colorstr/add'
+  defaults:
+  # Calls the form.add controller, defined in the colorstr entity.
+    _entity_form: content_entity_example_colorstr.add
+    _title: 'Add Colorstr'
+  requirements:
+    _entity_create_access: 'content_entity_example_colorstr'
+
+entity.content_entity_example_colorstr.edit_form:
+  path: '/content_entity_example_colorstr/{content_entity_example_colorstr}/edit'
+  defaults:
+  # Calls the form.edit controller, defined in the colorstr entity.
+    _entity_form: content_entity_example_colorstr.edit
+    _title: 'Edit Colorstr'
+  requirements:
+    _entity_access: 'content_entity_example_colorstr.edit'
+
+entity.content_entity_example_colorstr.delete_form:
+  path: '/colorstr/{content_entity_example_colorstr}/delete'
+  defaults:
+    # Calls the form.delete controller, defined in the colorstr entity.
+    _entity_form: content_entity_example_colorstr.delete
+    _title: 'Delete Colorstr'
+  requirements:
+    _entity_access: 'content_entity_example_colorstr.delete'
+
+content_entity_example.colorstr_settings:
+  path: 'admin/structure/content_entity_example_colorstr_settings'
+  defaults:
+    _form: '\Drupal\content_entity_example\Form\ColorstrSettingsForm'
+    _title: 'Colorstr Settings'
+  requirements:
+    _permission: 'administer colorstr entity'

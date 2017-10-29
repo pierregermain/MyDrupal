@@ -1,0 +1,10 @@
+'delete colorstr entity':
+  title: Delete entity content.
+'add colorstr entity':
+  title: Add entity content
+'view colorstr entity':
+  title: View entity content
+'edit colorstr entity':
+  title: Edit entity content
+'administer colorstr entity':
+  title: Administer settings
