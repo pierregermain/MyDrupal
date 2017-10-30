@@ -1,0 +1,26 @@
+uuid: 259170f0-8319-4d95-87e7-2abf193eae1f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.color.field_color_structure
+  module:
+    - customentity
+id: color.color.field_color_structure
+field_name: field_color_structure
+entity_type: color
+bundle: color
+label: 'Color Structure'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:colorstructure'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

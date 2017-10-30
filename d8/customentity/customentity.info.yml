@@ -1,0 +1,5 @@
+name: customentity
+type: module
+description: Custom Entity
+core: 8.x
+package: Custom

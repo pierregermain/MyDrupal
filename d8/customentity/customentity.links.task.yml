@@ -1,0 +1,198 @@
+# Product routing definition
+product.settings_tab:
+  route_name: product.settings
+  title: 'Settings'
+  base_route: product.settings
+
+entity.product.canonical:
+  route_name: entity.product.canonical
+  base_route: entity.product.canonical
+  title: 'View'
+
+entity.product.edit_form:
+  route_name: entity.product.edit_form
+  base_route: entity.product.canonical
+  title: 'Edit'
+
+entity.product.delete_form:
+  route_name:  entity.product.delete_form
+  base_route:  entity.product.canonical
+  title: Delete
+  weight: 10
+
+# Color routing definition
+color.settings_tab:
+  route_name: color.settings
+  title: 'Settings'
+  base_route: color.settings
+
+entity.color.canonical:
+  route_name: entity.color.canonical
+  base_route: entity.color.canonical
+  title: 'View'
+
+entity.color.edit_form:
+  route_name: entity.color.edit_form
+  base_route: entity.color.canonical
+  title: 'Edit'
+
+entity.color.delete_form:
+  route_name:  entity.color.delete_form
+  base_route:  entity.color.canonical
+  title: Delete
+  weight: 10
+
+# Colorstructure routing definition
+colorstructure.settings_tab:
+  route_name: colorstructure.settings
+  title: 'Settings'
+  base_route: colorstructure.settings
+
+entity.colorstructure.canonical:
+  route_name: entity.colorstructure.canonical
+  base_route: entity.colorstructure.canonical
+  title: 'View'
+
+entity.colorstructure.edit_form:
+  route_name: entity.colorstructure.edit_form
+  base_route: entity.colorstructure.canonical
+  title: 'Edit'
+
+entity.colorstructure.delete_form:
+  route_name:  entity.colorstructure.delete_form
+  base_route:  entity.colorstructure.canonical
+  title: Delete
+  weight: 10
+
+# Product routing definition
+product.settings_tab:
+  route_name: product.settings
+  title: 'Settings'
+  base_route: product.settings
+
+entity.product.canonical:
+  route_name: entity.product.canonical
+  base_route: entity.product.canonical
+  title: 'View'
+
+entity.product.edit_form:
+  route_name: entity.product.edit_form
+  base_route: entity.product.canonical
+  title: 'Edit'
+
+entity.product.delete_form:
+  route_name:  entity.product.delete_form
+  base_route:  entity.product.canonical
+  title: Delete
+  weight: 10
+
+# Color routing definition
+color.settings_tab:
+  route_name: color.settings
+  title: 'Settings'
+  base_route: color.settings
+
+entity.color.canonical:
+  route_name: entity.color.canonical
+  base_route: entity.color.canonical
+  title: 'View'
+
+entity.color.edit_form:
+  route_name: entity.color.edit_form
+  base_route: entity.color.canonical
+  title: 'Edit'
+
+entity.color.delete_form:
+  route_name:  entity.color.delete_form
+  base_route:  entity.color.canonical
+  title: Delete
+  weight: 10
+
+# Colorstructure routing definition
+colorstructure.settings_tab:
+  route_name: colorstructure.settings
+  title: 'Settings'
+  base_route: colorstructure.settings
+
+entity.colorstructure.canonical:
+  route_name: entity.colorstructure.canonical
+  base_route: entity.colorstructure.canonical
+  title: 'View'
+
+entity.colorstructure.edit_form:
+  route_name: entity.colorstructure.edit_form
+  base_route: entity.colorstructure.canonical
+  title: 'Edit'
+
+entity.colorstructure.delete_form:
+  route_name:  entity.colorstructure.delete_form
+  base_route:  entity.colorstructure.canonical
+  title: Delete
+  weight: 10
+
+# Product routing definition
+product.settings_tab:
+  route_name: product.settings
+  title: 'Settings'
+  base_route: product.settings
+
+entity.product.canonical:
+  route_name: entity.product.canonical
+  base_route: entity.product.canonical
+  title: 'View'
+
+entity.product.edit_form:
+  route_name: entity.product.edit_form
+  base_route: entity.product.canonical
+  title: 'Edit'
+
+entity.product.delete_form:
+  route_name:  entity.product.delete_form
+  base_route:  entity.product.canonical
+  title: Delete
+  weight: 10
+
+# Color routing definition
+color.settings_tab:
+  route_name: color.settings
+  title: 'Settings'
+  base_route: color.settings
+
+entity.color.canonical:
+  route_name: entity.color.canonical
+  base_route: entity.color.canonical
+  title: 'View'
+
+entity.color.edit_form:
+  route_name: entity.color.edit_form
+  base_route: entity.color.canonical
+  title: 'Edit'
+
+entity.color.delete_form:
+  route_name:  entity.color.delete_form
+  base_route:  entity.color.canonical
+  title: Delete
+  weight: 10
+
+# Colorstructure routing definition
+colorstructure.settings_tab:
+  route_name: colorstructure.settings
+  title: 'Settings'
+  base_route: colorstructure.settings
+
+entity.colorstructure.canonical:
+  route_name: entity.colorstructure.canonical
+  base_route: entity.colorstructure.canonical
+  title: 'View'
+
+entity.colorstructure.edit_form:
+  route_name: entity.colorstructure.edit_form
+  base_route: entity.colorstructure.canonical
+  title: 'Edit'
+
+entity.colorstructure.delete_form:
+  route_name:  entity.colorstructure.delete_form
+  base_route:  entity.colorstructure.canonical
+  title: Delete
+  weight: 10
+

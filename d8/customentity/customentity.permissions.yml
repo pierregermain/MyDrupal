@@ -1,0 +1,198 @@
+add product entities:
+  title: 'Create new Product entities'
+
+administer product entities:
+  title: 'Administer Product entities'
+  description: 'Allow to access the administration form to configure Product entities.'
+  restrict access: true
+
+delete product entities:
+  title: 'Delete Product entities'
+
+edit product entities:
+  title: 'Edit Product entities'
+
+access product overview:
+  title: 'Access the Product overview page'
+
+view published product entities:
+  title: 'View published Product entities'
+
+view unpublished product entities:
+  title: 'View unpublished Product entities'
+add color entities:
+  title: 'Create new Color entities'
+
+administer color entities:
+  title: 'Administer Color entities'
+  description: 'Allow to access the administration form to configure Color entities.'
+  restrict access: true
+
+delete color entities:
+  title: 'Delete Color entities'
+
+edit color entities:
+  title: 'Edit Color entities'
+
+access color overview:
+  title: 'Access the Color overview page'
+
+view published color entities:
+  title: 'View published Color entities'
+
+view unpublished color entities:
+  title: 'View unpublished Color entities'
+add colorstructure entities:
+  title: 'Create new Colorstructure entities'
+
+administer colorstructure entities:
+  title: 'Administer Colorstructure entities'
+  description: 'Allow to access the administration form to configure Colorstructure entities.'
+  restrict access: true
+
+delete colorstructure entities:
+  title: 'Delete Colorstructure entities'
+
+edit colorstructure entities:
+  title: 'Edit Colorstructure entities'
+
+access colorstructure overview:
+  title: 'Access the Colorstructure overview page'
+
+view published colorstructure entities:
+  title: 'View published Colorstructure entities'
+
+view unpublished colorstructure entities:
+  title: 'View unpublished Colorstructure entities'
+add product entities:
+  title: 'Create new Product entities'
+
+administer product entities:
+  title: 'Administer Product entities'
+  description: 'Allow to access the administration form to configure Product entities.'
+  restrict access: true
+
+delete product entities:
+  title: 'Delete Product entities'
+
+edit product entities:
+  title: 'Edit Product entities'
+
+access product overview:
+  title: 'Access the Product overview page'
+
+view published product entities:
+  title: 'View published Product entities'
+
+view unpublished product entities:
+  title: 'View unpublished Product entities'
+add color entities:
+  title: 'Create new Color entities'
+
+administer color entities:
+  title: 'Administer Color entities'
+  description: 'Allow to access the administration form to configure Color entities.'
+  restrict access: true
+
+delete color entities:
+  title: 'Delete Color entities'
+
+edit color entities:
+  title: 'Edit Color entities'
+
+access color overview:
+  title: 'Access the Color overview page'
+
+view published color entities:
+  title: 'View published Color entities'
+
+view unpublished color entities:
+  title: 'View unpublished Color entities'
+add colorstructure entities:
+  title: 'Create new Colorstructure entities'
+
+administer colorstructure entities:
+  title: 'Administer Colorstructure entities'
+  description: 'Allow to access the administration form to configure Colorstructure entities.'
+  restrict access: true
+
+delete colorstructure entities:
+  title: 'Delete Colorstructure entities'
+
+edit colorstructure entities:
+  title: 'Edit Colorstructure entities'
+
+access colorstructure overview:
+  title: 'Access the Colorstructure overview page'
+
+view published colorstructure entities:
+  title: 'View published Colorstructure entities'
+
+view unpublished colorstructure entities:
+  title: 'View unpublished Colorstructure entities'
+add product entities:
+  title: 'Create new Product entities'
+
+administer product entities:
+  title: 'Administer Product entities'
+  description: 'Allow to access the administration form to configure Product entities.'
+  restrict access: true
+
+delete product entities:
+  title: 'Delete Product entities'
+
+edit product entities:
+  title: 'Edit Product entities'
+
+access product overview:
+  title: 'Access the Product overview page'
+
+view published product entities:
+  title: 'View published Product entities'
+
+view unpublished product entities:
+  title: 'View unpublished Product entities'
+add color entities:
+  title: 'Create new Color entities'
+
+administer color entities:
+  title: 'Administer Color entities'
+  description: 'Allow to access the administration form to configure Color entities.'
+  restrict access: true
+
+delete color entities:
+  title: 'Delete Color entities'
+
+edit color entities:
+  title: 'Edit Color entities'
+
+access color overview:
+  title: 'Access the Color overview page'
+
+view published color entities:
+  title: 'View published Color entities'
+
+view unpublished color entities:
+  title: 'View unpublished Color entities'
+add colorstructure entities:
+  title: 'Create new Colorstructure entities'
+
+administer colorstructure entities:
+  title: 'Administer Colorstructure entities'
+  description: 'Allow to access the administration form to configure Colorstructure entities.'
+  restrict access: true
+
+delete colorstructure entities:
+  title: 'Delete Colorstructure entities'
+
+edit colorstructure entities:
+  title: 'Edit Colorstructure entities'
+
+access colorstructure overview:
+  title: 'Access the Colorstructure overview page'
+
+view published colorstructure entities:
+  title: 'View published Colorstructure entities'
+
+view unpublished colorstructure entities:
+  title: 'View unpublished Colorstructure entities'

@@ -1,0 +1,126 @@
+
+# Product menu items definition
+entity.product.collection:
+  title: 'Product list'
+  route_name: entity.product.collection
+  description: 'List Product entities'
+  parent: system.admin_structure
+  weight: 100
+
+product.admin.structure.settings:
+  title: Product settings
+  description: 'Configure Product entities'
+  route_name: product.settings
+  parent: system.admin_structure
+
+# Color menu items definition
+entity.color.collection:
+  title: 'Color list'
+  route_name: entity.color.collection
+  description: 'List Color entities'
+  parent: system.admin_structure
+  weight: 100
+
+color.admin.structure.settings:
+  title: Color settings
+  description: 'Configure Color entities'
+  route_name: color.settings
+  parent: system.admin_structure
+
+# Colorstructure menu items definition
+entity.colorstructure.collection:
+  title: 'Colorstructure list'
+  route_name: entity.colorstructure.collection
+  description: 'List Colorstructure entities'
+  parent: system.admin_structure
+  weight: 100
+
+colorstructure.admin.structure.settings:
+  title: Colorstructure settings
+  description: 'Configure Colorstructure entities'
+  route_name: colorstructure.settings
+  parent: system.admin_structure
+
+# Product menu items definition
+entity.product.collection:
+  title: 'Product list'
+  route_name: entity.product.collection
+  description: 'List Product entities'
+  parent: system.admin_structure
+  weight: 100
+
+product.admin.structure.settings:
+  title: Product settings
+  description: 'Configure Product entities'
+  route_name: product.settings
+  parent: system.admin_structure
+
+# Color menu items definition
+entity.color.collection:
+  title: 'Color list'
+  route_name: entity.color.collection
+  description: 'List Color entities'
+  parent: system.admin_structure
+  weight: 100
+
+color.admin.structure.settings:
+  title: Color settings
+  description: 'Configure Color entities'
+  route_name: color.settings
+  parent: system.admin_structure
+
+# Colorstructure menu items definition
+entity.colorstructure.collection:
+  title: 'Colorstructure list'
+  route_name: entity.colorstructure.collection
+  description: 'List Colorstructure entities'
+  parent: system.admin_structure
+  weight: 100
+
+colorstructure.admin.structure.settings:
+  title: Colorstructure settings
+  description: 'Configure Colorstructure entities'
+  route_name: colorstructure.settings
+  parent: system.admin_structure
+
+# Product menu items definition
+entity.product.collection:
+  title: 'Product list'
+  route_name: entity.product.collection
+  description: 'List Product entities'
+  parent: system.admin_structure
+  weight: 100
+
+product.admin.structure.settings:
+  title: Product settings
+  description: 'Configure Product entities'
+  route_name: product.settings
+  parent: system.admin_structure
+
+# Color menu items definition
+entity.color.collection:
+  title: 'Color list'
+  route_name: entity.color.collection
+  description: 'List Color entities'
+  parent: system.admin_structure
+  weight: 100
+
+color.admin.structure.settings:
+  title: Color settings
+  description: 'Configure Color entities'
+  route_name: color.settings
+  parent: system.admin_structure
+
+# Colorstructure menu items definition
+entity.colorstructure.collection:
+  title: 'Colorstructure list'
+  route_name: entity.colorstructure.collection
+  description: 'List Colorstructure entities'
+  parent: system.admin_structure
+  weight: 100
+
+colorstructure.admin.structure.settings:
+  title: Colorstructure settings
+  description: 'Configure Colorstructure entities'
+  route_name: colorstructure.settings
+  parent: system.admin_structure

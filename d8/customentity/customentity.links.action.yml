@@ -1,0 +1,45 @@
+entity.product.add_form:
+  route_name: entity.product.add_form
+  title: 'Add Product'
+  appears_on:
+    - entity.product.collection
+entity.color.add_form:
+  route_name: entity.color.add_form
+  title: 'Add Color'
+  appears_on:
+    - entity.color.collection
+entity.colorstructure.add_form:
+  route_name: entity.colorstructure.add_form
+  title: 'Add Colorstructure'
+  appears_on:
+    - entity.colorstructure.collection
+entity.product.add_form:
+  route_name: entity.product.add_form
+  title: 'Add Product'
+  appears_on:
+    - entity.product.collection
+entity.color.add_form:
+  route_name: entity.color.add_form
+  title: 'Add Color'
+  appears_on:
+    - entity.color.collection
+entity.colorstructure.add_form:
+  route_name: entity.colorstructure.add_form
+  title: 'Add Colorstructure'
+  appears_on:
+    - entity.colorstructure.collection
+entity.product.add_form:
+  route_name: entity.product.add_form
+  title: 'Add Product'
+  appears_on:
+    - entity.product.collection
+entity.color.add_form:
+  route_name: entity.color.add_form
+  title: 'Add Color'
+  appears_on:
+    - entity.color.collection
+entity.colorstructure.add_form:
+  route_name: entity.colorstructure.add_form
+  title: 'Add Colorstructure'
+  appears_on:
+    - entity.colorstructure.collection

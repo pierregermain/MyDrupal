@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains customentity.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function customentity_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the customentity module.
+    case 'help.page.customentity':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Custom Entity') . '</p>';
+      return $output;
+
+    default:
+  }
+}

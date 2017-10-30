@@ -1,0 +1,22 @@
+uuid: 135ddff5-ad43-45ae-958d-346632ffa737
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.colorstructure.field_value
+  module:
+    - customentity
+id: colorstructure.colorstructure.field_value
+field_name: field_value
+entity_type: colorstructure
+bundle: colorstructure
+label: Value
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '000000'
+default_value_callback: ''
+settings: {  }
+field_type: string

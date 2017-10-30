@@ -1,0 +1,21 @@
+uuid: 91d86479-560b-4fdf-8da4-f7e539c0f946
+langcode: en
+status: true
+dependencies:
+  module:
+    - customentity
+id: color.field_value
+field_name: field_value
+entity_type: color
+type: string
+settings:
+  max_length: 8
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
