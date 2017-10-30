@@ -41,6 +41,8 @@ use Drupal\user\UserInterface;
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",
+ *     "value" = "value",
+ *     "colorstructure = colorstructure",
  *     "uuid" = "uuid",
  *     "uid" = "user_id",
  *     "langcode" = "langcode",
@@ -85,6 +87,35 @@ class Color extends ContentEntityBase implements ColorInterface {
     return $this;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getValue() {
+    return $this->get('value')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setValue($name) {
+    $this->set('value', $name);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getColorstructure() {
+    return $this->get('colorstructure')->target_id;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setColorstructure($uid) {
+    $this->set('colorstructure', $uid);
+    return $this;
+  }
   /**
    * {@inheritdoc}
    */
@@ -192,6 +223,51 @@ class Color extends ContentEntityBase implements ColorInterface {
       ->setDisplayOptions('form', [
         'type' => 'string_textfield',
         'weight' => -4,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['value'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Value'))
+      ->setDescription(t('The value of the Product entity.'))
+      ->setSettings([
+        'max_length' => 6,
+        'text_processing' => 0,
+      ])
+      ->setDefaultValue('000000')
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -3,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -3,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['colorstructure'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Colorstructure'))
+      ->setDescription(t('The Colorstructure of the Color entity.'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'colorstructure')
+      ->setSetting('handler', 'default')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'type' => 'author',
+        'weight' => -1,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => -1,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);

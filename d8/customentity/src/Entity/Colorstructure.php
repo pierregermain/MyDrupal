@@ -41,6 +41,7 @@ use Drupal\user\UserInterface;
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",
+ *     "value" = "value",
  *     "uuid" = "uuid",
  *     "uid" = "user_id",
  *     "langcode" = "langcode",
@@ -82,6 +83,21 @@ class Colorstructure extends ContentEntityBase implements ColorstructureInterfac
    */
   public function setName($name) {
     $this->set('name', $name);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getValue() {
+    return $this->get('value')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setValue($name) {
+    $this->set('value', $name);
     return $this;
   }
 
@@ -192,6 +208,26 @@ class Colorstructure extends ContentEntityBase implements ColorstructureInterfac
       ->setDisplayOptions('form', [
         'type' => 'string_textfield',
         'weight' => -4,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['value'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Value'))
+      ->setDescription(t('The value of the Product entity.'))
+      ->setSettings([
+        'max_length' => 6,
+        'text_processing' => 0,
+      ])
+      ->setDefaultValue('000000')
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -3,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -3,
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);

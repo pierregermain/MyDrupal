@@ -41,6 +41,7 @@ use Drupal\user\UserInterface;
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",
+ *     "color = color",
  *     "uuid" = "uuid",
  *     "uid" = "user_id",
  *     "langcode" = "langcode",
@@ -82,6 +83,21 @@ class Product extends ContentEntityBase implements ProductInterface {
    */
   public function setName($name) {
     $this->set('name', $name);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getColor() {
+    return $this->get('color')->target_id;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setColor($uid) {
+    $this->set('color', $uid);
     return $this;
   }
 
@@ -192,6 +208,31 @@ class Product extends ContentEntityBase implements ProductInterface {
       ->setDisplayOptions('form', [
         'type' => 'string_textfield',
         'weight' => -4,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['color'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Color'))
+      ->setDescription(t('The Color of the Product entity.'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'color')
+      ->setSetting('handler', 'default')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'type' => 'author',
+        'weight' => -1,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => -1,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
