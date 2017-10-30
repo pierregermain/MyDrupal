@@ -103,10 +103,6 @@ Have a deep look on how it is done with the *user_id* and then you will be able 
 
 Just as for the Color Entity, but this time you will modify the Product Entity.
 
-### Unit Testing
-
-https://docs.drupalconsole.com/en/commands/test-run.html
-
 # Example 2: Using the content_entity_example
 
 If you are not willing to use the Drupal Console you can do this exercise using the content_entity_example from drupal.og
