@@ -7,3 +7,6 @@ Drupal 8 Module Development Notes
 https://www.drupal.org/docs/8/api/routing-system/structure-of-routes
  - `path` key indicates the path we want this route to work on
  - `defaults` section defines the handler
+ - we can use *Route variables* like `path: '/hello/{param}'` and/or `/hello/{node}`
+# Namespaces
+
