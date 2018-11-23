@@ -9,4 +9,6 @@ https://www.drupal.org/docs/8/api/routing-system/structure-of-routes
  - `defaults` section defines the handler
  - we can use *Route variables* like `path: '/hello/{param}'` and/or `/hello/{node}`
 # Namespaces
+ - Drupal 8 uses the PSR-4 namespace autoloading standard.
 
+Pag 33
