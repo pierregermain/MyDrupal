@@ -5,3 +5,5 @@ Drupal 8 Module Development Notes
  - Use short and concise DocBlocks
 # About Routes
 https://www.drupal.org/docs/8/api/routing-system/structure-of-routes
+ - `path` key indicates the path we want this route to work on
+ - `defaults` section defines the handler
