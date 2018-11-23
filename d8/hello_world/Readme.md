@@ -3,3 +3,5 @@ Drupal 8 Module Development Notes
 # About hooks
  - By default we use hooks only in the `*.module` file
  - Use short and concise DocBlocks
+# About Routes
+https://www.drupal.org/docs/8/api/routing-system/structure-of-routes
