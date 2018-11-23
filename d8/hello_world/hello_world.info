@@ -2,4 +2,4 @@ name: Hello
 description: Hello
 type: module
 core: 8.x
-package: kindle
+package: custom
