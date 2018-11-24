@@ -10,5 +10,8 @@ https://www.drupal.org/docs/8/api/routing-system/structure-of-routes
  - we can use *Route variables* like `path: '/hello/{param}'` and/or `/hello/{node}`
 # Namespaces
  - Drupal 8 uses the PSR-4 namespace autoloading standard.
+ - the base namespace is `\Drupal\module_name,`
+ - we will need a /src folder inside our module to place all of our classes that need to be autoloaded.
+
 
 Pag 33
