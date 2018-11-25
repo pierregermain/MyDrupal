@@ -12,6 +12,11 @@ https://www.drupal.org/docs/8/api/routing-system/structure-of-routes
  - Drupal 8 uses the PSR-4 namespace autoloading standard.
  - the base namespace is `\Drupal\module_name,`
  - we will need a /src folder inside our module to place all of our classes that need to be autoloaded.
+# Services
+ - To make Controllers more minimalistic we use services.
+ - A service is an object that gets instantiated by a Service Container and is used to handle operations in a reusable way,
+ - Services are a core part of the dependency injection (DI) principle
+ - they are globally registered with the service and instantiated only once per request (singleton).
 
 
-Pag 33
+Pag The HelloWorldSalutation service 
