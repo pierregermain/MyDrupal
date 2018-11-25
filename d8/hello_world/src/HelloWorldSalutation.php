@@ -1,5 +1,5 @@
 <?php
-
+// Service Class
 namespace Drupal\hello_world;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
