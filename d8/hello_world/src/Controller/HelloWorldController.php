@@ -8,15 +8,6 @@ use Drupal\Core\Controller\ControllerBase;
  *
  */
 class HelloWorldController extends ControllerBase { 
-	/**
-	 * Hello World.
-   * @return string 
-   */
-	public function helloWorld() { 
-		return [
-			'#markup' => $this->t('Hello World') 
-		]; 
-  }
 
   /**
    * @var \Drupal\hello_world\HelloWorldSalutation
@@ -39,5 +30,18 @@ class HelloWorldController extends ControllerBase {
     return new static(
       $container->get('hello_world.salutation')
     );
+  }
+  
+  /**
+	 * Hello World.
+   * @return string 
+   */
+	public function helloWorld() { 
+		//return [
+		//	'#markup' => $this->t('Hello World') 
+		//]; 
+		return [
+			'#markup' => $this->salutation->getSalutation(), 
+		]; 
   }
 }

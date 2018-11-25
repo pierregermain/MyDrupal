@@ -84,6 +84,32 @@ public function __construct (...)
 public static function create (...)
 ```
 
+# Forms: Admin Configuration Form
+
+[API](https://api.drupal.org/api/drupal/elements/8.2.x)
+
+ - We configure `*.routing.yml` to enable the link to the Form
+ - Usually Form classes are in the `/Form` folder
+ - We implement `FormInterface` and either can extend from:
+   - `FormBase` or
+   - `ConfigFormBase`
+ - Four main methods that needs to be understand:
+   - getFormId()
+   - buildForm()
+   - validateForm() with it's `$form_state` object (this method is not mandatory)
+   - submitForm() receives the same arguments as `validateForm()`
+ - Other methods that needs to be implemented:
+   - getEditableConfigNames() that return configuration objets
+ - forms can receive arguments from the Service Container in the same way we injected the salutation service into our Controller.
+ - ConfigFormBase ,which we are extending in our preceding form above, injects the config.factory service because it needs to use it for reading and storing configuration values.
+
+# Altering Forms
+
+
+
+
+
+
 
 
 
