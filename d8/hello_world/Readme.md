@@ -105,10 +105,73 @@ public static function create (...)
 
 # Altering Forms
 
+Alterning form form other modules (this code gets executed for ALL forms):
 
+```
+/**
+ * Implements hook_form_alter().
+ */
+function my_module_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
+    $form_state, $form_id) {
+  if ($form_id == 'salutation_configuration_form') {
+    // Perform alterations.
+  }
+}
+```
+Altering form from other modules (only for our form):
 
+```
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function my_module_form_salutation_configuration_form_alter(&$form,
+    \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Perform alterations.
+}
+```
+# Custom Submit Handlers
 
+Typically, for the forms defined as we did, it's pretty simple. Once we alter the form and
+inspect the $form array, we can find a #submit key, which is an array that has one item. 
+This is simply the submitForm() method on the form class. So, what we
+can do is either remove this item and add our own function or simply add another item to
+that array
 
+```(php)
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function my_module_form_salutation_configuration_form_alter(&$form,
+    \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Perform alterations.
+  $form['#submit'][] = 'hello_world_salutation_configuration_form_submit';
+}
+```
+And the callback we added to the #submit array above can look like this:
+
+```(php)
+/**
+ * Custom submit handler for the form_salutation_configuration form.
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function my_module_salutation_configuration_form_submit(&$form,
+    \Drupal\Core\Form\FormStateInterface $form_state) {
+  // Do something when the form is submitted.
+}
+```
+
+There is another case though. If the submit button on the form has a #submit property
+specifying its own handler, the default form #submit handlers we saw just now won't fire
+anymore. This was not the case with our form. So, in that situation, you will need to add
+your own handler to that array. Hence, the only difference is the place you tack on the
+submit handler. A prominent example of such a form is the Node add/edit form.
+
+Finally, when it comes to the validation handler, it works exactly the same as with the
+submit, but it all happens under the #validate array key.
+
+# Rendering Forms
 
 
 
