@@ -34,8 +34,7 @@ class HelloWorldSalutation {
     if ($salutation != "") {
       return $salutation;
     }
-    // Without configuration object
-    /*
+    // If no configuration object was set this code will execute
     $time = new \DateTime();
     if ((int) $time->format('G') >= 06 && (int) $time->format('G') < 12) {
       return $this->t('Good morning world');
@@ -43,6 +42,5 @@ class HelloWorldSalutation {
     else {
       return $this->t('Good evening world');
     }
-    /*
   }
 }
