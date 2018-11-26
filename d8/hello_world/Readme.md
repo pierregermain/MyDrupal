@@ -222,20 +222,16 @@ class HelloWorldSalutationBlock
 ...
 __construct () // makes container aware
 
-
 create() with the following args:
 
-ContainerInterface $container, //
-
-array $configuration, // configuration values that were stored with the plugin (or passed when building)
-
+ContainerInterface $container //
+array $configuration // configuration values that were stored with the plugin (or passed when building)
 $plugin_id // ID set in the plugin annotation (or other discovery mechanism
-
 $plugin_definition // metadata on this plugin (including all the info found in the annotation)
-) 
-
+ 
 build() // responsible for building the block content.
-...
+
+(...)
 
 ```
 
@@ -278,23 +274,77 @@ There are two main aspects when talking about link building in Drupal the *URL* 
 
 # The Link
 
-Once we have a Url object we can create the link.
+Once we have a `Url` object we can create the link.
 
-2 ways:
+2 ways to create links:
 
  1. Use `LinkGenerator` aka `link_generator` service using the `generate()` method. This will return a `GeneratedLink` object with the string needed.
-i
+
 ```
-service: $url = Url::fromRoute('my_route', ['param_name' => $param_value]); 
+$url = Url::fromRoute('my_route', ['param_name' => $param_value]); 
 $link = \Drupal::service('link_generator')->generate('My link', $url);
 ```
 
-We can then directly print $link because it implements the __toString() method.
+We can then directly print $link because it implements the `__toString()` method.
 
- 2. Use `Link` class which wraps a render element (for theming)
+ 2. Use `Link` class which wraps a render element (used in for theming, good if you need to share this data without services)
 
 ```
- url = Url::fromRoute('my_other_route'); 
- $link = Link::fromTextAndUrl('My link', $url);
+$url = Url::fromRoute('my_other_route'); 
+$link = Link::fromTextAndUrl('My link', $url);
 ```
+
+We now have $link as a `Link` object whose `toRenderable()` returns a render array of the `#type => 'link'`. Behind the scenes, at render time, it will also use the link generator to transform that into a link string.
+
+If we have a Link object, we can also use the link generator ourselves to generate a link based on it:
+`$link = \Drupal::service('link_generator')->generateFromLink($linkObject);`
+
+# Event Dispatcher and redirects
+
+In D7 dynamic redirect could be done using the `hook_init()` which gets called on each request and then use the `drupal_goto()` function.
+
+## Redirecting from a Controller
+
+In our controller instead of returning our render array we could return `return new RedirectResponse('node/1');` using the Symfony HTTP Foundation component.
+
+
+## Redirecting from a subscriber
+
+### Event Dispatcher
+
+registering event subscribers is a matter of creating a service tagged with `event_subscriber` and that implements the interface.
+
+Example:
+
+Let's now take a look at an example event subscriber that listens to the kernel.request
+event and redirects it to the home page if a user with a certain role tries to access our Hello
+World page. This will demonstrate both how to subscribe to events and how to perform a
+redirect. It will also show us how to use the current route match service to inspect the
+current route.
+
+
+Let's create this subscriber by first writing the service definition for it
+
+```
+hello_world.redirect_subscriber:
+  class: \Drupal\hello_world\EventSubscriber\HelloWorldRedirectSubscriber
+  arguments: ['@current_user']
+  tags:
+    - {name: event_subscriber}
+```
+
+The dependency is actually the service that points to the current user (`AccountProxyInterface` object)
+
+Now have a look at /src/EventSubscriber.php
+
+We store the info of the logged in user in $currentUser
+
+
+
+
+
+
+
+
+
 
