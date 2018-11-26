@@ -8,6 +8,20 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
  */ 
 class HelloWorldSalutation { 
   use StringTranslationTrait;
+  
+  /**
+  * @var \Drupal\Core\Config\ConfigFactoryInterface
+  */
+  protected $configFactory;
+  
+  /**\
+  * HelloWorldSalutation constructor.
+  *
+  * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+  */
+  public function __construct(ConfigFactoryInterface $config_factory) {
+    $this->configFactory = $config_factory;
+  }
 
   /**
    * Returns the salutation
