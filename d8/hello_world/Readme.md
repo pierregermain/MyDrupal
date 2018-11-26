@@ -24,7 +24,6 @@ https://www.drupal.org/docs/8/api/routing-system/structure-of-routes
  - It is a standard practice to have the service name start with your module name.
  - Once we clear the cache, the service will get instantiated.
 
-
 ```
 services: 
   hello_world.salutation: 
@@ -193,6 +192,15 @@ example, inside a Controller.
 # Service dependencies
 
  - We want to get now the salutation message from the admin configuration Form we createtd in the last step.
+ - First we modify our service to accept an Drupal 8 configuration factory objet:
+   `arguments: ['@config.factory']`
+ - Now we can receive the argument in our service class:
+    ```
+    public function __construct(ConfigFactoryInterface $config_factory) {
+    $this->configFactory = $config_factory;
+    }
+    ```
+ 
  
  
 
