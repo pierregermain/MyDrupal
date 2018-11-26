@@ -283,4 +283,18 @@ Once we have a Url object we can create the link.
 2 ways:
 
  1. Use `LinkGenerator` aka `link_generator` service using the `generate()` method. This will return a `GeneratedLink` object with the string needed.
+i
+```
+service: $url = Url::fromRoute('my_route', ['param_name' => $param_value]); 
+$link = \Drupal::service('link_generator')->generate('My link', $url);
+```
+
+We can then directly print $link because it implements the __toString() method.
+
  2. Use `Link` class which wraps a render element (for theming)
+
+```
+ url = Url::fromRoute('my_other_route'); 
+ $link = Link::fromTextAndUrl('My link', $url);
+```
+
