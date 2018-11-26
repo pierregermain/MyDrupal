@@ -209,6 +209,7 @@ example, inside a Controller.
 ## How do we create a custom block plugin easily?
  - We need one class, placed in the right namespace `Drupal\module_name\Plugin\Block`
  - We need to use annotations: `id` and `admin_label`
+ - Note that each kind of plugin needs some kind of annotations.
  
 Please have a look at our example in `/src/Plugin/Block`
 
@@ -217,14 +218,33 @@ Please have a look at our example in `/src/Plugin/Block`
 
 class HelloWorldSalutationBlock 
   extends BlockBase // provides a number of helpful things a block plugin needs
-  implements ContainerFactoryPluginInterface // to make things easier
+  implements ContainerFactoryPluginInterface // to make things easier: this gives us the construct() and create() functions. 
 ...
 __construct () // makes container aware
-create()
-build()
+
+
+create() with the following args:
+
+ContainerInterface $container, //
+
+array $configuration, // configuration values that were stored with the plugin (or passed when building)
+
+$plugin_id // ID set in the plugin annotation (or other discovery mechanism
+
+$plugin_definition // metadata on this plugin (including all the info found in the annotation)
+) 
+
+build() // responsible for building the block content.
 ...
 
 ```
+
+
+# Block Configuration
+
+
+
+
 
 
 
