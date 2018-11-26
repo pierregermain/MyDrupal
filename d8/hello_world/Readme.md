@@ -181,9 +181,8 @@ the shorthand:
     ```
     $builder = \Drupal::formBuilder();
     ```
-    
-  Once we have it, we can build a form, like so:
-
+   - Once we have it, we can build a form, like so:
+   
     ```
     $form = $builder->getForm('Drupal\hello_world\Form\SalutationConfigurationForm');
     ```
