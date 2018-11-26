@@ -242,15 +242,29 @@ build() // responsible for building the block content.
 
 # Block Configuration
 
+let's imagine that we need a Boolean-like control on our block configuration so that when an admin places the block, they can toggle something and that value can be used in the build() method. We can achieve this with three to four methods on our plugin class.
 
+We add:
 
-
-
-
-
+defaultConfiguration() 
+blockForm()
+blockSubmit(
  
 
+after that we ca use in build()
 
+$config = $this-> getConfiguration();
+
+
+also keep in mind that we can use blockValidate and blockSubmit
+
+
+# Links
+
+There are two main aspects when talking about link building in Drupal the *URL* and the actual *link tag* itself. So, creating a link involves a two-step process that deals with these two, but can also be shortened into a single call via some helper methods.
+
+
+## The Url
 
 
 
