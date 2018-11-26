@@ -267,9 +267,10 @@ There are two main aspects when talking about link building in Drupal the *URL* 
 ## The Url
 
 
+ - represented by the `Drupal\Core\Url` Class
 
-
-
-
-
-
+ - Static methods:
+   `::fromRoute() to create new instance of `Url`
+   `::fromUri() has the $option array to configure your instance. have a look at the documentation above the code.
+ - Always work with route names, not with hardcoded urls.
+ - 
