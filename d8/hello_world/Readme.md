@@ -177,13 +177,17 @@ submit, but it all happens under the #validate array key.
  - We get the form builder and request from it the form using the fully qualified name of the form class.
  - The form builder can be injected using the `form_builder` service key or used statically via
 the shorthand:
-```
-$builder = \Drupal::formBuilder();
-```
-Once we have it, we can build a form, like so:
-```
-$form = $builder->getForm('Drupal\hello_world\Form\SalutationConfigurationForm');
-```
+
+    ```
+    $builder = \Drupal::formBuilder();
+    ```
+    
+  Once we have it, we can build a form, like so:
+
+    ```
+    $form = $builder->getForm('Drupal\hello_world\Form\SalutationConfigurationForm');
+    ```
+    
 In the preceding code, `$form` will be a render array of the form that we can return, for
 example, inside a Controller.
 
