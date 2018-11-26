@@ -192,7 +192,9 @@ example, inside a Controller.
 
 # Service dependencies
 
-
+ - We want to get now the salutation message from the admin configuration Form we createtd in the last step.
+ 
+ 
 
 
 
