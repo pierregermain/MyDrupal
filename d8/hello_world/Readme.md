@@ -271,6 +271,16 @@ There are two main aspects when talking about link building in Drupal the *URL* 
 
  - Static methods:
    `::fromRoute() to create new instance of `Url`
-   `::fromUri() has the $option array to configure your instance. have a look at the documentation above the code.
+   `::fromUri()  have a look at the documentation above the code.
+
+ - use the $option array to configure your instance.
  - Always work with route names, not with hardcoded urls.
- - 
+
+# The Link
+
+Once we have a Url object we can create the link.
+
+2 ways:
+
+ 1. Use `LinkGenerator` aka `link_generator` service using the `generate()` method. This will return a `GeneratedLink` object with the string needed.
+ 2. Use `Link` class which wraps a render element (for theming)
