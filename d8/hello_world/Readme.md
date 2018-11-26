@@ -200,8 +200,18 @@ example, inside a Controller.
     $this->configFactory = $config_factory;
     }
     ```
+
+# Blocks
+ - Custom blocks in Drupal 8 are **plugins**.
+ - In Drupal 8, we work with a simple plugin class that can be made container-aware (that is, we can inject dependencies into it) and we can store configuration in a logical fashion.
+ - Note: The *content* blocks that you create through the UI to place in a region and the custom blocks that are placed in a region are `content entities`.
  
+## How do we create a custom block plugin easily?
+ - We need one class, placed in the right namespace `Drupal\module_name\Plugin\Block`
  
+Please have a look at our example in `/src/Plugin/Block`
+
+
  
 
 
