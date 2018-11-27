@@ -301,7 +301,9 @@ If we have a Link object, we can also use the link generator ourselves to genera
 
 # Event Dispatcher and redirects
 
-In D7 dynamic redirect could be done using the `hook_init()` which gets called on each request and then use the `drupal_goto()` function.
+In D7 dynamic redirect could be done using the `hook_init()` which gets called on each request and then use the `drupal_goto()` function. 
+
+In D8 we would subscribe to `kernel.request` event.
 
 ## Redirecting from a Controller
 
@@ -338,6 +340,32 @@ The dependency is actually the service that points to the current user (`Account
 Now have a look at /src/EventSubscriber.php
 
 We store the info of the logged in user in $currentUser
+
+
+the important code is
+
+```
+public function onRequest( GetResponseEvent $ event) { $ route_name = $ this-> currentRouteMatch-> getRouteName(); if ($ route_name != = 'hello_world.hello') { return; } $ roles = $ this-> currentUser-> getRoles(); if (in_array(' non_grata', $ roles)) { $ url = Url:: fromUri(' internal:/'); $ event-> setResponse( new RedirectResponse( $ url->toString())); } }
+```
+
+From the `CurrentRouteMatch` service, we can figure out the name of the current route, the entire route object, parameters from the URL, and other useful things.
+
+
+the url is build with the Url class
+
+
+#Dispatch your own events
+
+we have seen howto sibscribe. now lets see howto dispatch events
+
+this way we can tell other modules that some function in our module has been executed.
+
+have a look at /src/SalutationEvent.php
+that extends Event. it has the $message with setters and getters.
+
+
+
+
 
 
 
