@@ -94,13 +94,13 @@ public static function create (...)
 
 ## Forms: Admin Configuration Form
 
- - Documentation [API](https://api.drupal.org/api/drupal/elements/8.2.x)
+ - Official documentation [API](https://api.drupal.org/api/drupal/elements/8.2.x) link.
  - We configure `*.routing.yml` to enable the link to the Form
- - Usually Form classes will be in stored in the `/Form` folder
+ - Usually Form classes will be stored in the `/Form` folder
  - We implement [`FormInterface`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/interface/FormInterface/8.2.x) and either can extend from:
-   - `[FormBase]`(https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormBase.php/class/FormBase/8.2.x) or
-   - `[ConfigFormBase](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21ConfigFormBase.php/class/ConfigFormBase/8.2.x)`
- - Four main methods that needs to be understand:
+   - [`FormBase`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormBase.php/class/FormBase/8.2.x) or
+   - [`ConfigFormBase`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21ConfigFormBase.php/class/ConfigFormBase/8.2.x)
+ - Four main methods that needs to be understood:
    - getFormId()
    - buildForm()
    - validateForm() with it's `$form_state` object (this method is not mandatory)
