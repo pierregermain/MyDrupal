@@ -64,18 +64,19 @@ There are two ways of using services in Drupal 8:
     - Service
     - Plugin
     - Other classes that accept dependency injection
-  - Example: [`\Drupal::entityTypeManager()`](https://api.drupal.org/api/drupal/core!lib!Drupal.php/function/Drupal%3A%3AentityTypeManager/8.2.x)
+  - Example 1: [`\Drupal::entityTypeManager()`](https://api.drupal.org/api/drupal/core!lib!Drupal.php/function/Drupal%3A%3AentityTypeManager/8.2.x)
 
-    Example: Howto use a static call:
+  - Example 2: Howto use a static call:
 
     ```
     $service = \Drupal::service('hello_world.salutation');
     ```
  
  **2. injected using dependency injection** to pass the object through the constructor (or in some rare cases, a setter method).
-  - there are a few different ways to inject dependencies based on the receiver
 
-## Injecting the service into a controller
+There are a few different ways to inject dependencies based on the receiver:
+
+### Injecting the service into a controller
 
 We put this code at the top to import the service class
 
@@ -93,13 +94,12 @@ public static function create (...)
 
 ## Forms: Admin Configuration Form
 
-[API](https://api.drupal.org/api/drupal/elements/8.2.x)
-
+ - Documentation [API](https://api.drupal.org/api/drupal/elements/8.2.x)
  - We configure `*.routing.yml` to enable the link to the Form
- - Usually Form classes are in the `/Form` folder
- - We implement `FormInterface` and either can extend from:
-   - `FormBase` or
-   - `ConfigFormBase`
+ - Usually Form classes will be in stored in the `/Form` folder
+ - We implement [`FormInterface`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/interface/FormInterface/8.2.x) and either can extend from:
+   - `[FormBase]`(https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormBase.php/class/FormBase/8.2.x) or
+   - `[ConfigFormBase](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21ConfigFormBase.php/class/ConfigFormBase/8.2.x)`
  - Four main methods that needs to be understand:
    - getFormId()
    - buildForm()
