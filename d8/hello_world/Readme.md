@@ -1,22 +1,22 @@
-Drupal 8 Module Development Notes
+# Drupal 8 Module Development Notes
 
-# About hooks
+## About hooks
  - By default we use hooks only in the `*.module` file
  - Use short and concise DocBlocks
 
-# About Routes
+## About Routes
 https://www.drupal.org/docs/8/api/routing-system/structure-of-routes
  - `path` key indicates the path we want this route to work on
  - `defaults` section defines the handler
  - we can use *Route variables* like `path: '/hello/{param}'` and/or `/hello/{node}`
 
-# Namespaces
+## Namespaces
  - Drupal 8 uses the PSR-4 namespace autoloading standard.
  - the base namespace is `\Drupal\module_name,`
  - we will need a /src folder inside our module to place all of our classes that need to be autoloaded.
  - the /src is the namespace root folder.
 
-# Services
+## Services
  - To make Controllers more minimalistic we use services.
  - A service is an object that gets instantiated by a Service Container and is used to handle operations in a reusable way,
  - Services are a core part of the dependency injection (DI) principle
@@ -30,7 +30,8 @@ services:
     class: Drupal\hello_world\HelloWorldSalutation
 ```
 
-# Tagged Services
+## Tagged Services
+
  - Typically, these are picked up by a collector service
 
 Example:
@@ -41,7 +42,7 @@ hello_world.salutation:
   tags:
     - {name: tag_name}
 ```
-# Ways to use services in Drupal 8
+## Ways to use services in Drupal 8
 
 There are two ways of using services in Drupal 8:
 
@@ -67,7 +68,7 @@ $service = \Drupal::service('hello_world.salutation');
  2. injected using dependency injection to pass the object through the constructor (or in some rare cases, a setter method).
   - there are a few different ways to inject dependencies based on the receiver
 
-# Injecting the service into a controller
+## Injecting the service into a controller
 
 We put this code at the top to import the service class
 
@@ -83,7 +84,7 @@ public function __construct (...)
 public static function create (...)
 ```
 
-# Forms: Admin Configuration Form
+## Forms: Admin Configuration Form
 
 [API](https://api.drupal.org/api/drupal/elements/8.2.x)
 
@@ -102,7 +103,7 @@ public static function create (...)
  - forms can receive arguments from the Service Container in the same way we injected the salutation service into our Controller.
  - ConfigFormBase ,which we are extending in our preceding form above, injects the config.factory service because it needs to use it for reading and storing configuration values.
 
-# Altering Forms
+## Altering Forms
 
 Alterning form form other modules (this code gets executed for ALL forms):
 
@@ -128,7 +129,7 @@ function my_module_form_salutation_configuration_form_alter(&$form,
   // Perform alterations.
 }
 ```
-# Custom Submit Handlers
+## Custom Submit Handlers
 
 Typically, for the forms defined as we did, it's pretty simple. Once we alter the form and
 inspect the $form array, we can find a #submit key, which is an array that has one item. 
@@ -170,7 +171,7 @@ submit handler. A prominent example of such a form is the Node add/edit form.
 Finally, when it comes to the validation handler, it works exactly the same as with the
 submit, but it all happens under the #validate array key.
 
-# Rendering Forms programmatically
+## Rendering Forms programmatically
 
  - We can do this using the `FormBuilder` service
  - We get the form builder and request from it the form using the fully qualified name of the form class.
@@ -189,7 +190,7 @@ the shorthand:
 In the preceding code, `$form` will be a render array of the form that we can return, for
 example, inside a Controller.
 
-# Service dependencies
+## Service dependencies
 
  - We want to get now the salutation message from the admin configuration Form we createtd in the last step.
  - First we modify our service to accept an Drupal 8 configuration factory objet:
@@ -201,12 +202,12 @@ example, inside a Controller.
     }
     ```
 
-# Blocks
+## Blocks
  - Custom blocks in Drupal 8 are **plugins**.
  - In Drupal 8, we work with a simple plugin class that can be made container-aware (that is, we can inject dependencies into it) and we can store configuration in a logical fashion.
  - Note: The *content* blocks that you create through the UI to place in a region and the custom blocks that are placed in a region are `content entities`.
  
-## How do we create a custom block plugin easily?
+### How do we create a custom block plugin easily?
  - We need one class, placed in the right namespace `Drupal\module_name\Plugin\Block`
  - We need to use annotations: `id` and `admin_label`
  - Note that each kind of plugin needs some kind of annotations.
@@ -236,7 +237,7 @@ build() // responsible for building the block content.
 ```
 
 
-# Block Configuration
+## Block Configuration
 
 let's imagine that we need a Boolean-like control on our block configuration so that when an admin places the block, they can toggle something and that value can be used in the build() method. We can achieve this with three to four methods on our plugin class.
 
@@ -255,12 +256,12 @@ $config = $this-> getConfiguration();
 also keep in mind that we can use blockValidate and blockSubmit
 
 
-# Links
+## Links
 
 There are two main aspects when talking about link building in Drupal the *URL* and the actual *link tag* itself. So, creating a link involves a two-step process that deals with these two, but can also be shortened into a single call via some helper methods.
 
 
-## The Url
+### The Url
 
 
  - represented by the `Drupal\Core\Url` Class
@@ -272,7 +273,7 @@ There are two main aspects when talking about link building in Drupal the *URL* 
  - use the $option array to configure your instance.
  - Always work with route names, not with hardcoded urls.
 
-# The Link
+### The Link
 
 Once we have a `Url` object we can create the link.
 
@@ -299,20 +300,20 @@ We now have $link as a `Link` object whose `toRenderable()` returns a render arr
 If we have a Link object, we can also use the link generator ourselves to generate a link based on it:
 `$link = \Drupal::service('link_generator')->generateFromLink($linkObject);`
 
-# Event Dispatcher and redirects
+## Event Dispatcher and redirects
 
 In D7 dynamic redirect could be done using the `hook_init()` which gets called on each request and then use the `drupal_goto()` function. 
 
 In D8 we would subscribe to `kernel.request` event.
 
-## Redirecting from a Controller
+### Redirecting from a Controller
 
 In our controller instead of returning our render array we could return `return new RedirectResponse('node/1');` using the Symfony HTTP Foundation component.
 
 
-## Redirecting from a subscriber
+### Redirecting from a subscriber
 
-### Event Dispatcher
+#### Event Dispatcher
 
 registering event subscribers is a matter of creating a service tagged with `event_subscriber` and that implements the interface.
 
@@ -354,7 +355,7 @@ From the `CurrentRouteMatch` service, we can figure out the name of the current 
 the url is build with the Url class
 
 
-#Dispatch your own events
+## Dispatch your own events
 
 we have seen howto sibscribe. now lets see howto dispatch events
 
