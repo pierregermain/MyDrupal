@@ -99,12 +99,12 @@ public static function create (...)
  - Usually Form classes will be stored in the `/Form` folder
  - We implement [`FormInterface`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/interface/FormInterface/8.2.x) and either can extend from:
    - [`FormBase`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormBase.php/class/FormBase/8.2.x) or
-   - [`ConfigFormBase`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21ConfigFormBase.php/class/ConfigFormBase/8.2.x)
+   - [`ConfigFormBase`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21ConfigFormBase.php/class/ConfigFormBase/8.2.x): for system configuration forms.
  - Four main methods that needs to be understood:
-   - getFormId()
-   - buildForm()
-   - validateForm() with it's `$form_state` object (this method is not mandatory)
-   - submitForm() receives the same arguments as `validateForm()`
+   - [getFormId()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AgetFormId/8.2.x)
+   - [buildForm()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AbuildForm/8.2.x)
+   - [validateForm()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AvalidateForm/8.2.x) with it's `$form_state` object (this method is not mandatory)
+   - [submitForm()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AsubmitForm/8.2.x) receives the same arguments as `validateForm()`
  - Other methods that needs to be implemented:
    - getEditableConfigNames() that return configuration objets
  - forms can receive arguments from the Service Container in the same way we injected the salutation service into our Controller.
