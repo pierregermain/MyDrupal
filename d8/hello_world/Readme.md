@@ -150,11 +150,11 @@ Usually once we alter the form and inspect the `$form` array, we can find a `#su
 function my_module_form_salutation_configuration_form_alter(&$form,
     \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   // Perform alterations.
-  $form['#submit'][] = 'hello_world_salutation_configuration_form_submit';
+  $form['#submit'][] = 'my_module_salutation_configuration_form_submit';
 }
 ```
 
-And the callback we added to the #submit array above can look like this:
+And the callback we added to the `#submit` array above can look like this:
 
 ```(php)
 /**
@@ -171,14 +171,15 @@ function my_module_salutation_configuration_form_submit(&$form,
 
 #### Special handler
 
-There is another case though. If the submit button on the form has a #submit property
-specifying its own handler, the default form #submit handlers we saw just now won't fire
-anymore. This was not the case with our form. So, in that situation, you will need to add
-your own handler to that array. Hence, the only difference is the place you tack on the
-submit handler. A prominent example of such a form is the Node add/edit form.
+ - There is another case though. 
+ - If the submit button on the form has a `#submit` property specifying its own handler, the default form #submit handlers we saw just now won't fire anymore. 
+ - This was not the case with our form. 
+ - In that situation, you will need to add your own handler to that array. Hence, the only difference is the place you tack on the submit handler. A prominent example of such a form is the *Node add/edit form*.
+
+## Custom Validation Handlers
 
 Finally, when it comes to the validation handler, it works exactly the same as with the
-submit, but it all happens under the #validate array key.
+submit, but it all happens under the `#validate` array key.
 
 ## Rendering Forms programmatically
 
@@ -212,23 +213,30 @@ example, inside a Controller.
     ```
 
 ## Blocks
+
  - Custom blocks in Drupal 8 are **plugins**.
  - In Drupal 8, we work with a simple plugin class that can be made container-aware (that is, we can inject dependencies into it) and we can store configuration in a logical fashion.
  - Note: The *content* blocks that you create through the UI to place in a region and the custom blocks that are placed in a region are `content entities`.
  
 ### How do we create a custom block plugin easily?
+
  - We need one class, placed in the right namespace `Drupal\module_name\Plugin\Block`
- - We need to use annotations: `id` and `admin_label`
+ - We need the following annotations:
+   - `id` and 
+   - `admin_label`
  - Note that each kind of plugin needs some kind of annotations.
  
 Please have a look at our example in `/src/Plugin/Block`
 
 ```
-(... imports and annotations ...)
+... 
+imports
+annotations
+...
 
 class HelloWorldSalutationBlock 
   extends BlockBase // provides a number of helpful things a block plugin needs
-  implements ContainerFactoryPluginInterface // to make things easier: this gives us the construct() and create() functions. 
+  implements ContainerFactoryPluginInterface // make things easier: gives construct() and create() functions. 
 ...
 __construct () // makes container aware
 
@@ -241,7 +249,7 @@ $plugin_definition // metadata on this plugin (including all the info found in t
  
 build() // responsible for building the block content.
 
-(...)
+...
 
 ```
 
