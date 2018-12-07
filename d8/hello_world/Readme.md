@@ -242,10 +242,10 @@ __construct () // makes container aware
 
 create() with the following args:
 
-ContainerInterface $container //
-array $configuration // configuration values that were stored with the plugin (or passed when building)
-$plugin_id // ID set in the plugin annotation (or other discovery mechanism
-$plugin_definition // metadata on this plugin (including all the info found in the annotation)
+  ContainerInterface $container //
+  array $configuration // configuration values that were stored with the plugin (or passed when building)
+  $plugin_id // ID set in the plugin annotation (or other discovery mechanism
+  $plugin_definition // metadata on this plugin (including all the info found in the annotation)
  
 build() // responsible for building the block content.
 
@@ -256,21 +256,23 @@ build() // responsible for building the block content.
 
 ## Block Configuration
 
-let's imagine that we need a Boolean-like control on our block configuration so that when an admin places the block, they can toggle something and that value can be used in the build() method. We can achieve this with three to four methods on our plugin class.
+Let's imagine that we need a Boolean-like control on our block configuration so that when an admin places the block, they can toggle something and that value can be used in the build() method. We can achieve this with three to four methods on our plugin class.
 
 We add:
 
+```
 defaultConfiguration() 
 blockForm()
 blockSubmit(
- 
+``` 
 
-after that we ca use in build()
+after that we ca use in the build() function
 
+```
 $config = $this-> getConfiguration();
+```
 
-
-also keep in mind that we can use blockValidate and blockSubmit
+also keep in mind that we can use `blockValidate` and `blockSubmit`
 
 
 ## Links
