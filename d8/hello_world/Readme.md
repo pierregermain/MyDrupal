@@ -112,7 +112,7 @@ public static function create (...)
 
 ## Altering Forms from other modules
 
- 1. Option 1: code gets executed for **ALL** forms:
+ - Option 1: code gets executed for **ALL** forms:
 
     ```
     /**
@@ -126,7 +126,7 @@ public static function create (...)
     }
     ```
 
- 2. Option 2: code gets executed only for our form:
+ - Option 2: code gets executed only for our form:
 
     ```
     /**
