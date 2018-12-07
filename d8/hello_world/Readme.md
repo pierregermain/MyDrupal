@@ -106,7 +106,7 @@ public static function create (...)
    - [validateForm()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AvalidateForm/8.2.x) with it's `$form_state` object (this method is not mandatory)
    - [submitForm()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AsubmitForm/8.2.x) receives the same arguments as `validateForm()`
  - Other methods that needs to be implemented:
-   - `getEditableConfigNames()` from the [ConfigFormBaseTrait`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21ConfigFormBaseTrait.php/trait/ConfigFormBaseTrait/8.2.x) used in the `ConfigFormBase`. This method returns configuration objets so that we can edit configurations.
+   - `getEditableConfigNames()` from the [`ConfigFormBaseTrait`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21ConfigFormBaseTrait.php/trait/ConfigFormBaseTrait/8.2.x) used in the `ConfigFormBase`. This method returns configuration objets so that we can edit configurations.
  - forms can receive arguments from the Service Container in the same way we injected the salutation service into our Controller.
  - ConfigFormBase ,which we are extending in our preceding form above, injects the config.factory service because it needs to use it for reading and storing configuration values.
 
