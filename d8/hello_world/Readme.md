@@ -256,14 +256,14 @@ build() // responsible for building the block content.
 
 ## Block Configuration
 
-Let's imagine that we need a Boolean-like control on our block configuration so that when an admin places the block, they can toggle something and that value can be used in the build() method. We can achieve this with three to four methods on our plugin class.
+Let's imagine that we need a Boolean-like control on our block configuration so that when an admin places the block, they can toggle something and that value can be used in the build() method. We can achieve this with three to four methods on our plugin class (remember that it's in `/src/Plugin/Block`.
 
 We add:
 
 ```
 defaultConfiguration() 
 blockForm()
-blockSubmit(
+blockSubmit()
 ``` 
 
 after that we ca use in the build() function
@@ -272,7 +272,7 @@ after that we ca use in the build() function
 $config = $this-> getConfiguration();
 ```
 
-also keep in mind that we can use `blockValidate` and `blockSubmit`
+also keep in mind that we can use `blockValidate` and `blockSubmit`.
 
 
 ## Links
