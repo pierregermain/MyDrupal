@@ -112,7 +112,7 @@ public static function create (...)
 
 ## Altering Forms
 
-### Altering Forms from other modules (this code would executed for **ALL** forms):
+1. Altering Forms from other modules (this code would executed for **ALL** forms):
 
 ```
 /**
@@ -126,7 +126,7 @@ function my_module_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
 }
 ```
 
-### Altering form from other modules (only for our form):
+2. Altering form from other modules (only for our form):
 
 ```
 /**
