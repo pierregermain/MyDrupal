@@ -110,35 +110,35 @@ public static function create (...)
  - Forms can receive arguments from the Service Container in the same way we injected the salutation service into our Controller.
  - `ConfigFormBase`, which we are extending injects the `config.factory` service because it needs to use it for reading and storing configuration values.
 
-## Altering Forms
+## Altering Forms from other modules
 
-1. Altering Forms from other modules (this code would executed for **ALL** forms):
+ 1. Option 1: code gets executed for **ALL** forms:
 
-```
-/**
- * Implements hook_form_alter().
- */
-function my_module_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
-    $form_state, $form_id) {
-  if ($form_id == 'salutation_configuration_form') {
-    // Perform alterations.
-  }
-}
-```
+    ```
+    /**
+     * Implements hook_form_alter().
+     */
+    function my_module_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
+        $form_state, $form_id) {
+      if ($form_id == 'salutation_configuration_form') {
+        // Perform alterations.
+      }
+    }
+    ```
 
-2. Altering form from other modules (only for our form):
+ 2. Option 2: code gets executed only for our form:
 
-```
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function my_module_form_salutation_configuration_form_alter(&$form,
-    \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  // Perform alterations.
-}
-```
+    ```
+    /**
+     * Implements hook_form_FORM_ID_alter().
+     */
+    function my_module_form_salutation_configuration_form_alter(&$form,
+        \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+      // Perform alterations.
+    }
+    ```
 ## Custom Submit Handlers
-
+    
 Typically, for the forms defined as we did, it's pretty simple. Once we alter the form and
 inspect the $form array, we can find a #submit key, which is an array that has one item. 
 This is simply the submitForm() method on the form class. So, what we
