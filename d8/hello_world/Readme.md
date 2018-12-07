@@ -141,7 +141,7 @@ public static function create (...)
 
 #### Typical handler
 
-Usually once we alter the form and inspect the `$form` array, we can find a `#submit` key, which is an array that has one item. This is simply the `submitForm()` method on the form class. So we can is either remove this item and add our own function or simply add another item to that array.
+Usually once we alter the form and inspect the `$form` array, we can find a `#submit` key, which is an array that has one item. This is simply the `submitForm()` method on the form class. So we can either remove this item and add our own function or simply add another item to that array.
 
 ```(php)
 /**
