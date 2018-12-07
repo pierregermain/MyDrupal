@@ -114,12 +114,12 @@ public static function create (...)
 
  - Option 1: code gets executed for **ALL** forms:
 
-    ```
+    ```(php)
     /**
      * Implements hook_form_alter().
      */
-    function my_module_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
-        $form_state, $form_id) {
+    function my_module_form_alter(&$form, 
+      \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
       if ($form_id == 'salutation_configuration_form') {
         // Perform alterations.
       }
