@@ -138,12 +138,10 @@ public static function create (...)
     }
     ```
 ## Custom Submit Handlers
-    
-Typically, for the forms defined as we did, it's pretty simple. Once we alter the form and
-inspect the $form array, we can find a #submit key, which is an array that has one item. 
-This is simply the submitForm() method on the form class. So, what we
-can do is either remove this item and add our own function or simply add another item to
-that array
+
+#### Usual handler
+
+Usually once we alter the form and inspect the `$form` array, we can find a `#submit` key, which is an array that has one item. This is simply the `submitForm()` method on the form class. So, what we can do is either remove this item and add our own function or simply add another item to that array.
 
 ```(php)
 /**
@@ -155,6 +153,7 @@ function my_module_form_salutation_configuration_form_alter(&$form,
   $form['#submit'][] = 'hello_world_salutation_configuration_form_submit';
 }
 ```
+
 And the callback we added to the #submit array above can look like this:
 
 ```(php)
@@ -169,6 +168,8 @@ function my_module_salutation_configuration_form_submit(&$form,
   // Do something when the form is submitted.
 }
 ```
+
+#### Special handler
 
 There is another case though. If the submit button on the form has a #submit property
 specifying its own handler, the default form #submit handlers we saw just now won't fire
