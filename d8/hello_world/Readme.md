@@ -277,7 +277,11 @@ also keep in mind that we can use `blockValidate` and `blockSubmit`.
 
 ## Links
 
-There are two main aspects when talking about link building in Drupal the *URL* and the actual *link tag* itself. So, creating a link involves a two-step process that deals with these two, but can also be shortened into a single call via some helper methods.
+There are two main aspects when talking about link building in Drupal:   
+ - the *URL* and
+ - the actual *link tag* itself.   
+
+So, creating a link involves a two-step process that deals with these two, but can also be shortened into a single call via some helper methods.
 
 
 ### The Url
@@ -286,8 +290,8 @@ There are two main aspects when talking about link building in Drupal the *URL* 
  - represented by the `Drupal\Core\Url` Class
 
  - Static methods:
-   `::fromRoute() to create new instance of `Url`
-   `::fromUri()  have a look at the documentation above the code.
+   - `::fromRoute()` to create new instance of `Url`
+   - `::fromUri()`  have a look at the documentation above the code.
 
  - use the $option array to configure your instance.
  - Always work with route names, not with hardcoded urls.
