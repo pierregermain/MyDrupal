@@ -342,10 +342,12 @@ Registering event subscribers is a matter of creating a service tagged with `eve
 
 Example:
 
-Let's now take a look at an example event subscriber that listens to the *kernel.request* event and redirects it to the home page if a user with a certain role tries to access our Hello World page. This will demonstrate both how to subscribe to events and how to perform a redirect. It will also show us how to use the current route match service to inspect the current route.
+ - Let's now take a look at an example event subscriber that listens to the *kernel.request* event and redirects it to the home page if a user with a certain role tries to access our Hello World page. 
+ - This will demonstrate both how to subscribe to events and how to perform a redirect. 
+ - It will also show us how to use the current route match service to inspect the current route.
 
 
-Let's create this subscriber by first writing the service definition for it
+Let's create this subscriber by first writing the service definition for it:
 
 ```
 hello_world.redirect_subscriber:
@@ -357,31 +359,45 @@ hello_world.redirect_subscriber:
 
 The dependency is actually the service that points to the current user (`AccountProxyInterface` object)
 
-Now have a look at /src/EventSubscriber.php
+Now have a look at `/src/EventSubscriber.php`
 
-We store the info of the logged in user in $currentUser
+We store the info of the logged in user in `$currentUser`
 
-
-the important code is
+The important code is
 
 ```
-public function onRequest( GetResponseEvent $ event) { $ route_name = $ this-> currentRouteMatch-> getRouteName(); if ($ route_name != = 'hello_world.hello') { return; } $ roles = $ this-> currentUser-> getRoles(); if (in_array(' non_grata', $ roles)) { $ url = Url:: fromUri(' internal:/'); $ event-> setResponse( new RedirectResponse( $ url->toString())); } }
+public function onRequest(GetResponseEvent $event) { 
+  $route_name = $this->currentRouteMatch->getRouteName(); 
+  if ($route_name !== 'hello_world.hello') { 
+    return; 
+  } 
+  $roles = $this->currentUser->getRoles(); 
+  if (in_array('non_grata', $roles)) { 
+    $url = Url::fromUri('internal:/'); 
+    $event->setResponse( new RedirectResponse($url->toString())); 
+  } 
+}
 ```
 
-From the `CurrentRouteMatch` service, we can figure out the name of the current route, the entire route object, parameters from the URL, and other useful things.
+From the `CurrentRouteMatch` service, we can figure out:
+ - the name of the current route, 
+ - the entire route object, 
+ - parameters from the Url and 
+ - other useful things.
 
 
-the url is build with the Url class
+The url is build with the `Url` class
 
 
 ## Dispatch your own events
 
-we have seen howto sibscribe. now lets see howto dispatch events
+ - We have seen howto subscribe to events. 
+ - Now lets see howto dispatch events.
+ - This way we can tell other modules that some function in our module has been executed.
 
-this way we can tell other modules that some function in our module has been executed.
+Example:
 
-have a look at /src/SalutationEvent.php
-that extends Event. it has the $message with setters and getters.
+Have a look at `/src/SalutationEvent.php` that extends `Event`. It has the `$message` string with setter and getter methods.
 
 
 
