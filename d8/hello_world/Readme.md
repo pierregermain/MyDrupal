@@ -327,26 +327,22 @@ If we have a Link object, we can also use the link generator ourselves to genera
 
 In D7 dynamic redirect could be done using the `hook_init()` which gets called on each request and then use the `drupal_goto()` function. 
 
-In D8 we would subscribe to `kernel.request` event.
+In D8 we would subscribe to the `kernel.request` event.
 
 ### Redirecting from a Controller
 
-In our controller instead of returning our render array we could return `return new RedirectResponse('node/1');` using the Symfony HTTP Foundation component.
+In our controller instead of returning our render array we could return `new RedirectResponse('node/1');` using the *Symfony HTTP Foundation* component.
 
 
 ### Redirecting from a subscriber
 
 #### Event Dispatcher
 
-registering event subscribers is a matter of creating a service tagged with `event_subscriber` and that implements the interface.
+Registering event subscribers is a matter of creating a service tagged with `event_subscriber` and that implements the interface.
 
 Example:
 
-Let's now take a look at an example event subscriber that listens to the kernel.request
-event and redirects it to the home page if a user with a certain role tries to access our Hello
-World page. This will demonstrate both how to subscribe to events and how to perform a
-redirect. It will also show us how to use the current route match service to inspect the
-current route.
+Let's now take a look at an example event subscriber that listens to the *kernel.request* event and redirects it to the home page if a user with a certain role tries to access our Hello World page. This will demonstrate both how to subscribe to events and how to perform a redirect. It will also show us how to use the current route match service to inspect the current route.
 
 
 Let's create this subscriber by first writing the service definition for it
