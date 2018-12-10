@@ -309,14 +309,14 @@ There are two ways to create links:
     $link = \Drupal::service('link_generator')->generate('My link', $url);
     ```
     
-    We can then directly print $link because it implements the `__toString()` method.
+    We can then directly print `$link` because it implements the `__toString()` method.
 
  2. Use `Link` class which wraps a render element (used in for theming, good if you need to share this data without services)
 
-```
-$url = Url::fromRoute('my_other_route'); 
-$link = Link::fromTextAndUrl('My link', $url);
-```
+    ```
+    $url = Url::fromRoute('my_other_route'); 
+    $link = Link::fromTextAndUrl('My link', $url);
+    ```
 
 We now have $link as a `Link` object whose `toRenderable()` returns a render array of the `#type => 'link'`. Behind the scenes, at render time, it will also use the link generator to transform that into a link string.
 
