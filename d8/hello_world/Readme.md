@@ -293,23 +293,23 @@ So, creating a link involves a two-step process that deals with these two, but c
    - [`Url::fromRoute()`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/function/Url%3A%3AfromRoute/8.2.x) to create new instance of `Url` that have Drupal routes.
    - [`Url::fromUri()`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/function/Url%3A%3AfromUri/8.2.x) to create a new instance of `Url` that do **not** have Drupal routes.
 
- - use the $option array to configure your instance.
+ - use the `$option` array to configure your instance.
  - Always work with route names, not with hardcoded urls.
 
 ### The Link
 
 Once we have a `Url` object we can create the link.
 
-2 ways to create links:
+There are two ways to create links:
 
  1. Use `LinkGenerator` aka `link_generator` service using the `generate()` method. This will return a `GeneratedLink` object with the string needed.
 
-```
-$url = Url::fromRoute('my_route', ['param_name' => $param_value]); 
-$link = \Drupal::service('link_generator')->generate('My link', $url);
-```
-
-We can then directly print $link because it implements the `__toString()` method.
+    ```
+    $url = Url::fromRoute('my_route', ['param_name' => $param_value]); 
+    $link = \Drupal::service('link_generator')->generate('My link', $url);
+    ```
+    
+    We can then directly print $link because it implements the `__toString()` method.
 
  2. Use `Link` class which wraps a render element (used in for theming, good if you need to share this data without services)
 
