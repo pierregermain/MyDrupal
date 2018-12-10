@@ -1,5 +1,35 @@
 # Drupal 8 Module Development Notes
 
+[TOC](https://magnetikonline.github.io/markdown-toc-generate/)
+
+- [Drupal 8 Module Development Notes](#drupal-8-module-development-notes)
+	- [About hooks](#about-hooks)
+	- [About Routes](#about-routes)
+	- [Namespaces](#namespaces)
+	- [Services](#services)
+		- [Tagged Services](#tagged-services)
+		- [Ways to use services in Drupal 8](#ways-to-use-services-in-drupal-8)
+		- [Injecting the service into a controller](#injecting-the-service-into-a-controller)
+	- [Forms: Admin Configuration Form](#forms-admin-configuration-form)
+	- [Altering Forms from other modules](#altering-forms-from-other-modules)
+	- [Custom Submit Handlers](#custom-submit-handlers)
+		- [Typical handler](#typical-handler)
+		- [Special handler](#special-handler)
+- [Custom Validation Handlers](#custom-validation-handlers)
+- [Rendering Forms programmatically](#rendering-forms-programmatically)
+- [Service dependencies](#service-dependencies)
+- [Blocks](#blocks)
+	- [How do we create a custom block plugin easily?](#how-do-we-create-a-custom-block-plugin-easily)
+- [Block Configuration](#block-configuration)
+- [Links](#links)
+	- [The Url](#the-url)
+	- [The Link](#the-link)
+- [Event Dispatcher and redirects](#event-dispatcher-and-redirects)
+	- [Redirecting from a Controller](#redirecting-from-a-controller)
+	- [Redirecting from a subscriber](#redirecting-from-a-subscriber)
+		- [Event Dispatcher](#event-dispatcher)
+- [Dispatch your own events](#dispatch-your-own-events)
+
 ## About hooks
 
  - By default we use hooks only in the `*.module` file
