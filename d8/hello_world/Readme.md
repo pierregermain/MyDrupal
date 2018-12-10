@@ -290,8 +290,8 @@ So, creating a link involves a two-step process that deals with these two, but c
  - represented by the [`Drupal\Core\Url`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/class/Url/8.2.x) Class
 
  - Static methods:
-   - [`Url::fromRoute()`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/function/Url%3A%3AfromRoute/8.2.x) to create new instance of `Url`
-   - [`Url::fromUri()`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/function/Url%3A%3AfromUri/8.2.x)  have a look at the documentation above the code.
+   - [`Url::fromRoute()`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/function/Url%3A%3AfromRoute/8.2.x) to create new instance of `Url` that have Drupal routes.
+   - [`Url::fromUri()`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/function/Url%3A%3AfromUri/8.2.x) to create a new instance of `Url` that do **not** have Drupal routes.
 
  - use the $option array to configure your instance.
  - Always work with route names, not with hardcoded urls.
