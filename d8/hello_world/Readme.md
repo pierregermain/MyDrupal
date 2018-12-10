@@ -1,7 +1,5 @@
 # Drupal 8 Module Development Notes
 
-[TOC](https://magnetikonline.github.io/markdown-toc-generate/)
-
 - [Drupal 8 Module Development Notes](#drupal-8-module-development-notes)
 	- [About hooks](#about-hooks)
 	- [About Routes](#about-routes)
@@ -29,6 +27,10 @@
 	- [Redirecting from a subscriber](#redirecting-from-a-subscriber)
 		- [Event Dispatcher](#event-dispatcher)
 - [Dispatch your own events](#dispatch-your-own-events)
+
+
+[TOC generator](https://magnetikonline.github.io/markdown-toc-generate/)
+
 
 ## About hooks
 
