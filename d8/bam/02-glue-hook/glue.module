@@ -1,0 +1,19 @@
+<?php
+/**
+ * @file
+ * Initial example of alter functions.
+ */
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Adds some playful text to the search form (by default on the homepage).
+ */
+function glue_form_alter(&$form, &$form_state, $form_id) {
+    if ($form_id == 'search_block_form') {
+        $form['fun_text'] = array(
+            '#markup' => '<p>Search our pages like a boss:</p>',
+            '#weight' => -10,
+        );
+    }
+}
