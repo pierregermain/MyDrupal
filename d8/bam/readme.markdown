@@ -65,12 +65,23 @@ Tips:
 
 ### Extending a Class
 
-Example: `05-oop-extending-a-class`
-Url: http://my-drupal.loc/example/?print=1
+Example: `06-oop-extending-a-class`
+Test Url: http://my-drupal.loc/example/?print=1
 
-We add the class `PrintedPage` that extends the Page class.
+We add the class `PrintedPage` that extends the Page class so that it inheritances all its functions and properties.
 
 Now inside the *ContactUsController* we check if the `print` variable is set.
+
+
+### Creating an Interface
+
+Example: `07-oop-creating-interface`
+
+We add the interface named Page with its
+    function build();
+    function theme();
+
+and now our *DefaultPage* and *PrintedPage* classes implement the Page interface requiring them to define those functions.
 
 
 
