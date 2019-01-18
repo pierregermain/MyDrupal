@@ -56,12 +56,21 @@ If we look at it, we see that our page and form could be objects.
 
 ## Oop Example
 
-Example: `05-oop-form`
+Example: `05-oop-simple-form`
 
 Tips: 
  - Be Agile (adaptable code) but
    - Only create new Object Types when you need them!
    - DRY: Do not repeat yourself!
+
+### Extending a Class
+
+Example: `05-oop-extending-a-class`
+Url: http://my-drupal.loc/example/?print=1
+
+We add the class `PrintedPage` that extends the Page class.
+
+Now inside the *ContactUsController* we check if the `print` variable is set.
 
 
 
