@@ -54,7 +54,7 @@ We begin to implement a form that is procedural (no oop).
 If we look at it, we see that our page and form could be objects.
 
 
-## Oop Example
+## Oop Examples
 
 Example: `05-oop-simple-form`
 
@@ -75,7 +75,7 @@ Now inside the *ContactUsController* we check if the `print` variable is set.
 
 ### Creating an Interface
 
-Example: `07-oop-creating-interface`
+Example: `07-oop-interface`
 
 We add the interface named Page with its
     function build();
@@ -83,7 +83,44 @@ We add the interface named Page with its
 
 and now our *DefaultPage* and *PrintedPage* classes implement the Page interface requiring them to define those functions.
 
+### Creating an Abstract Class
 
+Example: `08-oop-abstract`
+
+We define an abstract class named Page. It also has defined an abstract function named theme (that must be implented if we extend the Page class)
+Being abstract means that the class Page can't be used if not being extended.
+
+Tips:
+ - Caution with using abstract classes: It really can consume more horse power.
+ - Build your app as if it was an public api.
+ 
+## Public vs. Private vs. Protected Visibility
+
+Example: `09-oop-public-api`
+
+Type of visibility:
+
+ - PUBLIC: The Form class has public properties, so they can be used inside of the Form class or classes that extend the class.
+ - PROTECTED: The properties can't be accessed from instances of the class.
+ - PRIVATE: The properties can't be accessed from instances nor from classes that extend the class.
+   As an example we have the validate and submit functions inside the Form class set to private because we do not need to call that class from outside of the class.
+
+Tips: 
+ - Each Class should go to its own File!
+ - Each class File will be named as its containing class. If not possible you will need to use *namespacing*.
+ - Make your properties not to public.
+ - In the future you can always make them visible if needed (it's easier like that)
+
+Note:
+ - `__DIR__` points to the current directory.
+
+
+# T3: Namespacing and Autoloading
+
+
+
+ 
+---
 
 Videos that needs update
 
@@ -101,6 +138,6 @@ Videos that needs update
 14 - 4
  
 
- T3
- V15
+ T4
+ V1
 
