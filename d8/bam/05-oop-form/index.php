@@ -170,6 +170,14 @@ class Builder {
     }
 }
 
+class ContactUsController {
+    static function contactUsPage($page_elements) {
+        $page = new Page($page_elements, 'Contact us');
+        $page->build();
+        return $page->theme();
+    }
+}
+
 // Instantiate a Builder object to use below.
 $builder = new Builder();
 
@@ -225,7 +233,4 @@ $page_elements = array(
     ),
 );
 
-// Render the page content.
-$page = new Page($page_elements, 'Contact us');
-$page->build();
-print $page->theme();
+print ContactUsController::contactUsPage($page_elements);
