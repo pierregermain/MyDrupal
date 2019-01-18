@@ -64,16 +64,14 @@ class Form {
                 foreach ($settings['validations'] as $validation) {
                     switch ($validation) {
 
-                        // Check to make sure the value is not empty.
                         case 'not_empty':
-                            if (trim($value) == '') {
+                            if (!Validator::notEmpty($value)) {
                                 return false;
                             }
                             break;
 
-                        // Check for a valid email address.
                         case 'is_valid_email':
-                            if (!strstr($value, '@')) {
+                            if (!Validator::isValidEmail($value)) {
                                 return false;
                             }
                             break;
@@ -141,6 +139,24 @@ class Page {
       </html>';
     }
 }
+
+class Validator {
+
+    static function notEmpty($value) {
+        if (trim($value) == '') {
+            return false;
+        }
+        return true;
+    }
+
+    static function isValidEmail($value) {
+        if (!strstr($value, '@')) {
+            return false;
+        }
+        return true;
+    }
+}
+
 
 
 // Create an array for the contact form.
