@@ -111,17 +111,8 @@ class Page {
      * Builds out the content of a page based on the type of elements passed to it.
      */
     function build() {
-        foreach ($this->settings as $id => $values) {
-            switch ($values['type']) {
-                case 'html':
-                    $this->output .= '<div id="' . $id . '">' . $values['value'] . '</div>';
-                    break;
-                case 'form':
-                    $form = new Form($values['value']);
-                    $this->output .= $form->build();
-                    break;
-            }
-        }
+        $builder = new Builder();
+        $this->output = $builder->render($this->settings);
     }
 
     /**
@@ -157,7 +148,30 @@ class Validator {
     }
 }
 
+class Builder {
 
+    public $settings = array();
+    public $output = '';
+
+    function render($settings) {
+        $this->settings = $settings;
+        foreach ($this->settings as $id => $values) {
+            switch ($values['type']) {
+                case 'html':
+                    $this->output .= '<div id="' . $id . '">' . $values['value'] . '</div>';
+                    break;
+                case 'form':
+                    $form = new Form($values['value']);
+                    $this->output .= $form->build();
+                    break;
+            }
+        }
+        return $this->output;
+    }
+}
+
+// Instantiate a Builder object to use below.
+$builder = new Builder();
 
 // Create an array for the contact form.
 $contact_form = array(
@@ -182,6 +196,19 @@ $contact_form = array(
     ),
 );
 
+// Create an array for the footer content and render it.
+$footer_content = array(
+    'divider' => array(
+        'type' => 'html',
+        'value' => '<hr />',
+    ),
+    'content' => array(
+        'type' => 'html',
+        'value' => '<div style="text-align:center">&copy; ' . date('Y') . ' BuildAModule</div>',
+    ),
+);
+$footer = $builder->render($footer_content);
+
 // Create an array for the page.
 $page_elements = array(
     'header' => array(
@@ -191,6 +218,10 @@ $page_elements = array(
     'contact_form' => array(
         'type' => 'form',
         'value' => $contact_form,
+    ),
+    'footer' => array(
+        'type' => 'html',
+        'value' => $footer,
     ),
 );
 
