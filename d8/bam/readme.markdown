@@ -299,6 +299,20 @@ Example: `13-PSR-0-Example`
 
 This shows how to use our example with PSR-0 Autoloading (Drupal uses PSR-4 so it would have more simple directory structure)
 
+# T5: Composer
+
+ - Has autoloader out of the box
+ - Can download packages from [packagist](https://packagist.org/)
+ 
+## Install
+
+Example: `14-composer`
+
+We put in our examples folder a `composer.json` file
+
+and run `composer install`
+
+packages will be automatically downloaded to the `vendor` directory and a `composer.lock` file will be generated.
 
 
 ---

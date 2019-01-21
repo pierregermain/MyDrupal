@@ -1,2 +1,4 @@
 *.idea
 *.swp
+d8/bam/14-composer/vendor/*
+d8/bam/14-composer/composer.lock
