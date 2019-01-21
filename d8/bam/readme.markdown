@@ -141,7 +141,11 @@ Solution: Use **namespaces**
 
 ## Namespaces Example
 
+Example: `11-namespaces`
+
 Namespaces are like virtual directories.
+When you define a namespace it is like defining a virtual directory.
+When you want to use a namespace you will use the *use* statement.
 
 ### index.php
 
@@ -201,7 +205,48 @@ They both use
 namespace BAM\OOPExampleSite;
 ```
 
-So the classes that they define belong to those namespaces.
+So the classes that they define belong to this namespaces.
+
+When calling the Validator class from Form.php the Validator.php class will be used.
+
+If we wanted to use the other validator we would use (It takes always the last Class defined).
+
+```
+use ThirdParty\Utilities\Validator;
+```
+
+If we want to use both Validators we could define
+```
+use ThirdParty\Utilities\Validator as OtherValidator;
+```
+
+Keeping in mind that the third party validator has this namespace defined:
+
+```
+namespace ThirdParty\Utilities;
+```
+
+To call the Validators you can use one of the following
+
+```
+// Using Full qualified names
+\ThirdParty\Utilities\Validator::notEmpty($value);
+
+// Using Aliases
+OtherValidator::notEmpty($value);
+
+// Using Use Statements
+Validator::notEmpty($value);
+```
+
+## Autoloading
+
+Instead of using *require* and *use* statements just use the *use* statements so that the classes will autoload.
+
+### Creating an Autoloader
+
+
+
 
 
 ---
@@ -209,19 +254,11 @@ So the classes that they define belong to those namespaces.
 Videos that needs update
 
 06 - 3
-07 - 17
-07 - 23
-11 - 4
-11 - 6
-12 - 1
-12 - 3
-12 - 7
-14 - 15
-14 - 17
-14 - 25
-14 - 4
+07 - 17 , 23
+11 - 4 , 6
+12 - 1 , 3 , 7
+14 - 15 , 17 14 ,25 , 4
  
 
  T4
- V2
-
+ V7
