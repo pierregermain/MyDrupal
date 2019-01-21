@@ -1,5 +1,7 @@
 # BAM - Drupal 8 Developer Preparation
 
+# T1 Intro
+
 We will cover:
  - Build a simple module
  - OOP
@@ -13,7 +15,7 @@ We will cover:
  - Unit and functional testing
  - Plugins
  
-# T1 Build a dummy module
+# T2 Build a dummy module
 
 Example: `01-glue`
 
@@ -44,7 +46,7 @@ We can add a Controller using the *Drupal Console*. It will add the following fi
 
 Now, if you go to `glue/hello/hola` it will print `hola`.
 
-# T2 : OOP
+# T3 : OOP
 
 ## Procedural Example 
 
@@ -115,11 +117,93 @@ Note:
  - `__DIR__` points to the current directory.
 
 
-# T3: Namespacing and Autoloading
+# T4: Namespacing and Autoloading
 
+## Conflicts in Naming Classes
 
+Example: `09-name-conflict`
 
+In Form we declare:
+
+````
+require_once __DIR__ . '/Validator.php';
+require_once __DIR__ . '/ThirdPartyValidator.php';
+````
+
+The problem is that both classes use the same "Validator" Class, so when executing index.php this error will occur:
+
+```
+Fatal error: Cannot declare class Validator, because the name is already in use in 
+/shared/httpd/my-drupal/web/example/lib/ThirdPartyValidator.php on line 3
+```
+
+Solution: Use **namespaces**
+
+## Namespaces Example
+
+Namespaces are like virtual directories.
+
+### index.php
+
+We tell to use *Builder* and *ContactUsController* Classes from the `BAM\OOPExampleSite` namespace.
+
+```
+use BAM\OOPExampleSite\Builder;
+use BAM\OOPExampleSite\ContactUsController;
+```
+
+### Builder.php defines namespace
+
+```
+namespace BAM\OOPExampleSite;
+```
+
+### ContactUsController.php defines namespace
+
+We define the same namespace as for Builder.php.
+
+But we tell to use *PrintedPage* and *DefaultPage* 
+from the `BAM\OOPExampleSite\Page` namespaces.
+
+```
+namespace BAM\OOPExampleSite;
+
+use BAM\OOPExampleSite\Page\PrintedPage;
+use BAM\OOPExampleSite\Page\DefaultPage;
+```
+
+### Page.php
+
+```
+namespace BAM\OOPExampleSite;
+```
+
+#### DefaultPage.php and PrintedPage.php
+
+We define a special subdirectory namespace.
+But we also tell to use the `BAM\OOPExampleSite\Page` class to be able to extend the Page Class.
  
+
+
+```
+namespace BAM\OOPExampleSite\Page;
+use BAM\OOPExampleSite\Page;
+
+class DefaultPage extends Page {...}
+class PrintedPage extends Page {...}
+```
+
+### Form.php and Validator.php
+
+They both use
+
+```
+namespace BAM\OOPExampleSite;
+```
+
+So the classes that they define belong to those namespaces.
+
+
 ---
 
 Videos that needs update
@@ -139,5 +223,5 @@ Videos that needs update
  
 
  T4
- V1
+ V2
 
