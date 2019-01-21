@@ -241,11 +241,63 @@ Validator::notEmpty($value);
 
 ## Autoloading
 
-Instead of using *require* and *use* statements just use the *use* statements so that the classes will autoload.
+Instead of using *require* and *use* statements 
+it would be great to just use the *use* statements 
+so that the classes get auto-loaded.
 
 ### Creating an Autoloader
 
+Example: `12-autoloader`
 
+
+We add the following to our index.php
+
+```
+function my_autoloader($namespace)
+{
+  $namespace_array = explode("\\", $namespace);
+  $class = end($namespace_array);
+  $file_location = __DIR__ . '/lib/' . $class . '.php';
+  include $file_location;
+}
+
+spl_autoload_register('my_autoloader');
+
+```
+
+This will be executed every time we execute a Class for the first time.
+It is NOT a good idea to use your own autoloader.
+You should use an third party autoloader.
+Drupal uses caching for autoloading classes.
+
+## PHP FIG / Drupal 8 and PSR-4 Autoloading
+
+https://www.php-fig.org/
+
+Standards to structure your PHP Application
+
+PSR stands for PHP Standard Recommendation.
+
+PSR-4 is for autoloading
+
+Drupal 8 uses PSR-4
+
+https://www.php-fig.org/psr/psr-4/
+
+https://www.drupal.org/docs/develop/standards/psr-4-namespaces-and-autoloading-in-drupal-8 
+
+So in Drupal our modules will have the following structure:
+modules/$modulename/src/ 
+with the following namespace 
+Drupal\$modulename\
+
+https://buildamodule.com/video/drupal-8-developer-prep-working-with-symfony-components-in-drupal-8-part-1-using-and-creating-services-why-hook-menu-was-removed-and-why-drupal-switched-to-psr-4-autoloading
+
+## PSR-0 Example
+
+Example: `13-PSR-0-Example`
+
+This shows how to use our example with PSR-0 Autoloading (Drupal uses PSR-4 so it would have more simple directory structure)
 
 
 
@@ -260,5 +312,5 @@ Videos that needs update
 14 - 15 , 17 14 ,25 , 4
  
 
- T4
- V7
+ T5
+ V1
