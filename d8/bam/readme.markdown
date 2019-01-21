@@ -303,6 +303,9 @@ This shows how to use our example with PSR-0 Autoloading (Drupal uses PSR-4 so i
 
  - Has autoloader out of the box
  - Can download packages from [packagist](https://packagist.org/)
+   - Have a look at all the packages available. 
+   - **It's amazing!** how you can integrate those packaged to your PHP Application.
+ - It uses Semantic Versioning for version numbers. More info at [semver](https://semver.org/)
  
 ## Install
 
@@ -313,6 +316,37 @@ We put in our examples folder a `composer.json` file
 and run `composer install`
 
 packages will be automatically downloaded to the `vendor` directory and a `composer.lock` file will be generated.
+
+### About JSON
+
+
+JSON is JavaScript Object Notation: It basically stores information in JS Array Notation.
+
+## Using composer
+
+Example: `15-composer-use`
+
+Once we have downloaded all the packages we can use them from our Php Application (index.php). We just:
+ - Require our autoloader from composer.
+ - Use our downloaded package using the *use* statement.
+
+```
+$loader = require 'vendor/autoload.php';
+
+use Doctrine\Common\Inflector\Inflector;
+
+$singular = 'mouse';
+$plural = Inflector::pluralize($singular);
+
+print 'The plural of ' . $singular . '  is ' . $plural . '. Squeek(s)!';
+```
+
+## Drupal 8 and composer
+
+Drupal 8 uses composer in a similar way as we have seen in the previous example.
+
+It has a composer.json file with the required packages and an autolaoad future
+
 
 
 ---
@@ -326,5 +360,5 @@ Videos that needs update
 14 - 15 , 17 14 ,25 , 4
  
 
- T5
+ T6
  V1
