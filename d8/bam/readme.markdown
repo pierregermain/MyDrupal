@@ -375,8 +375,70 @@ We will add a composer.json to require that component and install it with compos
 It will download more than 100 files in the `vendor` directory!
 
 We will use 2 classes from this component:
- - Response.php
  - Request.php
+ - Response.php
+
+```
+Symfony Diagram:
+REQUEST ----> Process Data ----> RESPONSE
+```
+
+Notes: 
+ - You can output how you want the Response class (HTML, XML, JSON, etc.)
+ - Using Http Foundation gives you access to Global Variables in a secure way
+
+#### Request Examples
+
+```
+// Simulate a request:
+$request = Request::create('/index.php?name=Fabien');
+
+// The URI being requested
+print $request->getPathInfo();
+ 
+// Retrieve GET variables respectively
+print $request->query->get('name');
+print $request->query->get('name', 'Universe');
+ 
+// Retrieve SERVER variables
+print $request->server->get('HTTP_HOST');
+ 
+// Retrieve an HTTP request header, with normalized, lowercase keys
+print $request->headers->get('host');
+ 
+print $request->getMethod(); // GET, POST, PUT, DELETE, HEAD
+var_dump($request->getLanguages()); // An array of languages the client accepts
+
+
+// Example with getting a client IP address to as a security check:
+$request->getClientIp();
+
+
+```
+
+#### Response Examples
+
+``` 
+$response = new Response();
+ 
+$response->setContent('Hello again, world, it is ' . time() . '!');
+$response->setStatusCode(404);
+$response->headers->set('Content-Type', 'text/plain');// Renders the page as text, not as html
+ 
+// configure the HTTP cache headers
+$response->setMaxAge(10);
+```
+
+### Creating an init file
+
+Example: `18-symfony-init-file`
+http://my-drupal.loc/example/index.php
+http://my-drupal.loc/example/bye.php
+
+We create a init file that creates the Request and Response classes.
+Now we have 2 pages that uses that init file.
+
+
 
 
 
