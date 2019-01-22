@@ -347,6 +347,35 @@ Drupal 8 uses composer in a similar way as we have seen in the previous example.
 
 It has a composer.json file with the required packages and an autolaoad future
 
+# T6: Symfony
+
+Fabien Potencier created a nice tutorial called [Create your own framework... on top of the Symfony2 Components](http://fabien.potencier.org/create-your-own-framework-on-top-of-the-symfony2-components-part-1.html)
+Updated Tutorial can be found at [symfony.com/doc/current/create_framework](https://symfony.com/doc/current/create_framework/index.html)
+
+We will just progress through the original (obsolete) tutorial.
+
+## Create your own PHP Framework
+
+### Index.php without symfony
+
+Example: `16-vanilla-php`
+
+http://my-drupal.loc/example/?name=Pierre
+
+We have to take care of
+  - undefined name variable
+  - js that could be injected
+  - define character encoding
+ 
+ 
+### Http Foundation Component
+
+The first component that we will import is the Http Foundation Component. 
+We will add a composer.json to require that component and install it with composer.
+It will download more than 100 files in the `vendor` directory!
+
+
+
 
 
 ---
@@ -361,4 +390,4 @@ Videos that needs update
  
 
  T6
- V1
+ V2
