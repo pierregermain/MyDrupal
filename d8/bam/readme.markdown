@@ -438,7 +438,15 @@ http://my-drupal.loc/example/bye.php
 We create a init file that creates the Request and Response classes.
 Now we have 2 pages that uses that init file.
 
+### Creating an Front Controller
 
+Example: `19-symfony-front-controller`
+
+We want to route all request to one file. We will add an .htaccess file for that to happen.
+
+In that file we define the `/hello` and `/bye` routes
+
+Now hello.php and bye.php just define the response class, but do not requiere the init file nor do they send the response.
 
 
 
@@ -454,4 +462,4 @@ Videos that needs update
  
 
  T6
- V2
+ V11
