@@ -450,6 +450,20 @@ In that file we define the `/hello` and `/bye` routes.
 Now `hello.php` and `bye.php` just define a response class, 
 they do not require the `init.php` nor do they need to send the response.
 
+### Converting our pages to php templates
+
+Example: `20-symfony-php-templates`
+
+Now we use in the front.php the following code that turn on the output buffer from standard php:
+
+```
+ob_start();
+include $map[$path];
+$response->setContent(ob_get_clean());
+```
+
+In the pages we just use php when we need to access to variables.
+Later on we will use twig, so that we do not need to use php templates anymore.
 
 
 ---
