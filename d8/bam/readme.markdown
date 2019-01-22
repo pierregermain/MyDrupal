@@ -465,6 +465,17 @@ $response->setContent(ob_get_clean());
 In the pages we just use php when we need to access to variables.
 Later on we will use twig, so that we do not need to use php templates anymore.
 
+#### Using Variables in php templates
+
+Example: `20-symfony-php-templates`
+
+To use variables in php templates we can use the *extract* function.
+We extract the variables from our front.php and use them in the hello.php page.
+
+If $name is not defined it will still give us some error.
+To test this go to http://example.loc/hello?name=world
+
+
 
 ---
 
@@ -478,4 +489,4 @@ Videos that needs update
  
 
  T6
- V11
+ V77
