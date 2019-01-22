@@ -475,6 +475,10 @@ We extract the variables from our front.php and use them in the hello.php page.
 If $name is not defined it will still give us some error.
 To test this go to http://example.loc/hello?name=world
 
+### Routing Component
+
+Our routing code in front.php is very rudimentary. Let's use the symfony routing component for that.
+
 
 
 ---
@@ -489,4 +493,4 @@ Videos that needs update
  
 
  T6
- V77
+ V78
