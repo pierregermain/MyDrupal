@@ -374,7 +374,9 @@ The first component that we will import is the Http Foundation Component.
 We will add a composer.json to require that component and install it with composer.
 It will download more than 100 files in the `vendor` directory!
 
-
+We will use 2 classes from this component:
+ - Response.php
+ - Request.php
 
 
 
