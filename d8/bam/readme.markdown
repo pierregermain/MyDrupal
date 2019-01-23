@@ -503,13 +503,25 @@ It uses Closures/Anonymous functions (in JS it is called callback).
 
 As an example we will add a new route called `/is_leap_year/{year}`
 
+### Http Kernel Controller
+
+Example: `24-symfony-http-kernel-component`
+
+At our app.php we instantiate for every route a new controller. 
+Let's improve that with the Http Kernel Controller Component (it is not only a controller resolver).
+
+We add the $resolver and $controller to our front.php class.
 
 
----
+
+
+
+
+
 
 Videos that needs update
+---
 
-06 - 3
 07 - 17 , 23
 11 - 4 , 6
 12 - 1 , 3 , 7
@@ -517,4 +529,4 @@ Videos that needs update
  
 
  T6
- V78
+ V88
