@@ -513,6 +513,28 @@ Let's improve that with the Http Kernel Controller Component (it is not only a c
 We add the $resolver and $controller to our front.php class.
 
 
+### Creating our Framework
+
+Example: `25-symfony-framework`
+
+We create a new Framework called Simplex. 
+It will be at /src/Simplex/Framework.php.
+
+Now we pass our $matcher and $resolver to our framework.
+
+Now our code is easier to understand :)
+
+We also add our Framework to composer to be autoloaded (using PSR-0 (keep in mind that D8 uses PSR-4))
+
+````
+"autoload": {
+  "psr-0": { "Simplex": "src/" }
+}
+````
+
+As usual you need to run composer update to make this happen.
+
+
 
 
 
@@ -520,6 +542,7 @@ We add the $resolver and $controller to our front.php class.
 
 
 Videos that needs update
+
 ---
 
 07 - 17 , 23
@@ -528,5 +551,5 @@ Videos that needs update
 14 - 15 , 17 14 ,25 , 4
  
 
- T6
- V88
+ T7
+ V1
