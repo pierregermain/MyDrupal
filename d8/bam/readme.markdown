@@ -429,7 +429,7 @@ $response->headers->set('Content-Type', 'text/plain');// Renders the page as tex
 $response->setMaxAge(10);
 ```
 
-### Creating an init file
+#### Creating an init file
 
 Example: `18-symfony-init-file`
 http://my-drupal.loc/example/index.php
@@ -438,7 +438,7 @@ http://my-drupal.loc/example/bye.php
 We create a init file that creates the Request and Response classes.
 Now we have 2 pages that uses that init file.
 
-### Creating a Front Controller
+#### Creating a Front Controller
 
 Example: `19-symfony-front-controller`
 
@@ -450,7 +450,7 @@ In that file we define the `/hello` and `/bye` routes.
 Now `hello.php` and `bye.php` just define a response class, 
 they do not require the `init.php` nor do they need to send the response.
 
-### Converting our pages to php templates
+#### Converting our pages to php templates
 
 Example: `20-symfony-php-templates`
 
@@ -492,7 +492,16 @@ Now we need to `use Symfony\Component\Routing;` in app.php and front.php.
 We now use a matcher class to match routes.
 We also have added some examples howto generate URL's.
 
+#### Adding a Render Template Controller
 
+Example: `23-symfony-render-template-controller`
+
+Now we add an controller to the front.php class.
+We also need to pass that controller name in our app.php class.
+
+It uses Closures/Anonymous functions (in JS it is called callback).
+
+As an example we will add a new route called `/is_leap_year/{year}`
 
 
 
