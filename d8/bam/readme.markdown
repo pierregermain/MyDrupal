@@ -467,7 +467,7 @@ Later on we will use twig, so that we do not need to use php templates anymore.
 
 #### Using Variables in php templates
 
-Example: `20-symfony-php-templates`
+Example: `21-symfony-php-variables`
 
 To use variables in php templates we can use the *extract* function.
 We extract the variables from our front.php and use them in the hello.php page.
@@ -477,7 +477,22 @@ To test this go to http://example.loc/hello?name=world
 
 ### Routing Component
 
-Our routing code in front.php is very rudimentary. Let's use the symfony routing component for that.
+Example: `22-symfony-routing-component`
+
+Our routing code in *front.php* is very rudimentary. 
+Let's use the symfony routing component for that.
+
+We will import it updating our composer.json file.
+
+To do that we run `composer update` instead of `composer install`.
+
+We move our routing to a separate file called `app.php`.
+Now we need to `use Symfony\Component\Routing;` in app.php and front.php.
+
+We now use a matcher class to match routes.
+We also have added some examples howto generate URL's.
+
+
 
 
 
