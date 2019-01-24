@@ -535,7 +535,17 @@ We also add our Framework to composer to be autoloaded (using PSR-0 (keep in min
 As usual you need to run composer update to make this happen.
 
 
+#### Model and Controller class
 
+Example: `26-calendar-namnespace`
+
+We improve app.php so that it uses an independent controller class.
+
+We create the `calendar` namespace with 2 classes:
+ - LeapYear (Model Class)
+ - LeapYearController (Controller Class): This will use the Model Class.
+ 
+We also update our composer.json so that the new package is PSR-0 compatible
 
 
 
