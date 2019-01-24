@@ -16,7 +16,6 @@ class FrameworkTest extends \PHPUnit\Framework\TestCase
  
     $this->assertEquals(404, $response->getStatusCode());
   }
-
   protected function getFrameworkForException($exception)
   {
     $matcher = $this->getMockBuilder('Symfony\Component\Routing\Matcher\UrlMatcherInterface')->getMock();

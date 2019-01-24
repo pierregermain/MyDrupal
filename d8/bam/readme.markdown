@@ -549,6 +549,8 @@ We also update our composer.json so that the new package is PSR-0 compatible
 
 # T7: Unit Testing
 
+## Introduction
+
 We will use *PHP unit* to test our classes.
 
 Common types of testing:
@@ -564,6 +566,10 @@ To test our Application we will have:
  - One Test configuration file at `/phpunit.xml`
 
 To test our application just run `phpunit` from `/`
+
+The tricky part is `getMockBuilder` that will get an interface to know the methods that can be tested.
+
+After having instances of $matcher and $resolver using the getMockBuilder we use DI to create an instance of our Framework.
 
 
 
