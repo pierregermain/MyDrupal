@@ -571,6 +571,21 @@ The tricky part is `getMockBuilder` that will get an interface to know the metho
 
 After having instances of $matcher and $resolver using the getMockBuilder we use DI to create an instance of our Framework.
 
+## Dependency Injection (DI)
+
+We have created instances of $matcher and $resolver from outside of our code. That is DI!!!
+We are passing *mock objects*.
+
+Right now when calling our Framework from our Test class we get an error because we created mock objects instead of *UrlMatcher* and *ControllerResolver* classes respectively.
+
+So we need to *type-hint* our mock classes!!!
+
+To do so we just need to change our Framework to use the UrlMatcherInterface and ContollerResolverInterface instead of the previous ones.
+
+This can be done do because the previous classes extend the Inter;
+
+
+
 
 
 
