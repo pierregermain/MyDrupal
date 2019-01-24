@@ -547,6 +547,25 @@ We create the `calendar` namespace with 2 classes:
  
 We also update our composer.json so that the new package is PSR-0 compatible
 
+# T7: Unit Testing
+
+We will use *PHP unit* to test our classes.
+
+Common types of testing:
+ - Unit Testing
+ - Functional Testing:
+   - For Drupal we do it in the Browser usually with *Simple Test* or *[Behat](https://blog.eleven-labs.com/en/behat-structure-functional-tests/)*
+   - For JS we can use Selenium
+ - Regression Testing: Makes sure that a bug does not come back (you would test this using unit or functional testing).
+ 
+
+To test our Application we will have:
+ - Test files at  `/src/Simplex/Tests`
+ - One Test configuration file at `/phpunit.xml`
+
+To test our application just run `phpunit` from `/`
+
+
 
 
 
@@ -562,4 +581,4 @@ Videos that needs update
  
 
  T7
- V1
+ V100
