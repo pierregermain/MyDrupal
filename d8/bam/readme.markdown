@@ -584,7 +584,14 @@ To do so we just need to change our Framework to use the UrlMatcherInterface and
 
 This can be done do because the previous classes extend the Inter;
 
+## About our Test class
 
+ - any method that begins with test* will be run as a test.
+ 
+## About what can be tested
+
+[Manual](https://phpunit.de/manual/6.5/en/writing-tests-for-phpunit.html)
+[Assertions](https://phpunit.de/manual/6.5/en/appendixes.assertions.html)
 
 
 
@@ -602,4 +609,4 @@ Videos that needs update
  
 
  T7
- V100
+ V12

@@ -6,7 +6,7 @@ use Simplex\Framework;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
-class FrameworkTest extends \PHPUnit\Framework\TestCase
+class Framework1stTest extends \PHPUnit\Framework\TestCase
 {
   public function testNotFoundHandling()
   {
