@@ -547,7 +547,9 @@ We create the `calendar` namespace with 2 classes:
  
 We also update our composer.json so that the new package is PSR-0 compatible
 
-# T7: Unit Testing
+# T7 (Extra): Unit Testing
+
+Example: `27-phpunit`
 
 ## Introduction
 
@@ -594,6 +596,47 @@ This can be done do because the previous classes extend the Inter;
 [Assertions](https://phpunit.de/manual/6.5/en/appendixes.assertions.html)
 
 
+# T7 Symfony (part 2)
+
+## Observer Pattern / Event Dispatcher
+
+Example: `28-symfony-event-dispatcher-component`
+
+In Drupal we can use hooks to enhance functionality (This is using an Observer Pattern).
+In Symfony this is called the *Event Dispatcher* and we can import adding the component to our composer.json.
+
+### Adding Event Dispatcher to our Framework
+
+First we add the following to our Framework.php file:
+
+ - We add an Event Dispatcher to our /src/Simplex/Framework.php file.
+ - Now we pass a $dispatcher in the constructor. This is DI!!! We do type-hinting!!!
+ - Now we use a $response variable inside our code (before we just returned it)
+ - We dispatch the $response object (so that other parts of the application can use it) and after that we return it (like before)
+ 
+Second we add a new class `src/Simplex/ResponseEvent.php`.
+ - It is just a wrapper for $response and $request
+ - Extend from Event
+ - The constructor takes $response and $request
+ - It has getters for the $request and $request
+ - This class is used from Framework.php when dispatching the event (named 'response').
+   ```
+   $this->dispatcher->dispatch('response', new ResponseEvent($response, $request));
+   ```
+
+Third we add the following to our front.php file
+ - add dispatcher EventDispatcher
+ - add listener (the one from ResponseEvent.php). It has the same name: 'response'. It uses an callback function for the $event.
+ - get the $response from ResponseEvent.php
+ - after that we have some example code: If it is a valid page we add the Google Analytics code.
+ - we also add the end pass the dispatcher when instantiating our framework.
+ 
+## Add Second Listener 
+
+
+
+
+
 
 
 
@@ -609,4 +652,4 @@ Videos that needs update
  
 
  T7
- V12
+ V17 (second listener)
