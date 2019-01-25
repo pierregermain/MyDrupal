@@ -657,7 +657,7 @@ We change `addListener` to `addSubscriber` in our front.php file.
 Now our Event Listeners will implement `EventSubsciberInterface` (this will help to test the class providing special methods).
 The interface will provide the `getSubscribedEvents`, that will return all the subscribed events.
 
-## Add Caching
+## Adding Caching
 
 Example: `31-cache`
 
@@ -668,6 +668,43 @@ We enable caching in our LeapYearController adding
 ```
 $response->setTtl(10);//set time to live
 ```
+
+## Http Kernel Component
+
+Example: `32-http-kernel-component`
+
+Now we will use Http kernel Component in our Framework.php file.
+This makes the file super simple because the Http kernel component has already the constructor and the handler for the $response and $request classes.
+
+At front.php we call the framework, but because we want to use our $matcher and Http Kernel component does not have a way to pass it, we inject that using DI:
+
+```
+$dispatcher->addSubscriber(new HttpKernel\EventListener\RouterListener($matcher));
+```
+
+### Adding Error Reporting
+
+Example: `33-error-reporting`
+
+We add error reporting to our front.php file
+
+```
+$dispatcher->addSubscriber(new HttpKernel\EventListener\ExceptionListener($errorHandler));
+```
+
+Other examples would be
+
+```
+// Example of adding a listener that will run Response::prepare() before the response is sent:
+$dispatcher->addSubscriber(new HttpKernel\EventListener\ResponseListener('UTF-8'));
+
+// Example of adding support for a streamed response:
+$dispatcher->addSubscriber(new HttpKernel\EventListener\StreamedResponseListener());
+
+```
+
+We add a throw exception in our LeapYearController to test this functionality (if you enter a negative Year it will give an error)
+
 
 
 
@@ -686,4 +723,4 @@ Videos that needs update
  
 
  T7
- V22
+ V24
