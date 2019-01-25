@@ -620,6 +620,7 @@ Second we add a new class `src/Simplex/ResponseEvent.php`.
  - The constructor takes $response and $request
  - It has getters for the $request and $request
  - This class is used from Framework.php when dispatching the event (named 'response').
+ 
    ```
    $this->dispatcher->dispatch('response', new ResponseEvent($response, $request));
    ```
@@ -631,7 +632,18 @@ Third we add the following to our front.php file
  - after that we have some example code: If it is a valid page we add the Google Analytics code.
  - we also add the end pass the dispatcher when instantiating our framework.
  
-## Add Second Listener 
+### Adding a Second Listener with low priority
+
+Example: `29-second-listener`
+
+We add a second listener at front.php
+
+```
+$dispatcher->addListener('response', (...) , -255);
+```
+
+We put all in separate classes so we do not need anymore to use callback functions.
+
 
 
 
@@ -652,4 +664,4 @@ Videos that needs update
  
 
  T7
- V17 (second listener)
+ V112
