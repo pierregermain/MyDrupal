@@ -705,7 +705,24 @@ $dispatcher->addSubscriber(new HttpKernel\EventListener\StreamedResponseListener
 
 We add a throw exception in our LeapYearController to test this functionality (if you enter a negative Year it will give an error)
 
+## Add a Response Listener
 
+Example: `34-response-listener`
+
+Now we will return strings, and there will be a Listener to see if that string already exists.
+
+ - *LeapYearController* returns strings now.
+ - We create our StringResponseListener class that implements the EventSubscriberInterface with
+  - onView() method
+  - getSubscribedEvents()
+ - front.php will add that new subscriber
+ 
+   ```
+   $dispatcher->addSubscriber(new Simplex\StringResponseListener());
+   ```
+ 
+ 
+  
 
 
 
@@ -723,4 +740,4 @@ Videos that needs update
  
 
  T7
- V24
+ V121
