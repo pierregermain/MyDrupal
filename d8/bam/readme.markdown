@@ -721,14 +721,34 @@ Now we will return strings, and there will be a Listener to see if that string a
    $dispatcher->addSubscriber(new StringResponseListener());
    ```
  
+## Dependency Injection Container Component / Singleton Pattern
+
+Example: `35-symfony-dependency-injection-component` 
+
+We add the dependency to our composer.json file
+We add the file /src/container.php and register our Framwork class using:
+```
+$sc->register('framework', 'Simplex\Framework')
+  ->setArguments(array(new Reference('dispatcher'), new Reference('resolver')))
+```
+where dispatcher and resolver are also DI's.
+
+We add DI to front.php: We instantiate using the Singleton pattern (only one instance can be used)
+```
+$response = $sc->get('framework')->handle($request);
+```
+
+Tips (to understand our Container class)
+ - *new reference* allows to create new DI's
+ - *->addMethodCall* allows to run methods at the time of instantiation of an object.
  
-  
 
-
-
-
-
-
+**Important:**
+ - Never use DI inside an Class. Always use DI to instantiate a class but not the other way.
+ - Remember: Containers are used outside a class, never within them!
+ 
+ 
+ 
 Videos that needs update
 
 ---
@@ -740,4 +760,4 @@ Videos that needs update
  
 
  T7
- V121
+ V32
