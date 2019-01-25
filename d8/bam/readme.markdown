@@ -715,10 +715,10 @@ Now we will return strings, and there will be a Listener to see if that string a
  - We create our StringResponseListener class that implements the EventSubscriberInterface with
   - onView() method
   - getSubscribedEvents()
- - front.php will add that new subscriber
+ - Framework.php will add that new subscriber
  
    ```
-   $dispatcher->addSubscriber(new Simplex\StringResponseListener());
+   $dispatcher->addSubscriber(new StringResponseListener());
    ```
  
  
