@@ -747,6 +747,14 @@ Tips (to understand our Container class)
  - Never use DI inside an Class. Always use DI to instantiate a class but not the other way.
  - Remember: Containers are used outside a class, never within them!
  
+
+### Creating Global Variables with Dependency Injection Store
+
+
+In container.php we use *->setParameter* and *%name-of-variable%* to use global variables.
+
+
+
  
  
 Videos that needs update
