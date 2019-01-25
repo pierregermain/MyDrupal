@@ -645,6 +645,15 @@ $dispatcher->addListener('response', (...) , -255);
 We put all in separate classes so we do not need anymore to use callback functions.
 
 
+### Adding a Event Subscriber
+
+Example: `30-event-subscriber`
+
+A Event Subscriber will have various Event Listeners attached to it.
+Now the priority will be attached directly to the Event Listener.
+
+We change `addListener` to `addSubscriber` in our front.php file.
+
 
 
 
@@ -664,4 +673,4 @@ Videos that needs update
  
 
  T7
- V112
+ V115
