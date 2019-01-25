@@ -645,7 +645,7 @@ $dispatcher->addListener('response', (...) , -255);
 We put all in separate classes so we do not need anymore to use callback functions.
 
 
-### Adding a Event Subscriber
+## Adding a Event Subscriber
 
 Example: `30-event-subscriber`
 
@@ -654,7 +654,20 @@ Now the priority will be attached directly to the Event Listener.
 
 We change `addListener` to `addSubscriber` in our front.php file.
 
+Now our Event Listeners will implement `EventSubsciberInterface` (this will help to test the class providing special methods).
+The interface will provide the `getSubscribedEvents`, that will return all the subscribed events.
 
+## Add Caching
+
+Example: `31-cache`
+
+We add a HttpCache object to our front.php file.
+We implement HttpKernelInterface in our Framework.php file.
+
+We enable caching in our LeapYearController adding
+```
+$response->setTtl(10);//set time to live
+```
 
 
 
@@ -673,4 +686,4 @@ Videos that needs update
  
 
  T7
- V115
+ V22
