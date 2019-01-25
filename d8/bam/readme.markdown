@@ -657,7 +657,7 @@ We change `addListener` to `addSubscriber` in our front.php file.
 Now our Event Listeners will implement `EventSubsciberInterface` (this will help to test the class providing special methods).
 The interface will provide the `getSubscribedEvents`, that will return all the subscribed events.
 
-## Adding Caching
+## Adding Caching (aka Reverse Proxy)
 
 Example: `31-cache`
 
