@@ -757,9 +757,15 @@ In container.php we use *->setParameter* and *%name-of-variable%* to use global 
 
 # T9 - YAML Files
 
-## YAML Files for Routes
+ - YAML is Language independent
+ - Separation of concerns:
+    - Backend vs. 
+    - Configuration vs. 
+    - Frontend
+ 
+## YAML File for Routes
 
-Example: `36-routes-yml`
+Example: `36-routes-yaml`
 
 To be able to use yaml configuration files you would import the following with the composer.json file
 
@@ -798,6 +804,35 @@ leap_year:
 ```
 
  
+## Parsing generic YAML File as an Array
+
+Example: `37-yaml-syntax`
+
+In this example `/src/cointainer.php` parses the `yaml-syntax.yml` file
+
+```
+$var = Yaml::parse(__DIR__ . '/yaml-syntax.yml'); // Generic processing
+var_dump($var);
+die();
+```
+
+## YAML File for DI's
+
+Example: `38-yaml-services`
+
+Original File: `/src/original-container.php` (that was creating the DI's)
+New File: `/src/services.yml` (configures the DI's)
+New File: `/src/container.php` (that uses the services.yml file)
+
+Now to load our DI's we just do:
+
+```
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader as DICLoader;
+(...)
+$loader = new DICLoader($sc, $locator);
+$loader->load('services.yml');
+```
+
  
 Videos that needs update
 
