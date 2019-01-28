@@ -753,7 +753,49 @@ Tips (to understand our Container class)
 
 In container.php we use *->setParameter* and *%name-of-variable%* to use global variables.
 
+# T8 - Phpstorm (OK)
 
+# T9 - YAML Files
+
+## YAML Files for Routes
+
+Example: `36-routes-yml`
+
+To be able to use yaml configuration files you would import the following with the composer.json file
+
+```
+    "symfony/yaml": "2.4.*",
+    "symfony/config": "2.4.*"
+```
+
+
+For Routes we were using this code:
+
+```
+$routes->add('leap_year', new Routing\Route('/is_leap_year/{year}', array(
+  'year' => null,
+  '_controller' => 'Calendar\\Controller\\LeapYearController::indexAction',
+)));
+```
+
+### Importing / Parsing Yaml Files
+
+As a example we will parse our routes yaml file
+
+```
+$locator = new FileLocator(__DIR__);
+$loader = new YamlFileLoader($locator);
+$routes = $loader->load('routes.yml');
+$sc->setParameter('routes', $routes);
+```
+
+When using yaml files it will look like this:
+
+```
+leap_year:
+  path:     /is_leap_year/{year}
+  defaults: {'year': null, _controller: 'Calendar\Controller\LeapYearController::indexAction' }
+```
 
  
  
@@ -761,11 +803,10 @@ Videos that needs update
 
 ---
 
-07 - 17 , 23
 11 - 4 , 6
 12 - 1 , 3 , 7
 14 - 15 , 17 14 ,25 , 4
  
 
- T7
- V32
+ T9
+ V136
