@@ -933,6 +933,8 @@ We can use Drupal Console for that.
 
 Once generated it will have created the following files:
 
+ 1 - modules/blindd8/blindd8.services.yml
+ 2 - modules/blindd8/src/DefaultService.php
 
 
 
