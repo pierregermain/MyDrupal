@@ -753,7 +753,10 @@ Tips (to understand our Container class)
 
 In container.php we use *->setParameter* and *%name-of-variable%* to use global variables.
 
-# T8 - Phpstorm (OK)
+# T8 - Phpstorm 
+
+- `Ctr + Shift + N` : Find Files
+- `Ctr + Shift + F` : Search in Files
 
 # T9 - YAML Files
 
@@ -833,7 +836,51 @@ $loader = new DICLoader($sc, $locator);
 $loader->load('services.yml');
 ```
 
- 
+
+# T10 Dependency Injection Container in Drupal 8
+
+ - The DI Container in D8 is it's Backbone:
+   - Listeners / Subscribers
+   - Event Dispatchers
+   - Request / Response
+   - Http Kernel
+   - Contollers 
+
+In Drupal the services.yml files are (usually) prefixed with the module name (Please Have a nice search in Drupal Core)
+
+The backbone of the backbone of this is the following file: `/core/core.services.yml`
+
+Example:
+
+```
+  cache_factory:
+    class: Drupal\Core\Cache\CacheFactory
+    arguments: ['@settings', '%cache_default_bin_backends%']
+    calls:
+      - [setContainer, ['@service_container']]
+```
+
+Where:
+ - @settings is an other reference to a service called settings (because of the `@` symbol)
+
+
+TODO: V149  (T10-4)(Enable Debug and do a breakpoint!!!)
+The Dependency Injection Container file is a PHP file that gets created when running our php application. That file will have a really big hash name. In that file you can find all the services that could be called in our application.
+
+To search for services in the codebase you can search for `\Drupal::service(`
+
+If you are curious you will see that the method is in the Drupal.php class
+
+```
+  public static function service($id) {
+    return static::getContainer()->get($id);
+  }
+```
+
+
+#T11 Symfony Components in Drupal 8
+
+---- 
 Videos that needs update
 
 ---
@@ -843,5 +890,5 @@ Videos that needs update
 14 - 15 , 17 14 ,25 , 4
  
 
- T9
- V136
+ T10
+ V148
