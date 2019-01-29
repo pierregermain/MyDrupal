@@ -19,10 +19,8 @@ We will cover:
 
 Example: `01-glue`
 
-To enable a module you need two files
+In D8 to enable a module you need only one file:
  - *.info.yml file
- - *.module file
-
 
 ## Add a Form Alter Hook
 
@@ -756,7 +754,7 @@ In container.php we use *->setParameter* and *%name-of-variable%* to use global 
 # T8 - Phpstorm 
 
 - `Ctr + Shift + N` : Find Files
-- `Ctr + Shift + F` : Search in Files
+- `Ctr + Shift + F` or `Shift + Shift`: Search in Files 
 
 # T9 - YAML Files
 
@@ -863,10 +861,6 @@ Example:
 Where:
  - @settings is an other reference to a service called settings (because of the `@` symbol)
 
-
-TODO: V149  (T10-4)(Enable Debug and do a breakpoint!!!)
-The Dependency Injection Container file is a PHP file that gets created when running our php application. That file will have a really big hash name. In that file you can find all the services that could be called in our application.
-
 To search for services in the codebase you can search for `\Drupal::service(`
 
 If you are curious you will see that the method is in the Drupal.php class
@@ -880,9 +874,70 @@ If you are curious you will see that the method is in the Drupal.php class
 
 #T11 Symfony Components in Drupal 8
 
----- 
-Videos that needs update
+We will create a new module called `blindd8`
 
+## Introduction
+
+### About Hook Menu
+
+In D8 we do not have hook menu. Now we have:
+ - routing.yml
+ - menu_links.yml
+ 
+### About PSR-4
+
+Search in the code base `psr-4`
+
+You will see autoload configurations to /src in composer.json files.
+The magic happens in `DrupalKernel.php` inside the `protected function getModuleNamespacesPsr4($module_file_names) {(...)}`
+
+## Adding a Page
+
+Example: `39-blindd8`
+
+As we did with our glue example we will create:
+
+   - `/src/Controller/mycontroller.php`: It will have a method that prints the markup. We could also return other type of data like JSON, XML, etc.
+   - `routing.yml`: It defines our link and the method that will handle that url.
+
+We can add a Controller using the *Drupal Console*. 
+It will add the following files:
+```
+/src/Controller/MyController.php
+*.routing.yml
+```
+
+Now, if you go to `my-route` it will print `hola` (thanks to PSR-4 Autoloading).
+
+## Using a Service from inside our Controller
+
+Example: `39-blindd8`
+
+We will add DI to a service from within our `MyController` class.
+
+We use: `\Drupal::currentUser()` that is another way of using `\Drupal::service('current_user');` 
+
+You can see the service and the controller class:
+```
+/src/Controller/MyController.php
+*.routing.yml
+```
+
+### Finding Services for DI's
+
+Just search for services defined in `$module.services.yml` files.
+
+## Creating a Service inside our module
+
+We can use Drupal Console for that.
+
+Once generated it will have created the following files:
+
+
+
+
+--- 
+Videos that needs update
 ---
 
 11 - 4 , 6
@@ -891,4 +946,4 @@ Videos that needs update
  
 
  T10
- V148
+ V157(7)
