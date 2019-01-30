@@ -975,9 +975,9 @@ These types of events are defined at `KernelEvents.php`
 
 Example: `40-subscribe-event`
 
-We can generate a Subscriber with the Drupal Console running `drupal generate:event:subscriber`. 
-We will add it with the `` service name using a event tag of type event_subscriber.
-We will use `kernel.response`.
+We generate a Subscriber with the Drupal Console running 
+`drupal generate:event:subscriber`. 
+
 It will generate the following files:
 
 ```
@@ -985,15 +985,37 @@ It will generate the following files:
 ```
 
 It will add the service on the following file:
+
 ```
  /blindd8.services.yml
 ```
 
+We will name our service `blindd8.default` in `blindd8.service.yml` file using a event tag of type *event_subscriber*.
+We will use an Event of type  `kernel.response`. We subscribe to that event using
+
+```
+  static function getSubscribedEvents() {
+    $events['kernel.response'] = ['kernel_response'];
+    return $events;
+  }
+```
 
 Now we add the following code in the response:
 
+```
+$response = $event->getResponse();
+$response->setContent('Blind date, get it?!');
+$response->setStatusCode('404');
+```
 
+Now we will always have a Error 404 when visiting our drupal site.
 
+Tip:
+ - To see the methods of $event just put a breakpoint in the previous code.
+
+# T12 Symfony Components in Drupal 8 - Part 2
+
+ 
 
 --- 
 Videos that needs update
@@ -1003,5 +1025,5 @@ Videos that needs update
 14 - 15 , 17 14 ,25 , 4
  
 
- T10
- V162(13)
+ T12
+ V1()

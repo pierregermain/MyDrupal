@@ -23,7 +23,6 @@ class Subscriber implements EventSubscriberInterface {
    */
   static function getSubscribedEvents() {
     $events['kernel.response'] = ['kernel_response'];
-
     return $events;
   }
   /**
