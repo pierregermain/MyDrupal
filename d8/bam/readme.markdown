@@ -953,8 +953,44 @@ Can be tested at `http://my-drupal.loc/blindd8tag/`
 We will call our service from our controller class from a new method called `tag`
 
 ```
+        $myservice = \Drupal::service('blindd8.default');
+        $tagline = $myservice->getTagline();
+```
+
+## Events and Subscribers
+
+We will create now an Event and a listener to that event.
+
+We will register for some kind of Event, and when that Event is triggered a particular method of our class will be triggered (this is similar to hooks).
+
+### Searching for Subscribers in Drupal's Codebase
+
+Just search for `Subscriber` in the codebase and you should find the namespace `\Drupal\Core\EventSubscriber`
+
+You will find a method called `getSubscribedEvents(` that uses a type of Event.
+
+These types of events are defined at `KernelEvents.php`
+
+### Creating a Subscriber Class
+
+Example: `40-subscribe-event`
+
+We can generate a Subscriber with the Drupal Console running `drupal generate:event:subscriber`. 
+We will add it with the `` service name using a event tag of type event_subscriber.
+We will use `kernel.response`.
+It will generate the following files:
 
 ```
+ /src/EventSubscriber/Subscriber.php
+```
+
+It will add the service on the following file:
+```
+ /blindd8.services.yml
+```
+
+
+Now we add the following code in the response:
 
 
 
@@ -968,4 +1004,4 @@ Videos that needs update
  
 
  T10
- V158(8)
+ V162(13)

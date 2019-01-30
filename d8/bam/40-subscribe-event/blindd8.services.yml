@@ -1,0 +1,9 @@
+services:
+  blindd8.default:
+    class: Drupal\blindd8\DefaultService
+    arguments: []
+  blindd8.subscriber:
+    class: Drupal\blindd8\EventSubscriber\Subscriber
+    arguments: []
+    tags:
+      - { name: event_subscriber }
