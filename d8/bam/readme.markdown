@@ -913,6 +913,8 @@ Now, if you go to `my-route` it will print `hola` (thanks to PSR-4 Autoloading).
 
 Example: `39-blindd8`
 
+Can be tested at `http://my-drupal.loc/blindd8/my-string`
+
 We will add DI to a service from within our `MyController` class.
 
 We use: `\Drupal::currentUser()` that is another way of using `\Drupal::service('current_user');` 
@@ -929,12 +931,31 @@ Just search for services defined in `$module.services.yml` files.
 
 ## Creating a Service inside our module
 
+Example: `39-blindd8`
+
+Can be tested at `http://my-drupal.loc/blindd8`
+
 We can use Drupal Console for that.
 
 Once generated it will have created the following files:
 
  1 - modules/blindd8/blindd8.services.yml
  2 - modules/blindd8/src/DefaultService.php
+ 
+ We also create a method called `tag` in our Service file.
+
+### Calling our service
+
+Example: `39-blindd8`
+
+Can be tested at `http://my-drupal.loc/blindd8tag/`
+
+We will call our service from our controller class from a new method called `tag`
+
+```
+
+```
+
 
 
 
@@ -942,10 +963,9 @@ Once generated it will have created the following files:
 Videos that needs update
 ---
 
-11 - 4 , 6
 12 - 1 , 3 , 7
 14 - 15 , 17 14 ,25 , 4
  
 
  T10
- V157(7)
+ V158(8)

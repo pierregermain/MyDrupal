@@ -45,4 +45,22 @@ class MyController extends ControllerBase {
         );
         return $output;
     }
+
+    /**
+     * Provides a page that we can experiment with.
+     *
+     * @return array
+     *   A render array as expected by drupal_render().
+     */
+    public function tag()
+    {
+        $myservice = \Drupal::service('blindd8.default');
+        $tagline = $myservice->getTagline();
+
+        // Send it forth!
+        $output = array(
+            '#markup' => $this->t('Hey, this is @tagline', array('@tagline' => $tagline)),
+        );
+        return $output;
+    }
 }
