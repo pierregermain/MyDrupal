@@ -1047,7 +1047,11 @@ static function getSubscribedEvents() {
 }
 ```
 
+## Redirects
 
+```
+\Drupal\Core\Url::fromUri('internal:/')->toString()
+```
  
 
 --- 
@@ -1059,4 +1063,4 @@ Videos that needs update
  
 
  T12
- V1()
+ V168(3)
