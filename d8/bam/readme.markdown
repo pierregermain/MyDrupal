@@ -978,11 +978,6 @@ Example: `40-subscribe-event`
 We generate a Subscriber with the Drupal Console running 
 `drupal generate:event:subscriber`. 
 
-It will generate the following files:
-
-```
- /src/EventSubscriber/Subscriber.php
-```
 
 It will add the service on the following file:
 
@@ -990,6 +985,11 @@ It will add the service on the following file:
  /blindd8.services.yml
 ```
 
+It will generate the following files:
+
+```
+ /src/EventSubscriber/Subscriber.php
+```
 We will name our service `blindd8.default` in `blindd8.service.yml` file using a event tag of type *event_subscriber*.
 We will use an Event of type  `kernel.response`. We subscribe to that event using
 
@@ -1014,6 +1014,39 @@ Tip:
  - To see the methods of $event just put a breakpoint in the previous code.
 
 # T12 Symfony Components in Drupal 8 - Part 2
+
+## Get route in our Subscriber
+
+Example: `40-subscribe-event`
+
+Right now our Subscriber will be executed for all response events. 
+We do not want that. We can add an if statement to improve our code.
+There we will add the name of the rout. We could add names that we have defined at our yml file.
+We will just use system.404 route, that is the route for 404 errors.
+
+```
+        if ($route == 'system.404') {...}
+```
+
+
+
+## About {@inheritdoc}
+
+For overwritten methods we can use the `{@inheritdoc}`.
+In Phpstorm these methods have a green round icon with an Up Arrow.
+
+Example:
+
+```
+/**
+ * {@inheritdoc}
+ */
+static function getSubscribedEvents() {
+  $events['kernel.response'] = ['kernel_response'];
+  return $events;
+}
+```
+
 
  
 

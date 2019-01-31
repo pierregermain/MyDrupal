@@ -31,10 +31,13 @@ class Subscriber implements EventSubscriberInterface {
    *
    * @param GetResponseEvent $event
    */
-  public function kernel_response(Event $event) {
-          $response = $event->getResponse();
-          $response->setContent('Blind date, get it?!');
-          $response->setStatusCode('404');
-  }
+    public function kernel_response(Event $event) {
 
+        $route = \Drupal::routeMatch()->getRouteName();
+        if ($route == 'system.404') {
+            $response = $event->getResponse();
+            $response->setContent('Blind date, get it?!');
+            $response->setStatusCode('404');
+        }
+    }
 }
