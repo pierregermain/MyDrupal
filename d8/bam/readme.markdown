@@ -1064,9 +1064,9 @@ Important:
 Please have a look at this blog post [Automatic Redirect by Path in Drupal 8](http://agileadam.com/2017/08/automatic-redirect-by-path-in-drupal-8/) for more examples.
 
 
-### Creating our own event
+### Creating our custom event
 
-#### Using Generic Event
+#### Creating our event using the Generic Event Class from Symfony
 
 Example:`41-dispatch-event` 
 path: `http://my-drupal.loc/blindd8event`
@@ -1076,8 +1076,16 @@ Method: genericEvent()
 We will register our event in the *event dispatcher* using:
 `\Drupal::service('event_dispatcher')->dispatch('blindd8.notable_event', $event);`
 
+#### Subscribe to our custom event
 
+Example:`42-subscribe-event` 
+path: `http://my-drupal.loc/blindd8event`
 
+We add in our getSubscribedEvents in our Subscriber class to the new created event 
+
+```
+$events['blindd8.notable_event'][] = array('onNotableEvent');
+```
 
 
 
