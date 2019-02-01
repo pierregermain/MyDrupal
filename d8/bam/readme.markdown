@@ -1087,6 +1087,20 @@ We add in our getSubscribedEvents in our Subscriber class to the new created eve
 $events['blindd8.notable_event'][] = array('onNotableEvent');
 ```
 
+#### Creating our event using an Event Class
+
+Example: `43-event-class`
+path: `http://my-drupal.loc/blindd8event`
+
+Good Example for Boilerplate code is `ConfigCollectionInfo` that extends the Event Class.
+
+We need two methods: setString and getString in our `BlindD8NotableEvent.php` class.
+We update the code to use that class.
+
+
+
+
+
 
 
 --- 
