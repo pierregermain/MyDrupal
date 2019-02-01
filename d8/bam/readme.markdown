@@ -1097,10 +1097,17 @@ Good Example for Boilerplate code is `ConfigCollectionInfo` that extends the Eve
 We need two methods: setString and getString in our `BlindD8NotableEvent.php` class.
 We update the code to use that class.
 
+## Overriding Services
 
+You can find examples searching for `extends ServiceProviderBase`
 
+Example: `44-override-service`
+path: '/blindd8tag'
 
+`DefaultService2.php` overrides `DefaultService.php`
 
+The overriding is done in the `BlindD8ServiceProvider`
+ 
 
 
 --- 
