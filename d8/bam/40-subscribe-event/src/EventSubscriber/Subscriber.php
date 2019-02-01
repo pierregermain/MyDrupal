@@ -58,6 +58,9 @@ class Subscriber implements EventSubscriberInterface {
 
         if ($route_name == 'blindd8.redirect') {
 
+            $messenger = \Drupal::messenger();
+            $messenger->addMessage('You have been redirected', $messenger::TYPE_WARNING);
+
             $url = \Drupal\Core\Url::fromUri('internal:/')->toString();
             $response = new RedirectResponse($url);
             $event->setResponse($response);
