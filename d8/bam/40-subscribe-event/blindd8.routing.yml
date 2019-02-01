@@ -19,3 +19,7 @@ blindd8.my_controller_tag:
     _title: 'My Service Page'
   requirements:
     _permission: 'access content'
+blindd8.redirect:
+  path: '/blindd8redirect'
+  requirements:
+    _permission: 'access content'

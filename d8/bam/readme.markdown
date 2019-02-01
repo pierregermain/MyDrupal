@@ -1049,10 +1049,20 @@ static function getSubscribedEvents() {
 
 ## Redirects
 
-```
-\Drupal\Core\Url::fromUri('internal:/')->toString()
-```
- 
+Example:`40-subscribe-event` 
+
+path: `http://my-drupal.loc/blindd8redirect` will redirect to `/`.
+
+We add an request event in our Subscriber.php class.
+
+If we want to see more examples just search for `RedirectResponse` in the code base.
+
+Important: 
+ - You will need to use the `GetResponseEvent` in the method that will be called. 
+ - Also a object of type Symfony\Component\HttpFoundation\RedirectResponse.
+
+Please have a look at this blog post [Automatic Redirect by Path in Drupal 8](http://agileadam.com/2017/08/automatic-redirect-by-path-in-drupal-8/) for more examples.
+
 
 --- 
 Videos that needs update
@@ -1063,4 +1073,4 @@ Videos that needs update
  
 
  T12
- V168(3)
+ V169
