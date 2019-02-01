@@ -1047,7 +1047,7 @@ static function getSubscribedEvents() {
 }
 ```
 
-## Redirects
+## Creating a Redirect using an request event
 
 Example:`40-subscribe-event` 
 
@@ -1062,6 +1062,23 @@ Important:
  - Also a object of type Symfony\Component\HttpFoundation\RedirectResponse.
 
 Please have a look at this blog post [Automatic Redirect by Path in Drupal 8](http://agileadam.com/2017/08/automatic-redirect-by-path-in-drupal-8/) for more examples.
+
+
+### Creating our own event
+
+#### Using Generic Event
+
+Example:`41-dispatch-event` 
+path: `http://my-drupal.loc/blindd8event`
+Class: MyController.php
+Method: genericEvent()
+
+We will register our event in the *event dispatcher* using:
+`\Drupal::service('event_dispatcher')->dispatch('blindd8.notable_event', $event);`
+
+
+
+
 
 
 --- 
