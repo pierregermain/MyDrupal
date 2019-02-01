@@ -1108,6 +1108,18 @@ path: '/blindd8tag'
 
 The overriding is done in the `BlindD8ServiceProvider`
  
+Keep in mind that an interface that will be overriden should use a Interface, so that we do not need to copy / paste the class into a new file.
+
+## Subrequest (Using the Http Kernel component)
+
+Example: `45-subrequest`
+path: '/blindd8subrequest'
+
+Usually you will not use this component directly, only Drupal Core uses it.
+
+But you can use the Http Kernel to do sub-requests.
+
+In the example `45-subrequest` you will see an admin page embedded in our page.
 
 
 --- 
