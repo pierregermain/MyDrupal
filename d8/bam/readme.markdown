@@ -1121,14 +1121,64 @@ But you can use the Http Kernel to do sub-requests.
 
 In the example `45-subrequest` you will see an admin page embedded in our page.
 
+# Upgrading from D7 to D8
 
+## About Knowledge
+
+3 types of knowledge:
+ - how Drupal works (taxonomies, etc.)
+ - how symfony works (Services, etc.)
+ - how D8 works (Plugins, configurations, etc.)
+ 
+## Our Example module
+
+Example: `46-d7-trails-module`
+Name: trails
+
+The modules is a block that shows the pages visitited by a user. Features:
+ - You can select the number of items to show (using a dropbox)
+ - You can limit the number of items to show in the dropbox 
+ 
+Expanation of the code:
+ - we have a hook init that when reloading the page adds an item to the arrays block
+ - we have 2 permissions:
+   - admin trails
+   - access trails blocks
+ - we have a hook menu where we define new pages 
+ - hook help
+ - hook block info
+ - hook block configure
+ - hook block save
+ - hook block view
+ - hook cron
+ 
+## Converting our D7 module to D8 
+
+We just copy our Drupal 7 module to our Drupal 8 /modules path and see what happens. 
+As soon as an error happens we will fix it.
+
+The first think we try is to install the module (we need an info.yml file).
+
+## Good Documentation
+ 
+ - Drupal Core
+ - Drupal Contributed Modules
+ - [Drupal API](https://www.drupal.org/docs/8/api). In our example we will work with block so your would need to understand the [block API](https://api.drupal.org/api/drupal/core%21modules%21block%21block.api.php/group/block_api/8.6.x)
+ - [Drupal Change Records](https://www.drupal.org/list-changes/drupal) 
+ - [Google](https://www.google.com/search?q=upgrade+drupal+7+module++to++8)
+ - [Drupal Guide to convert modules](https://www.drupal.org/docs/8/converting-drupal-7-modules-to-drupal-8)
+
+### Step 1 : Info File
+
+[Official Documentation](https://www.drupal.org/docs/8/converting-drupal-7-modules-to-drupal-8/step-1-convert-mymoduleinfo-to-mymoduleinfoyml) 
+ 
+ 
 --- 
 Videos that needs update
 ---
 
-12 - 1 , 3 , 7
 14 - 15 , 17 14 ,25 , 4
  
 
  T12
- V169
+ V181
