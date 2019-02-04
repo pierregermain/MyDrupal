@@ -1168,10 +1168,54 @@ The first think we try is to install the module (we need an info.yml file).
  - [Google](https://www.google.com/search?q=upgrade+drupal+7+module++to++8)
  - [Drupal Guide to convert modules](https://www.drupal.org/docs/8/converting-drupal-7-modules-to-drupal-8)
 
-### Step 1 : Info File
+### Step 1: Info File
 
 [Official Documentation](https://www.drupal.org/docs/8/converting-drupal-7-modules-to-drupal-8/step-1-convert-mymoduleinfo-to-mymoduleinfoyml) 
  
+### Step 2: Finding a Example: Block Plugin
+
+We could use the "Powered by Drupal" block as an simple example. We'll just search for that string in the codebase (in other cases you would need to narrow down an other string).
+
+We find the "SystemPoweredByBlock.php" that extends from `BlockBase`.
+
+## About Annotations
+
+`Doctrine` parses out the annotations metadata. Example for the Powered by Drupal
+
+```php
+/**
+ * Provides a 'Powered by Drupal' block.
+ *
+ * @Block(
+ *   id = "system_powered_by_block",
+ *   admin_label = @Translation("Powered by Drupal")
+ * )
+ */
+class SystemPoweredByBlock extends BlockBase { (...) } 
+```
+
+## Plugins in Drupal
+
+In D8 at the very top we have Plugins (`Drupal\system\Plugin\`) and then under that we have Blocks (`Drupal\system\Plugin\Block`).
+
+Our Powered By Drupal is a Block Plug
+
+All Plugins use annotations metadata to provide data.
+
+Keep in mind that "SystemPoweredByBlock.php" is able to create infinite number of blocks of that type (instances).
+
+
+## Creatins a Block Plugin
+
+We do the following (we could also use the Drupal Console):
+
+ - Create the /src/Plugin/Block folder.
+ - Copy the Powered by Drupal Block to our module.
+ - We will rename that file <module><type-of-block>Block.php, in our case : `TrailsHistoryBlock`
+
+Now we just clear our caches and add the block from the Drupal UI.
+ 
+
  
 --- 
 Videos that needs update
@@ -1181,4 +1225,4 @@ Videos that needs update
  
 
  T12
- V181
+ V186(15)

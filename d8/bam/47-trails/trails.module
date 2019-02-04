@@ -208,6 +208,7 @@ function trails_block_view($delta = '') {
  * http://api.drupal.org/api/drupal/modules--system--system.api.php/function/hook_cron/7
  */
 function trails_cron() {
+    /*
   // Get the trail array.
   $trail = variable_get('trails_history', array());
 
@@ -219,4 +220,5 @@ function trails_cron() {
 
   // Save the shorter trail
   variable_set('trails_history', $short_trail);
+    */
 }
