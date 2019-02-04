@@ -1215,6 +1215,17 @@ We do the following (we could also use the Drupal Console):
 
 Now we just clear our caches and add the block from the Drupal UI.
  
+## Moving our hook init code to a subscriber
+
+We will use our example from trails (example `40-subscribe-event`).
+
+So we do the following:
+ - Create a request method at `/src/EventSubscriber/Subscriber.php`
+ - Copy the code from hook init to that method.
+ - Create services file
+ 
+ 
+
 
  
 --- 
