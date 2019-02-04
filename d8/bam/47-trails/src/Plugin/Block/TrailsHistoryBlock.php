@@ -25,7 +25,7 @@ class TrailsHistoryBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    return ['#markup' => '<span>' . $this->t('Custom Block') . '</span>'];
+    return ['#markup' => '<span>' . $this->t('Custom Block Changed') . '</span>'];
   }
 
 }
