@@ -1164,7 +1164,7 @@ The first think we try is to install the module (we need an info.yml file).
  - Drupal Core
  - Drupal Contributed Modules
  - [Drupal API](https://www.drupal.org/docs/8/api). In our example we will work with block so your would need to understand the [block API](https://api.drupal.org/api/drupal/core%21modules%21block%21block.api.php/group/block_api/8.6.x)
- - [Drupal Change Records](https://www.drupal.org/list-changes/drupal) 
+ - [Drupal Change Records](https://www.drupal.org/list-changes/drupal). Search in Branch 8.x
  - [Google](https://www.google.com/search?q=upgrade+drupal+7+module++to++8)
  - [Drupal Guide to convert modules](https://www.drupal.org/docs/8/converting-drupal-7-modules-to-drupal-8)
 
@@ -1205,7 +1205,7 @@ All Plugins use annotations metadata to provide data.
 Keep in mind that "SystemPoweredByBlock.php" is able to create infinite number of blocks of that type (instances).
 
 
-## Creatins a Block Plugin
+## Creating a Block Plugin
 
 We do the following (we could also use the Drupal Console):
 
@@ -1225,7 +1225,47 @@ So we do the following:
  - Create services file
  
  
+## About D7 variable_get()
 
+variable_get() has been removed from D8. Now we use the [State API](https://www.drupal.org/node/1787278)
+
+Example:
+
+``` 
+Drupal 7:
+
+  variable_set('my_data', 'foo');
+  $data = variable_get('my_data', array());// array is default value
+  variable_del('my_data');
+  
+Drupal 8: 
+
+  \Drupal::state()->set('my_data', 'foo');
+  $data = \Drupal::state()->get('my_data', array());// array is default value
+  $data = \Drupal::state()->getMultiple('my_data', 'my_data2');
+  \Drupal::state()->delete('my_data');
+
+```
+
+Naming convention: <module-name>.<variable-name>
+
+## About Drupal get title
+
+Now we use
+
+``` 
+  $request = \Drupal::request();
+  $route_match = \Drupal::routeMatch();
+  $title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+```
+
+## About $_GET['q'] 
+
+To get the current path we can use:
+
+```
+$query = \Drupal::request()->query->get('q');
+```
 
  
 --- 
@@ -1235,5 +1275,5 @@ Videos that needs update
 14 - 15 , 17 14 ,25 , 4
  
 
- T12
- V186(15)
+ T13
+ V201(7)

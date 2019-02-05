@@ -38,17 +38,26 @@ class Subscriber implements EventSubscriberInterface {
     public function saveTrail(GetResponseEvent $event) {
 
         // Grab the trail history from a variable
-        $trail = variable_get('trails_history', array());
+        //$trail = variable_get('trails_history', array());
+        $trail = \Drupal::state()->get('trails.history', array());
+
+        // Get Title
+
+        $request = \Drupal::request();
+        $route_match = \Drupal::routeMatch();
+        $title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+
 
         // Add current page to trail.
         $trail[] = array(
-            'title' => strip_tags(drupal_get_title()),
-            'path' => $_GET['q'],
+            'title' => strip_tags($title),
+            'path' => \Drupal::request()->query->get('q') ,
             'timestamp' => REQUEST_TIME,
         );
 
         // Save the trail as a variable
-        variable_set('trails_history', $trail);
+        //variable_set('trails_history', $trail);
+        \Drupal::state()->set('trails.history', $trail);
 
     }
 }
