@@ -1352,6 +1352,14 @@ protected function getEditableConfigNames() {
 }
 ```
 
+### Test the configuration
+
+Once implemented uninstall / install the moodule to see if the default value is working.
+
+
+## Register Menu Link
+
+(...)
 
  
 --- 
@@ -1362,4 +1370,4 @@ Videos that needs update
  
 
  T14
- V208(13)
+ V211(17)
