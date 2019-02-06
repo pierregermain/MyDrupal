@@ -1215,7 +1215,7 @@ We do the following (we could also use the Drupal Console):
 
 Now we just clear our caches and add the block from the Drupal UI.
  
-## Moving our hook init code to a subscriber
+### Moving our hook init code to a subscriber
 
 We will use our example from trails (example `40-subscribe-event`).
 
@@ -1225,7 +1225,7 @@ So we do the following:
  - Create services file
  
  
-## About D7 variable_get()
+### About D7 variable_get()
 
 variable_get() has been removed from D8. Now we use the [State API](https://www.drupal.org/node/1787278)
 
@@ -1249,7 +1249,7 @@ Drupal 8:
 
 Naming convention: <module-name>.<variable-name>
 
-## About Drupal get title
+### About Drupal get title
 
 Now we use
 
@@ -1259,7 +1259,7 @@ Now we use
   $title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
 ```
 
-## Upgrading $_GET['q'] 
+### Upgrading $_GET['q'] 
 
 To get the current path we can use:
 
@@ -1267,15 +1267,91 @@ To get the current path we can use:
 $query = \Drupal::request()->query->get('q');
 ```
 
-## Upgrading hook_block_view()
+### Upgrading hook_block_view()
 
 Example: `48-trails`
 
 Just insert the code in the build method of your Block Plugin.
 
-## Upgrading format_interval()
+### Upgrading format_interval()
 
 https://www.drupal.org/node/2173787
+
+
+## Configuration Form
+
+Now we need to create the configuration pages for our example.
+
+### Module configuration form
+
+We need to adapt trails_menu() defining a route and a menu link.
+
+We can do the following
+ - search for a good example (a minimalisitc example in Drupal Core)
+ - use the Drupal Console using [generate:form:config](https://hechoendrupal.gitbooks.io/drupal-console/content/en/commands/generate-form-config.html)
+ 
+We will use the first option: search for an existing form. So we will take the form from [Configuration > Image Toolkit](http://my-drupal.loc/admin/config/media/image-toolkit)  
+
+We search in our codebase for "Select an image processing toolkit" and get the following file:
+/web/core/modules/system/src/Form/ImageToolkitForm.php
+
+We see that the Form extends from `ConfigFormBase`
+
+We copy that form to our module as /src/Form/SettingsForm.php
+
+We remove unused code until the build_form() method.
+
+Then we copy our old code from the build from to our new build_form() and see what we need.
+ - We adapt our old form to the new structure 
+ - We adapt deprecated functions (For example [drupal_map_assoc()](https://www.drupal.org/node/2207453))
+
+### Default Config Values
+
+In Drupal 8 we use an other method to store variable configuration.
+
+Example:
+      $current_toolkit = $this->config('system.image')->get('toolkit');
+      
+The value "toolkit" from the "system.image" configuration comes from an configuration yml file:
+File Name: system.image
+``` 
+toolkit: gd
+```
+
+So the value is "gd" before installing the module. Once installed we get that value from the DB
+
+#### Creating a Default config file
+
+we create that file in /config/install/trails.settings.yml
+
+#### Submit Form
+
+Now that we have the default value (get) we can do the submit method (set).
+
+
+### Add Config Page
+
+Now we do the routing.
+
+For an example we can search for files using the file name `ImageToolKit` 
+We will find the routing in the `system.routing.yml` file.
+
+So we create a new route for path: 
+/admin/config/people/trails
+
+
+### implement the method getEditableConfigNames 
+
+Don't forget to implement that method!!!
+
+```
+protected function getEditableConfigNames() {
+    return [
+        'trails.settings',
+    ];
+}
+```
+
 
  
 --- 
@@ -1286,4 +1362,4 @@ Videos that needs update
  
 
  T14
- V203(9)
+ V208(13)
