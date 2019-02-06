@@ -1259,13 +1259,23 @@ Now we use
   $title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
 ```
 
-## About $_GET['q'] 
+## Upgrading $_GET['q'] 
 
 To get the current path we can use:
 
 ```
 $query = \Drupal::request()->query->get('q');
 ```
+
+## Upgrading hook_block_view()
+
+Example: `48-trails`
+
+Just insert the code in the build method of your Block Plugin.
+
+## Upgrading format_interval()
+
+https://www.drupal.org/node/2173787
 
  
 --- 
@@ -1275,5 +1285,5 @@ Videos that needs update
 14 - 15 , 17 14 ,25 , 4
  
 
- T13
- V201(7)
+ T14
+ V203(9)
