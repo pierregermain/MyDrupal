@@ -1,5 +1,12 @@
 # BAM - Drupal 8 Developer Preparation
 
+# About Ajax Error
+
+To debug an Ajax error just do the following:
+ - open inspector > network
+ - click the link that is not working
+ - open the js > preview: You will see the error =)
+ 
 # T1 Intro
 
 We will cover:
@@ -1357,11 +1364,68 @@ protected function getEditableConfigNames() {
 Once implemented uninstall / install the moodule to see if the default value is working.
 
 
-## Register Menu Link
+## Registering a Menu Link
 
-(...)
+This is done in the `<module-name>.links.menu.yml` file
 
- 
+We want to show our URL in the /admin/config page
+
+To find how this is done we search in the codebase for a string (For example we search for "Choose which image toolkit")
+
+We see that it is generated in the `system.links.menu.yml` file.
+
+We copy the array of that file and adapt it to our needs to our new `trails.links.menu.yml`
+To find the parent route we search for the string "Configure default user account". That link has the correct parent. 
+
+So we will have this content in our `trails.links.menu.yml` file:
+
+```
+trails.settings:
+  title: 'Trails'
+  parent: user.admin_index
+  route_name: trails.settings
+  description: 'Configure Trails module.'
+```
+
+After clearing the caches the link will show in the /admin/config page
+
+## Registering a link in the module listing page
+
+Just add in the `trails.info.yml` file the following route of our module:
+```
+configure : trails.settings
+```
+
+
+## Using a Block Configuration in our Block
+
+When creating our Block from Block Layout we are not able to configure "max_number". 
+To do that we need to create a new method called `buildConfigurationForm()` in the following class:
+Class: /src/Plugin/Block/TrailsHistoryBlock
+
+To find an example we search for "buildConfigurationForm("
+
+Also, in Drupal 7 we were using the block_configure hook for that.
+
+So we copy our original code from Drupal 7 to our new buildConfigurationForm() method.
+
+The tricky part is the default value:
+
+```php
+'#default_value' => $this->configuration['num_to_show'] ?: 5,
+```
+
+The fist time this is run it will not have a default value, that's why we need to assign 5 to it.
+
+Also an other tricky part is to get the value from our settings page. In our Settings Block we would use $this->config but in our Block we would use \Drupal::config:
+
+```php
+$max_in_settigns = \Drupal::config('trails.settings')->get('max_in_settings');
+```
+
+
+
+
 --- 
 Videos that needs update
 ---
@@ -1370,4 +1434,4 @@ Videos that needs update
  
 
  T14
- V211(17)
+ V212(22)
