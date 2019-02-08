@@ -1291,6 +1291,8 @@ Now we need to create the configuration pages for our example.
 
 ### Module configuration form
 
+Example: `49-trails-config-form`
+
 We need to adapt trails_menu() defining a route and a menu link.
 
 We can do the following
@@ -1321,6 +1323,7 @@ Example:
       
 The value "toolkit" from the "system.image" configuration comes from an configuration yml file:
 File Name: system.image
+
 ``` 
 toolkit: gd
 ```
@@ -1334,7 +1337,6 @@ we create that file in /config/install/trails.settings.yml
 #### Submit Form
 
 Now that we have the default value (get) we can do the submit method (set).
-
 
 ### Add Config Page
 
@@ -1363,8 +1365,9 @@ protected function getEditableConfigNames() {
 
 Once implemented uninstall / install the moodule to see if the default value is working.
 
-
 ## Registering a Menu Link
+
+Example: `50-trails-block-instance-settings`
 
 This is done in the `<module-name>.links.menu.yml` file
 
@@ -1423,8 +1426,23 @@ Also an other tricky part is to get the value from our settings page. In our Set
 $max_in_settigns = \Drupal::config('trails.settings')->get('max_in_settings');
 ```
 
+## Saving a Block Instance
 
+Example: `51-save-block-instance-configuration`
 
+When saving our block it is not saving the value "num_to_show" so it is giving an error of *Notice: Undefined index: num_to_show in Drupal\trails\Plugin\Block\TrailsHistoryBlock->buildConfigurationForm()*.
+
+For that to happen we need the `submitConfigurationForm()` in our Block Instance `/src/Plugin/Block/TrailsHistoryBlock`.
+We copy a method from the code base and adapt it to our needs.
+
+### Using the configuration from the Block Instance
+
+For that we modify our build() method.
+
+We are using: `$num_items = \Drupal::state()->get('trails.num_items', 5)`
+but we want to use: `$this->configuration['num_to_show'] ?: 5`
+
+TODO: Do not execute this should not be executed from /admin/structure
 
 --- 
 Videos that needs update
@@ -1434,4 +1452,4 @@ Videos that needs update
  
 
  T14
- V212(22)
+ V25
