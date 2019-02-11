@@ -1442,14 +1442,35 @@ For that we modify our build() method.
 We are using: `$num_items = \Drupal::state()->get('trails.num_items', 5)`
 but we want to use: `$this->configuration['num_to_show'] ?: 5`
 
-TODO: Do not execute this should not be executed from /admin/structure
+## Clean up the module
 
---- 
-Videos that needs update
----
+### Updating Permissions
 
-14 - 15 , 17 14 ,25 , 4
- 
+Example:`53-trails-clean-up`
+
+We create the file trails.permissions.yml
+
+[About Permissions](https://www.drupal.org/node/2311427)
+
+### Updating Hook Help
+
+We update the signature from
+```
+function trails_help($path, $arg) {
+```
+to
+```
+function trails_help($route_name, RouteMatchInterface $route_match) {
+```
+
+and will use routes instead of path.
+
+## About hook cron
+
+
+
+
+TODO: Fix Error when saving block
 
  T14
  V25
