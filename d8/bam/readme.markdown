@@ -1128,7 +1128,7 @@ But you can use the Http Kernel to do sub-requests.
 
 In the example `45-subrequest` you will see an admin page embedded in our page.
 
-# Upgrading from D7 to D8
+#T13 Upgrading from D7 to D8
 
 ## About Knowledge
 
@@ -1467,10 +1467,70 @@ and will use routes instead of path.
 
 ## About hook cron
 
+Just run and debug the code and make changes where you need them.
+
+#T14 Twig
+
+## Introduction
+
+In D7 we
+ 1. Create template file
+ 2. Register it with hook theme
+ 
+In D8 we need also to:
+ 3. Use `#theme` in render array or use `drupal_render`.
+ 
+## Creation of the Template file
+
+Example: `53-twig`
+
+In our example, our block module (the build function), has markup that should go in template files.
+
+To find a nice example we search in the codebase for `feed-icon.html.twig`
+
+Let's copy that file in our module as `/templates/trails-list.html.twig`.
+
+## Registering our twig file with hook theme
+
+To search examples search for the following:
+ - code with `theme_hook` for the boilerplate
+We just create a theme hook in our trails.module file.
+
+```
+/**
+ * Implements hook_theme().
+ */
+function trails_theme() {
+    return [
+        'trails_list' => [
+            'render element' => 'elements',
+            'template' => 'trails-list',
+        ],
+    ];
+}
+```
+## Using our template file
+
+we do that registering the template in a render array
+
+We can modify our build function and return an render array 
+
+We change
+```
+    return ['#markup' => $output];
+```
+to
+```
+    return ['#theme' => 'trails-list'];
+```
+
+## About Twig debug
+
+Search for "twig" in the change record and then for "debug" in the list
+
+https://www.drupal.org/node/1922666
 
 
 
-TODO: Fix Error when saving block
-
- T14
- V25
+ T15
+ V3
