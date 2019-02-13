@@ -1479,7 +1479,11 @@ In D7 we
  
 In D8 we need also to:
  3. Use `#theme` in render array or use `drupal_render`.
- 
+
+## Drupal Twig Coding Standards
+
+https://www.drupal.org/docs/develop/coding-standards/twig-coding-standards 
+
 ## Creation of the Template file
 
 Example: `53-twig`
@@ -1524,13 +1528,66 @@ to
     return ['#theme' => 'trails-list'];
 ```
 
-## About Twig debug
+## About Twig debug and auto-reload
 
-Search for "twig" in the change record and then for "debug" in the list
+Search for "twig" in the change record and then for "debug" in the list of drupal changes.
 
 https://www.drupal.org/node/1922666
 
+usually you will just enable debug in the services file.
+
+If it does not work have a look at the following links:
+https://www.drupal.org/docs/8/theming/twig/debugging-compiled-twig-templates
+https://www.drupal.org/node/2598914
+
+## Drupal t Translate function
+
+https://www.drupal.org/docs/develop/coding-standards/twig-coding-standards 
+
+```
+<div>
+  {{ 'Original'|t }} 
+</div>
+```
+
+### Drupal t Translate function with substitutions:
+
+https://www.drupal.org/node/1918824
 
 
- T15
- V3
+Example:
+
+``` 
+PHPTemplate: 
+<?php print t('Welcome, @username', array('@username' => $user->name)); ?>
+
+Twig: 
+{{ 'Welcome, @username'|t({ '@username': user.name }) }}
+```
+
+## Pass Variables to Twig
+
+In the theme hook we add the following:
+```
+   'variables' => ['num_items' => NULL, 'title' => NULL],
+```
+
+An in the block build return we add the following (using hash tag!!!):
+
+``` 
+    return ['#theme' => 'trails_list', '#num_items' => $num_items];
+```
+
+And at the twig file we can use that variable using {{ num_items }}. In our case we will have:
+
+``` 
+<p> {{  'Below are the last @num pages you have visited.' | t({ '@num': num_items })  }} </p>
+```
+
+### Debug Variable
+
+``` 
+{{ dump(num_items) }}
+```
+
+V9
