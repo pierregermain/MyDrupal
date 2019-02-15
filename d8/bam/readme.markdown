@@ -1482,7 +1482,10 @@ In D8 we need also to:
 
 ## Drupal Twig Coding Standards
 
+Documentation:
+
 https://www.drupal.org/docs/develop/coding-standards/twig-coding-standards 
+[Comparison of PHPTemplate and Twig theming paradigms](https://www.drupal.org/node/1918824)
 
 ## Creation of the Template file
 
@@ -1584,10 +1587,22 @@ And at the twig file we can use that variable using {{ num_items }}. In our case
 <p> {{  'Below are the last @num pages you have visited.' | t({ '@num': num_items })  }} </p>
 ```
 
-### Debug Variable
+#### Debug available variables
 
+```
+{{ dump(_context|keys) }}
+```
+and then
 ``` 
 {{ dump(num_items) }}
 ```
 
-V9
+## Twig Loops
+
+Now that we have our items array in our twig file we want to loop over it!
+
+``` 
+{% for item in items %}
+    <li>{{ item.title }} - {{ item.time }} {{ 'ago'|t }}</li>
+{% endfor %}
+```
