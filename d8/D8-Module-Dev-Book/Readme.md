@@ -29,7 +29,66 @@
 
 [TOC generator](https://magnetikonline.github.io/markdown-toc-generate/)
 
-## About hooks
+# T1 Introduction
+
+- Drupal is a CMS and a CMF (Content Management Framework)
+- Drupal Techs:
+  - PHP
+  - DB: PHP Data Objects
+  - Web server
+  - HTML, CSS, JS
+ 
+- Drupal Architecture:
+  - Core
+  - Modules
+  - Themes
+  - Hooks (D7) and
+   - Plugins (D8)
+   - Events (EventDispatcher of Symfony)
+  - Services and
+   - Service Dependency Injection container
+   
+- From Request to Reponse:
+  - we enter in /node/123
+  - web server recognizes that we need PHP
+  - PHP executes index.php of Drupal (it's the front controller) and creates an `Request` object
+  - Symfony HTTPKernel creates events such as `kernel.request`, etc.
+  - The route is defined from the `kernel.request` event
+  - The route controller is identified and the `kernel.controller` event is used.
+  - After some processing usually an *render array* is returned and transformed into an `Response` Object.
+  
+As a Drupal Dev you will spend your time inside controllers and services.
+
+- Drupal's mayor subsystems
+ - Routing: Path translates to a route using the *Symfony Routing component*.
+ - Entities. Types:
+  - Content (Node, User, Comment) with bundles (Articles, Basic Page, etc.)
+  - Configuration with bundles
+ - Fields: Stored on entities. Types:
+  - base fields (code)
+  - configuration fields (UI)
+ - Menus with its API
+ - Views
+ - Forms using its API
+ - Configuration using YML files
+ - Plugins (For example Blocks) using Annotations to be discovered
+ - Theme System
+ - Caching
+ 
+- Tools for developers:
+ - composer
+ - API site and coding standards
+ - devel module
+ - drush and drupal console
+ - developer settings 
+ 
+# T2 Your first module
+
+## Creating hooks
+
+Example: `01-hello_world-hook`
+This examples creates an help page at
+http://my-drupal.loc/admin/help/hello_world
 
  - By default we use hooks only in the `*.module` file
  - Use short and concise DocBlocks
