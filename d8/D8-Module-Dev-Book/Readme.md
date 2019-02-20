@@ -128,14 +128,24 @@ In this case we would get converted the node ID to $node entity. That is *sehr P
 
 Keep in mind that if you name your parameter *{node}* drupal will know that it has to convert it automatically to a $node entity (because the machine name is `node`).
 
----
-
-## Namespaces
+## About Namespaces
 
  - Drupal 8 uses the PSR-4 namespace autoloading standard.
- - the base namespace is `\Drupal\module_name,`
+ - All namespaces for Drupal core and modules classes start with `\Drupal`.
+ - The base namespace for a module is `\Drupal\module_name,`
  - We will need a /src folder inside our module to place all of our classes that need to be autoloaded.
  - The `/src` is the namespace root folder.
+
+## Creating a Controller
+
+Example: `03-hello_world-controller`
+
+We create the file /src/Controller/HelloWorldController.php that extends the `ConrollerBase`
+and a route to /hello-world named hello_world.hello_world
+
+We should do this with the Drupal Console to not commit syntax errors :). It will generate for us the boiler plate for the route and the controller.
+
+---
 
 ## Services
 
