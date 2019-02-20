@@ -87,19 +87,48 @@ As a Drupal Dev you will spend your time inside controllers and services.
 ## Creating hooks
 
 Example: `01-hello_world-hook`
+
 This examples creates an help page at
 http://my-drupal.loc/admin/help/hello_world
 
- - By default we use hooks only in the `*.module` file
+ - By default we use hooks only in the `<module>.module` file
  - Use short and concise DocBlocks
 
-## About Routes
+## Creating Routes and Controllers
+
+Example: `02-hello_world-routes`
+
+In `hello_world.routing.yml` we define 
+ - the route `hello_world.hello.title` that relates to `/hello.title`. But it has no controller defined so it will give as an Access Denied error.
+
+Important Notes:
 
  - [Documentation](https://www.drupal.org/docs/8/api/routing-system/structure-of-routes)
- - By default we define routes in the `*.routing.yml` file
+ - By default we define routes in the `<module>.routing.yml` file
  - `path` key indicates the path we want this route to work on
  - `defaults` section defines the handler
- - We can use *Route variables* like `path: '/hello/{param}'` and/or `/hello/{node}`
+ 
+### Route Variables
+
+We can use **Route variables** like `path: '/hello/{param}'` or `/hello/{node}`:
+   - The controller gets as an argument the `$param` or `$node` variable.
+   
+#### Parameter Converters
+
+The parameters can be autoloaded with a converter using:
+
+``` 
+options:
+  parameters:
+    param:
+      type: entity: node
+```
+
+In this case we would get converted the node ID to $node entity. That is *sehr Praktisch*.
+
+Keep in mind that if you name your parameter *{node}* drupal will know that it has to convert it automatically to a $node entity (because the machine name is `node`).
+
+---
 
 ## Namespaces
 
