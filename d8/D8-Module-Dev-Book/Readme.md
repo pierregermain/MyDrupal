@@ -98,8 +98,7 @@ http://my-drupal.loc/admin/help/hello_world
 
 Example: `02-hello_world-routes`
 
-In `hello_world.routing.yml` we define 
- - the route `hello_world.hello.title` that relates to `/hello.title`. But it has no controller defined so it will give as an Access Denied error.
+In `hello_world.routing.yml` we define our route. But if you do not define a controller related to the route it will give you a Page Not Found error. 
 
 Important Notes:
 
