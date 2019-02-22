@@ -144,44 +144,59 @@ and a route to /hello-world named hello_world.hello_world
 
 We should do this with the Drupal Console to not commit syntax errors :). It will generate for us the boiler plate for the route and the controller.
 
----
+## Creating a Service
 
-## Services
+Example: `04-hello_world-service`
 
+Information:
  - To make Controllers more minimalistic we use services.
  - A service is an object that gets instantiated by a Service Container and is used to handle operations in a reusable way.
  - Services are a core part of the *Dependency Injection* (DI) Principle.
- - Services are globally registered with the service and instantiated only once per request (*singleton*).
- - It is a standard practice to have the service name start with your module name.
- - Once we clear the cache, the service will get instantiated.
+ - Services are globally registered with the service and instantiated only once per request (*singleton*). So you should write your services so that it stays immutable.
+ 
+Sample code:
+ - `/core/core.services.yml` for core services.
+ - `*.services.yml` in modules.
 
-    ```
-    services: 
-      hello_world.salutation: 
-        class: Drupal\hello_world\HelloWorldSalutation
-    ```
+Our Example:
+ - We create a Service Class in `/src/HelloWorldSalutation.php` (thanks to PSR-4 it get autoloaded).
+ - We register it with the Service Container and use it from there as a DI:
+   - We create the `hello_world.services.yml` file that begins with the `services` key.
+   - Our service is called `hello_world.salutation`
 
+```
+services:
+  hello_world.salutation:
+    class: Drupal\hello_world\HelloWorldSalutation
+    arguments: []
+```
+
+Once we clear the cache, the service will be available to be used.
+ 
 ### Tagged Services
 
- - Typically, these are picked up by a collector service
+ - We use tags to inform the container as to a specific purpose that they serve.
+ - We can also define priorities 
 
-    Example:
+Example:
 
-    ```
-    hello_world.salutation:
-      class: Drupal\hello_world\HelloWorldSalutation
-      tags:
-        - {name: tag_name}
-    ```
+```
+hello_world.salutation:
+  class: Drupal\hello_world\HelloWorldSalutation
+  tags:
+    - {name: tag_name}
+```
 
-### Ways to use services in Drupal 8
 
-There are two ways of using services in Drupal 8:
+
+### Ways to use services in Drupal
+
+Once you have created a service there are 2 ways of using services in Drupal 8:
 
  **1. statically** by a static call to the Service Container:
 
   - We use this in:
-    - `.module` files (but only put there code that should be there)
+    - `.module` files (Remember to only put there code that should be there)
     - hooks
     - Drupal Procedural Code
   - Some important services exist in the `\Drupal` class
@@ -194,29 +209,34 @@ There are two ways of using services in Drupal 8:
 
   - Example 2: Howto use a static call:
 
-    ```
+```
     $service = \Drupal::service('hello_world.salutation');
-    ```
+```
  
- **2. injected using dependency injection** to pass the object through the constructor (or in some rare cases, a setter method).
+ **2. injected** using dependency injection to pass the object through the constructor (or in some rare cases, a setter method).
 
-There are a few different ways to inject dependencies based on the receiver:
+There are a few different ways to inject dependencies based on the receiver, for now we will just see how to inject the service into a controller.
 
-### Injecting the service into a controller
+### Injecting the service into our controller
 
-We put this code at the top to import the service class
+We import the following in our `/src/Controller/HelloWorldController` class.
 
 ```
 use Drupal\hello_world\HelloWorldSalutation;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 ```
 
-and after that we implement the code in our Controller class
+and after that we implement the following code:
 
 ```
-public function __construct (...)
-public static function create (...)
+protected $salutation;
+public function __construct (takes our service as an argumen and stores it in the $salutation property)
+public static function create (recives the Service Container as a parameter)
 ```
+
+Because our class implements `ContainerInjectionInterface` thanks to extending `ControllerBase` the first method that will get called is the `create` method that tells with service should be injected.
+
+
 
 ## Forms: Admin Configuration Form
 
