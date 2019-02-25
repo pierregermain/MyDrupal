@@ -236,25 +236,33 @@ public static function create (recives the Service Container as a parameter)
 
 Because our class implements `ContainerInjectionInterface` thanks to extending `ControllerBase` the first method that will get called is the `create` method that tells with service should be injected.
 
-
-
 ## Forms: Admin Configuration Form
+
+Example: `05-hello_world-form`
+ - We want to be able to change the greeting.
+ - We create a route in hello_world.routing.yml file that points to our new config Page
+   - path: `/admin/config/salutation-configuration`
+   
+ - We create our Form at /src/Form/SalutationConfigurationForm.php. We use **configuration factory** to store the value (defined in the *ConfigFormBaseTrait*).
+
+Important Info:
 
  - Official documentation [API](https://api.drupal.org/api/drupal/elements/8.2.x) link.
  - We configure `*.routing.yml` to enable the link to the Form
- - Usually Form classes will be stored in the `/Form` folder
+ - Usually Form classes will be stored in the `/src/Form` folder
  - We implement [`FormInterface`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/interface/FormInterface/8.2.x) and either can extend from:
    - [`FormBase`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormBase.php/class/FormBase/8.2.x) or
    - [`ConfigFormBase`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21ConfigFormBase.php/class/ConfigFormBase/8.2.x): for system configuration forms.
  - Four main methods that needs to be understood:
-   - [getFormId()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AgetFormId/8.2.x)
-   - [buildForm()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AbuildForm/8.2.x)
-   - [validateForm()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AvalidateForm/8.2.x) with it's `$form_state` object (this method is not mandatory)
-   - [submitForm()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AsubmitForm/8.2.x) receives the same arguments as `validateForm()`
+   - [getFormId()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AgetFormId/8.2.x): returns a unique machine-name for the form.
+   - [buildForm()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AbuildForm/8.2.x): returns the form definition and metadata.
+   - [validateForm()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AvalidateForm/8.2.x) that gets the form definition and an `$form_state` object that has the submitted values (this method is NOT mandatory)
+   - [submitForm()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21FormInterface.php/function/FormInterface%3A%3AsubmitForm/8.2.x) receives the same arguments as `validateForm()`.
  - Other methods that needs to be implemented:
-   - `getEditableConfigNames()` from the [`ConfigFormBaseTrait`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21ConfigFormBaseTrait.php/trait/ConfigFormBaseTrait/8.2.x) used in the `ConfigFormBase`. This method returns configuration objets so that we can edit configurations.
+   - `getEditableConfigNames()` from the [`ConfigFormBaseTrait`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Form%21ConfigFormBaseTrait.php/trait/ConfigFormBaseTrait/8.2.x) used in the `ConfigFormBase`. This method returns configuration objects so that we can edit configurations.
  - Forms can receive arguments from the Service Container in the same way we injected the salutation service into our Controller.
  - `ConfigFormBase`, which we are extending injects the `config.factory` service because it needs to use it for reading and storing configuration values.
+
 
 ## Altering Forms from other modules
 
