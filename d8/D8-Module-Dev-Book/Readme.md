@@ -236,7 +236,11 @@ public static function create (recives the Service Container as a parameter)
 
 Because our class implements `ContainerInjectionInterface` thanks to extending `ControllerBase` the first method that will get called is the `create` method that tells with service should be injected.
 
-## Forms: Admin Configuration Form
+## About Forms
+
+API: https://api.drupal.org/api/drupal/elements/
+
+### Forms: Admin Configuration Form
 
 Example: `05-hello_world-form`
  - We want to be able to change the greeting.
@@ -264,38 +268,47 @@ Important Info:
  - `ConfigFormBase`, which we are extending injects the `config.factory` service because it needs to use it for reading and storing configuration values.
 
 
-## Altering Forms from other modules
+### Altering Forms from other modules
 
- - Option 1: code gets executed for **ALL** forms:
+Remember that Drupal has *alter* hooks to allow other modules to make changes to an array or an object before the array or object is used.
 
-    ```(php)
-    /**
-     * Implements hook_form_alter().
-     */
-    function my_module_form_alter(&$form, 
-      \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-      if ($form_id == 'salutation_configuration_form') {
-        // Perform alterations.
-      }
-    }
-    ```
+- Option 1: using `form_alter` hook.
+   - Disadvantage: code gets executed for **ALL** forms.
 
- - Option 2: code gets executed only for our form:
+```
+/**
+ * Implements hook_form_alter().
+ */
+function my_module_form_alter(&$form, 
+  \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'salutation_configuration_form') {
+    // Perform alterations.
+  }
+}
+```
 
-    ```
-    /**
-     * Implements hook_form_FORM_ID_alter().
-     */
-    function my_module_form_salutation_configuration_form_alter(&$form,
-        \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-      // Perform alterations.
-    }
-    ```
-## Custom Submit Handlers
+- Option 2: using `form_FORM_ID_alter` hook.
+   - Advantage: code gets executed only for our form:
+
+```
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function my_module_form_salutation_configuration_form_alter(&$form,
+    \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Perform alterations.
+}
+```
+
+### Custom Submit Handlers
 
 #### Typical handler
 
-Usually once we alter the form and inspect the `$form` array, we can find a `#submit` key, which is an array that has one item. This is simply the `submitForm()` method on the form class. So we can either remove this item and add our own function or simply add another item to that array.
+Usually once we alter the form and inspect the `$form` array, we can find a `#submit` key, which is an array that has one item. 
+This is simply the `submitForm()` method on the form class. 
+So we can either remove this item and add our own function or simply add another item to that array.
+
+Example: Adding our own function:
 
 ```(php)
 /**
@@ -328,28 +341,31 @@ function my_module_salutation_configuration_form_submit(&$form,
  - There is another case though. 
  - If the submit button on the form has a `#submit` property specifying its own handler, the default form #submit handlers we saw just now won't fire anymore. 
  - This was not the case with our form. 
- - In that situation, you will need to add your own handler to that array. Hence, the only difference is the place you tack on the submit handler. A prominent example of such a form is the *Node add/edit form*.
+ - In that situation, you will need to add your own handler to that array (the button array). Hence, the only difference is the place you tack on the submit handler. A prominent example of such a form is the *Node add/edit form*.
 
-## Custom Validation Handlers
+#### Custom Validation Handlers
 
 Finally, when it comes to the validation handler, it works exactly the same as with the
 submit, but it all happens under the `#validate` array key.
 
-## Rendering Forms programmatically
+### Rendering Forms (programmatically)
+
+Sometimes we need to render a form from a Controller or Block.
 
  - We can do this using the `FormBuilder` service
  - We get the form builder and request from it the form using the fully qualified name of the form class.
  - The form builder can be injected using the `form_builder` service key or used statically via
 the shorthand:
 
-    ```
-    $builder = \Drupal::formBuilder();
-    ```
-   - Once we have it, we can build a form, like so:
+```
+$builder = \Drupal::formBuilder();
+```
+
+Once we have it, we can build a form, like so:
    
-    ```
-    $form = $builder->getForm('Drupal\hello_world\Form\SalutationConfigurationForm');
-    ```
+```
+$form = $builder->getForm('Drupal\hello_world\Form\SalutationConfigurationForm');
+```
     
 In the preceding code, `$form` will be a render array of the form that we can return, for
 example, inside a Controller.
