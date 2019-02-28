@@ -410,24 +410,33 @@ public function getSalutation() {
  
 ### How do we create a custom block plugin easily?
 
- - We need one class, placed in the right namespace `Drupal\module_name\Plugin\Block`
- - We need the following annotations:
-   - `id` and 
-   - `admin_label`
- - Note that each kind of plugin needs some kind of annotations.
- 
-Please have a look at our example in `/src/Plugin/Block`
+Example: `07-hello_world-block` in the `/src/Plugin/Block` folder.
+ - We create a simple block that will render hello world as our previous controller did.  
+ - From the UI you will be able to add the block called *Hello world salutation*.
+
+Keep in mind:
+ - We need one class, placed in the right namespace `Drupal\module_name\Plugin\Block` (PSR-4 auto-loading)
+ - We need the following annotation (*id* and *admin_label*):
+ ```
+ * @Block(
+ *  id = "hello_world_salutation_block",
+ *  admin_label = @Translation("Hello world salutation"),
+ * )
+ ```
+ - Note that each kind of plugin needs some kind of annotations (Have a look at `AnnotationInterface` to see which annotations you need).
 
 ```
-... 
+(...) 
 imports
 annotations
-...
+(...)
 
 class HelloWorldSalutationBlock 
   extends BlockBase // provides a number of helpful things a block plugin needs
   implements ContainerFactoryPluginInterface // make things easier: gives construct() and create() functions. 
-...
+  
+  (...)
+  
 __construct () // makes container aware
 
 create() with the following args:
@@ -439,10 +448,9 @@ create() with the following args:
  
 build() // responsible for building the block content.
 
-...
+(...)
 
 ```
-
 
 ## Block Configuration
 
