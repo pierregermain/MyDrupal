@@ -372,15 +372,35 @@ example, inside a Controller.
 
 ## Service dependencies
 
+Example: `06-hello_world-service-dependency`
+
  - We want to get now the salutation message from the admin configuration Form we createtd in the last step.
- - First we modify our service to accept an Drupal 8 configuration factory objet:
+ - First we modify our service to accept an Drupal 8 configuration factory object (That's the service responsible for loading config objects):
    `arguments: ['@config.factory']`
- - Now we can receive the argument in our service class:
-    ```
-    public function __construct(ConfigFactoryInterface $config_factory) {
-    $this->configFactory = $config_factory;
-    }
-    ```
+    - Note that `@config.factory` is defined in `core.services.yml` to the  `Drupal\Core\Config\CoreFactory` class.
+ - Now we receive the `$config_factory` argument in our service class:
+
+```
+
+use \Drupal\Core\Config\ConfigFactoryInterface;
+
+(...)
+
+public function __construct(ConfigFactoryInterface $config_factory) {
+  $this->configFactory = $config_factory;
+}
+
+(...)
+
+public function getSalutation() {
+  $config = $this->configFactory->get('hello_world.custom_salutation');
+  $salutation = $config->get('salutation');
+  
+  (...)
+  
+}
+
+```
 
 ## Blocks
 
