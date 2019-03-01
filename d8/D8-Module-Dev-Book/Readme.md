@@ -417,12 +417,14 @@ Example: `07-hello_world-block` in the `/src/Plugin/Block` folder.
 Keep in mind:
  - We need one class, placed in the right namespace `Drupal\module_name\Plugin\Block` (PSR-4 auto-loading)
  - We need the following annotation (*id* and *admin_label*):
+ 
  ```
  * @Block(
  *  id = "hello_world_salutation_block",
  *  admin_label = @Translation("Hello world salutation"),
  * )
  ```
+ 
  - Note that each kind of plugin needs some kind of annotations (Have a look at `AnnotationInterface` to see which annotations you need).
 
 ```
@@ -454,13 +456,18 @@ build() // responsible for building the block content.
 
 ## Block Configuration
 
-Let's imagine that we need a Boolean-like control on our block configuration so that when an admin places the block, they can toggle something and that value can be used in the build() method. We can achieve this with three to four methods on our plugin class (remember that it's in `/src/Plugin/Block`.
+Example: `08-hello_world-block-configuration`
+File: `/src/Plugin/Block/HelloWorldSalutationBlock.php`
 
-We add:
+Let's imagine that we need a Boolean-like control on our block configuration so that when an admin places the block, they can toggle something and that value can be used in the build() method. 
+ - We can achieve this with three to four methods on our plugin class. 
+   - remember that our block is in `/src/Plugin/Block`.
+
+We need to implement:
 
 ```
-defaultConfiguration() 
-blockForm()
+defaultConfiguration() // defines the configuration items with there default values for this block
+blockForm() // gives definitions to each item
 blockSubmit()
 ``` 
 
