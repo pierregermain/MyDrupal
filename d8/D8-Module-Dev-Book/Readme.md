@@ -480,38 +480,44 @@ $config = $this-> getConfiguration();
 also keep in mind that we can use `blockValidate` and `blockSubmit`.
 
 
-## Links
+## Working with Links
+
+Example: `08-hello_world-link`
+We just print the actual link in the block (/src/Plugin/Block) using the 2 ways presented here.
+We show those links if the Checkbox in Enabled.
 
 There are two main aspects when talking about link building in Drupal:   
  - the *URL* and
- - the actual *link tag* itself.   
+ - the actual *link* tag itself.   
 
-So, creating a link involves a two-step process that deals with these two, but can also be shortened into a single call via some helper methods.
+So, creating a link involves a two-step process that deals with these two, 
+but can also be shortened into a single call via some helper methods.
 
 
-### The Url
-
+### 1. The Url
 
  - represented by the [`Drupal\Core\Url`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/class/Url/8.2.x) Class
 
  - Static methods:
-   - [`Url::fromRoute()`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/function/Url%3A%3AfromRoute/8.2.x) to create new instance of `Url` that have Drupal routes.
-   - [`Url::fromUri()`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/function/Url%3A%3AfromUri/8.2.x) to create a new instance of `Url` that do **not** have Drupal routes.
+   - [`Url::fromRoute()`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/function/Url%3A%3AfromRoute/8.2.x) 
+   to create new instance of `Url` from a Drupal routes.
+   - [`Url::fromUri()`](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/function/Url%3A%3AfromUri/8.2.x) 
+   to create a new instance of `Url` from an internal or external URL.
 
- - use the `$option` array to configure your instance.
- - Always work with route names, not with hardcoded urls.
+ - Keep in mind that passing the `$option` array you can configure your instance. [Examples at ::fromUri()](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/function/Url%3A%3AfromUri/8.2.x).
+ - Try to work with route names, not with hardcoded urls.
 
-### The Link
+### 2. The Link
 
-Once we have a `Url` object we can create the link.
+Once we have a `Url` object we can generate the link.
 
 There are two ways to create links:
 
- 1. Use `LinkGenerator` aka `link_generator` service using the `generate()` method. This will return a `GeneratedLink` object with the string needed.
+ 1. Use `LinkGenerator` service (named `link_generator`) using the `generate()` method. This will return a `GeneratedLink` object with the string needed.
 
     ```
     $url = Url::fromRoute('my_route', ['param_name' => $param_value]); 
-    $link = \Drupal::service('link_generator')->generate('My link', $url);
+    $link = \Drupal::service('link_generator')->generate('Link anchor name', $url);
     ```
     
     We can then directly print `$link` because it implements the `__toString()` method.
@@ -519,11 +525,13 @@ There are two ways to create links:
  2. Use `Link` class which wraps a render element (used in for theming, good if you need to share this data without services)
 
     ```
-    $url = Url::fromRoute('my_other_route'); 
-    $link = Link::fromTextAndUrl('My link', $url);
+    $url = Url::fromRoute('my_route'); 
+    $link = Link::fromTextAndUrl('Link anchor Name', $url);
+    $link = $link->toString();
     ```
 
-We now have $link as a `Link` object whose `toRenderable()` returns a render array of the `#type => 'link'`. Behind the scenes, at render time, it will also use the link generator to transform that into a link string.
+We now have $link as a `Link` object whose `toRenderable()` returns a render array of the `#type => 'link'`. 
+Behind the scenes, at render time, it will also use the link generator to transform that into a link string.  
 
 If we have a Link object, we can also use the link generator ourselves to generate a link based on it:
 `$link = \Drupal::service('link_generator')->generateFromLink($linkObject);`
