@@ -540,12 +540,27 @@ If we have a Link object, we can also use the link generator ourselves to genera
 
 In D7 dynamic redirect could be done using the `hook_init()` which gets called on each request and then use the `drupal_goto()` function. 
 
-In D8 we would subscribe to the `kernel.request` event.
+In D8 we would subscribe to the `kernel.request` event and change the response directly.
 
 ### Redirecting from a Controller
 
+Example: `09-hello_world-redirect-from-controller`
+
 In our controller instead of returning our render array we could return `new RedirectResponse('node/1');` using the *Symfony HTTP Foundation* component.
 
+We add the following to examples: In the first example we response with an response object directly.
+```
+  public function helloWorld() {
+    return new Response ('my text');
+  }
+```
+
+In the second we response with an Response redirect object.
+```
+  public function helloWorld() {
+    return new RedirectResponse('node/1');
+  }
+```
 
 ### Redirecting from a subscriber
 
