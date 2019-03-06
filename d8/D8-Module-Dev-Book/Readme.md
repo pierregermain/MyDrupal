@@ -562,48 +562,63 @@ In the second we response with an Response redirect object.
   }
 ```
 
-### Redirecting from a subscriber
 
-#### Event Dispatcher
+### Event Dispatcher
 
-Registering event subscribers is a matter of creating a service tagged with `event_subscriber` and that implements the interface.
+The Event Dispatcher allows us to dispatch and subscribe to events.
+
+#### Redirecting from a subscriber
+
+Example: `10-hello_world-subscriber`
+Link: /redirect
+
+Usually we want to redirect from a certain page to another if various conditions match. For this we can subscribe to the request event and change the response.
+
+System that makes this happen is the `event_dispatcher` service:
+ - it is an instance of the `ContainerAwareEventDispatcher`.
+ - it dispatches *named* events (as Event objects)
+ 
+Instances of `EventSubsciberInterface`:
+ - listen to named event.
+ - allow subscribers to change the data before the logic comes in
+ 
+So, Registering event subscribers is a matter of creating a service tagged with `event_subscriber` and that implements the interface.
 
 Example:
 
- - Let's now take a look at an example event subscriber that listens to the *kernel.request* event and redirects it to the home page if a user with a certain role tries to access our Hello World page. 
- - This will demonstrate both how to subscribe to events and how to perform a redirect. 
- - It will also show us how to use the current route match service to inspect the current route.
+ - Event subscriber listens to the *kernel.request* event 
+ - Event subscriber redirects it to the home page if a user with a certain role tries to access our Hello World page. 
+ - This will demonstrate:
+     - how to subscribe to events and how to perform a redirect. 
+     - how to use the current route match service to inspect the current route.  
 
-
-Let's create this subscriber by first writing the service definition for it:
+We add the following to our service file 
+ - The dependency is actually the service that points to the current user (`AccountInterface` object).
+ - In our example we check if $current_user has the non grata role (anonymous user).
+ - We also add the current_route_match service to our service file.
 
 ```
 hello_world.redirect_subscriber:
   class: \Drupal\hello_world\EventSubscriber\HelloWorldRedirectSubscriber
-  arguments: ['@current_user']
+  arguments: ['@current_user', '@current_route_match']
   tags:
     - {name: event_subscriber}
 ```
 
-The dependency is actually the service that points to the current user (`AccountProxyInterface` object)
 
-Now have a look at `/src/EventSubscriber.php`
+We add the following Subscriber Class: `/src/EventSubscriber/HelloWorldRedirectSubscriber.php`
 
-We store the info of the logged in user in `$currentUser`
+We store the info of the logged in user in `protected $currentUser` and the current route in `protected $currentRouteMatch`
 
 The important code is
 
 ```
 public function onRequest(GetResponseEvent $event) { 
   $route_name = $this->currentRouteMatch->getRouteName(); 
-  if ($route_name !== 'hello_world.hello') { 
-    return; 
-  } 
+  (...)
   $roles = $this->currentUser->getRoles(); 
-  if (in_array('non_grata', $roles)) { 
-    $url = Url::fromUri('internal:/'); 
-    $event->setResponse( new RedirectResponse($url->toString())); 
-  } 
+  (...)
+  $event->setResponse( new RedirectResponse($url->toString())); 
 }
 ```
 
@@ -612,9 +627,6 @@ From the `CurrentRouteMatch` service, we can figure out:
  - the entire route object, 
  - parameters from the Url and 
  - other useful things.
-
-
-The url is build with the `Url` class
 
 
 ## Dispatch your own events
