@@ -631,13 +631,28 @@ From the `CurrentRouteMatch` service, we can figure out:
 
 ## Dispatch your own events
 
- - We have seen howto subscribe to events. 
- - Now lets see howto dispatch events.
+ - We have seen how to subscribe to events. 
+ - Now lets see how to dispatch events.
  - This way we can tell other modules that some function in our module has been executed.
 
-Example:
+Example: `11-hello_world-dispatch-events`
+File: `/src/SalutationEvent.php` is our `Event` class
+Link: http://my-drupal.loc/hello-world
 
-Have a look at `/src/SalutationEvent.php` that extends `Event`. It has the `$message` string with setter and getter methods.
+We will create an event to be dispatched when `HelloWorldSalutation::getSalutation()` method is called. Other modules will be able to alter this message.
+
+Steps:
+  1. First we create the SalutationEvent class that extends Event. It has the $message property with setters and getters.
+  2. Second we inject the *Event Dispatcher service* into our `HelloWorldSalutation` service. We just need to add an `argument` called `@event_dispatcher` into the services.yml file.
+  3. Third we receive the new argument in the constructor (Drupal\hello_world\HelloWorldSalutation)
+    - We also need to dispatch the event using `$event = this->eventDispatcher->dispatch(SalutationEvent::EVENT,$event`.
+    - After that we get the value with `$event->getValue();`. We do that so that other modules can change the value.
+
+## What can Subscribers do
+
+After we have created our own event we can subcribe to it listening to `SalutationEvent::EVENT`. We can also use `stopPropagation()` to no longer trigger other listeners.
+
+
 
 
 
