@@ -18,7 +18,23 @@
  - With the `Syslog` core module we can complement/replace the logging with the one of the server.
  - We still use the `watchdog()` function of D7, but all the code has been ported to PS-3 so other implementation can also be used.
 
-## D8 Logging theory
+## The Drupal 8 Logging theory
+
+We have 3 keyplayers in Drupal 8 that work with the logging framework
+
+1. `LoggerChannel` which represents a category of logged messages. They are objects that contact the `LoggerChannelFactory`.
+2. `LoggerChannelFactory` is a service used to be in touch with the logging framework. 
+
+Example:
+```php
+\Drupal::logger('hello_world')->error('This is the error message');// hello_world is the category
+// this will be translated to
+\Drupal::service('logger.factory')->get('hello_world')->error('This is the error message');
+```
+
+3. `LoggerInterface` implementation with the `RfcLoggerTrait`. It takes services tagged with the `logger` tag, at sends them to the `LoggerChannelFactory`.
+
+## Your own logger channel
 
 # Mailing
 
