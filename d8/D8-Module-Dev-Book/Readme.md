@@ -77,6 +77,20 @@ We add the following to the *.services.yml file
 
 Clearing the caches would enable our logger.
 
+#### Logging in Hello World
+
+ - Let's add some logging to our module. 
+ - Let's log an info message when an admin changes the greeting message 
+ - So we modify the `/src/Form/SalutationConfigurationForm` injecting the service to our form.
+
+Note:
+ - `FormBase` implements `ContainerInjectionInteface`.
+ - But we need the `create()` method to add our service and store it in a property (created with the constructor).
+ - So we add the following:
+   - protected $logger;
+   - __constructor(...)
+   - create (...)
+ - We log the message in the submit() method
 
 
 # Mailing
