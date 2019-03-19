@@ -92,7 +92,37 @@ Note:
    - create (...)
  - We log the message in the submit() method
 
-
 # Mailing
+
+## Introduction
+
+We will see how to send emails programmatically. The default system uses Php mail. After using the default we will see how to use our own system.
+
+Sending emails is a 2 part job:
+ 1. Define a *template* for the email in our module: This is a procedural data wrapper to the email you want to send using the *hook_mail()* with the *key* and *message ID* arguments.
+ 2. Use the Drupal Mail Manager to send an email using one of the defined *templates*. The default "plugin" is `PhpMail` that uses the `mail()` function.
+ 
+Each Mail `Plugin` needs to implement `MailInterface` which has 2 methods: 
+ - `format()` for preparation (concatenation, etc.)
+ - `mail()` for the sending
+ 
+To know which plugin to use the Mail Manager uses the configuration object called `system.mail`. We can modify this object using the `hook_install()` and `hook_uninstall()`.
+
+## Implementing hook_mail()
+
+Example: `22-hello_world-mail`
+We will define our mail template using the hook_mail() in our hello_world.module file.
+
+``` 
+function hello_world_mail($key, &$message, $params) {
+(...)
+}
+```
+
+where:
+ - $key is used to identify the type of message. In our case it is *hello_world_log*.
+ - $message has the message that will be send and need to be filled in. In the case of $message['body'] notice that it is an array that will be imploded later with the *format()* method. In the case of $message['header'] it was already filled by the PhpMail plugin.
+ - $param has parameters send from the client.
+
 
 ## Tokens
