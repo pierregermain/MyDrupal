@@ -141,8 +141,20 @@ We also add new arguments to our constructor (so we also need to add them to the
 
 ## Alter Mails
 
-Example: `23-hello_world-mail_alter`
+We could alter mails using the `hook_mail_alter` that will modify the $message array created with the hook_mail() in the previous section.
+This will be called every time a mail is send so be careful using this.
 
-We can alter mails using the `hook_mail_alter`
+``` 
+/**
+* Implements hook_mail_alter().
+*/
+function hello_world_mail_alter(&$message) {
+  switch ($message['key']) {
+    case 'hello_world_log':
+        $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+        break;
+  }
+}
+```
 
 # Tokens
