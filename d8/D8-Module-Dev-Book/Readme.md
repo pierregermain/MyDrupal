@@ -111,6 +111,7 @@ To know which plugin to use the Mail Manager uses the configuration object calle
 ## Implementing hook_mail()
 
 Example: `22-hello_world-mail`
+
 We will define our mail template using the hook_mail() in our hello_world.module file.
 
 ``` 
@@ -124,5 +125,24 @@ where:
  - $message has the message that will be send and need to be filled in. In the case of $message['body'] notice that it is an array that will be imploded later with the *format()* method. In the case of $message['header'] it was already filled by the PhpMail plugin.
  - $param has parameters send from the client.
 
+### Sending Mails
 
-## Tokens
+The sending is done in the `log()` method in our `MailLogger` class.
+
+``` 
+\Drupal::service('plugin.manager.mail')->mail('hello_world', 'hello_world_log', $to, $langode, ['message' => $markup, 'user' => $account]);
+```
+
+where:
+ - hello_world is our module
+ - hello_world_log is our template
+
+We also add new arguments to our constructor (so we also need to add them to the service definition in the services file)
+
+## Alter Mails
+
+Example: `23-hello_world-mail_alter`
+
+We can alter mails using the `hook_mail_alter`
+
+# Tokens
