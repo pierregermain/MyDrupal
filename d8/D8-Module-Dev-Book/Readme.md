@@ -157,4 +157,39 @@ function hello_world_mail_alter(&$message) {
 }
 ```
 
+## Custom mail plugins
+
+The default PHP mailer might not be enough for our application, we might want to use an external API.
+
+### The mail plugin
+
+Example: `23-hello_world-mail-plugin` 
+file: `/src/Plugin/Mail/HelloWorldMail.php`
+
+Parts of the class:
+ - nice Plugin annotation
+ - implements MailInterface
+ - format method (exact copy of default PhpMail plugin)
+ - create method (There we would inject/import our external PHP API library)
+ - mail method (there we will add our own implementation to our API)
+
+### Using our own plugin
+
+file: `hello_world.install`
+There is no UI to select which plugin the mail manager should use. 
+
+Usually we would implement the hook_install and hook_uninstall to be able to change the default manager
+
+We have 3 options (Will use the third one)
+ 1. All emails send with our plugin
+ 2. All emails sent for a module with a specific key (i.e. template) will use our plugin
+ 3. All emails send from our module will use our plugin
+
+You will have to uninstall / install to test this functionality. By default I have commented out the install script.
+
+``` 
+drupal module:uninstall hello_world
+drupal module:install hello_world
+```
+
 # Tokens
