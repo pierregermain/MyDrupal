@@ -220,3 +220,5 @@ Components:
  Documentation:
   - [drupal.org](https://www.drupal.org/project/api_tokens)
   - [token.api.php file](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Utility%21token.api.php/8.2.x)
+
+### Using Token API
