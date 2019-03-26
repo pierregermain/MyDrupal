@@ -193,3 +193,30 @@ drupal module:install hello_world
 ```
 
 # Tokens
+
+We want to include some personalized information in the mail text without hardcoding it.
+
+## The Token API
+
+About:
+ - Tokens in D8 are a standard formatted placeholders, which can be found inside a string and replaced by a real value from an related object.
+ - Tokens are flexible: you can define groups which contain related tokens.
+ - You will find many existing tokens that you can use in your code
+ - You can define your own tokens
+
+Format:
+``` 
+type:token
+```
+where:
+ - `type` is the machine-readable name of a token type (a group of tokens)
+ - `token` is the machine-readable name of a token within a group
+ 
+Components:
+ 1. `hook_token_info()` (to define token types and tokens)
+ 2. `hook_tokens()` (fired when a token is found in a string)
+ 3. `Token` service (to do the replacement)
+ 
+ Documentation:
+  - [drupal.org](https://www.drupal.org/project/api_tokens)
+  - [token.api.php file](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Utility%21token.api.php/8.2.x)
