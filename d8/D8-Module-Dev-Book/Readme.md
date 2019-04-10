@@ -194,6 +194,10 @@ drupal module:install hello_world
 
 # Tokens
 
+Example: `24-hello_world-token`
+
+The great thing about tokens is the UI component. There are modules to define strings and fill them up with tokens.
+
 We want to include some personalized information in the mail text without hardcoding it.
 
 ## The Token API
@@ -222,3 +226,46 @@ Components:
   - [token.api.php file](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Utility%21token.api.php/8.2.x)
 
 ### Using Token API
+
+Our custom `src/Logger/MailLogger` has a `$context` array in its `log()` method. That array has info about what will be logged.
+
+We will now get our user account from within our `MailLogger::log()` method (using `$account = $context['user'];` )
+
+This $account variable will have useful information about our logged in user (but keep in mind that is has not all the information about the user)
+
+And finally we will alter our `hook_mail()` in our `*.module` file to replace a token:
+
+```
+if (isset($params['user'])) {
+   $user_message = 'The user that was logged in: [current-user:name]';
+  $message['body'][] = \Drupal::token()->replace($user_message, ['current-user' => $params['user']]);
+}
+```
+
+Now when we get `user` parameter we will add a new message to the email informing who was logged in. 
+We use the `token` service to replace the string. The `replace` method takes the $user_message string 
+and as a paramter the token to be searched (in this case the 'current-user' string of the type 'user').
+
+
+### Defining new Tokens
+
+We want a dynamic "Hello World" message. We will expose the message with a token!
+
+First we implement the `hook_token_info()` in our module file. There we define a type and a token and return an array containing both.
+After that we implement the `hook_tokens()` to handle the replacement of our token.
+
+**TODO**: Explain this process (p.92) or watch https://drupalize.me/videos/what-are-tokens?p=1701
+
+To use the token we can use:
+
+``` 
+$final_string = \Drupal::token()->replace('The salutation text is:[hello_world:salutation]');
+```
+
+**TODO** Insert the code to make it work
+
+
+
+
+
+
