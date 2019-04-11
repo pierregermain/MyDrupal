@@ -1,6 +1,4 @@
 # Drupal 8 Module Development Notes
- - T1 Introduction
- - T2 Your first Module
 
 [TOC GENERATE](https://magnetikonline.github.io/markdown-toc-generate/)
 
