@@ -20,4 +20,11 @@ regardless of the theme.
 However, as long as the module uses the theme system properly, 
 a theme will be able to override (*overriding*) any HTML and/or CSS by swapping the modules implementation with its own.
 
+# Twig
+
+D7: PHPTemplate: `*.tpl.php`  files
+D8: Twig: `*.html.twig` files
+
+# Theme hooks
+
 
