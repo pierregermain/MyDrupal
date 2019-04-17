@@ -71,5 +71,81 @@ in this case `component_box` will be the theme hook, and $variables is the data 
 
 Modules and themes can override theme hooks using `hook_theme_registry_alter()`.
 
+# Theme Hook suggestions
 
+Pattern:
 
+```
+
+base_theme_hook__some_context
+
+```
+
+We append the context to the theme hook!
+
+The theme system checks:
+ - 1. If there is a template file matching the suggestion inside a theme
+ - 2. If there is a theme hook registered
+ - 3. If there is a base theme hook (Fallback)
+ 
+ ## Proposing suggestions
+ 
+ It is the caller that proposes different kind of suggestions
+ 
+ ```
+return [
+ '#theme' => 'item_list__my_list',
+ '#items' => $items
+];
+ ```
+ 
+ So in our case the base theme is `item_list` which renders `item-list.html.twig`.
+ It there is *no* `item-list--my-list.html.twig` and no `item_list__my_list` theme hook is registered
+ than the default `item_list` theme hook is used.
+ 
+## Provide suggestions from a module
+
+A module that registers a theme hook can also provide a list of suggestions by implementing:
+
+```
+hook_theme_suggestions_HOOK() 
+```
+
+where HOOK is the theme hook name.
+
+We can provide a list of theme hook suggestions by implementing:
+
+```
+hook_theme_suggestions_HOOK_alter() 
+```
+
+# Render Arrays
+
+Definition:
+```
+A render array is a structured array that provides data (probably nested) 
+along with hints as to how it should be rendered (properties, like #type).
+```
+ - they allow to delay the rendering
+ - we no longer have to/should render anything manually
+ - Drupal will know how to turn them into markup
+ 
+ 
+## The structure of a render array
+
+Render arrays are rendered by the `renderer` service which recursively renders each level. 
+The properties have a `#` sign whereas children not.
+Each level needs to have al least one property.
+Mandatory properties are the following:
+
+```
+#type
+#theme
+#markup
+```
+
+### #type
+### #theme
+### #markup
+
+ 
