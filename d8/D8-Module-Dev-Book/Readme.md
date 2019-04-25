@@ -145,7 +145,33 @@ Mandatory properties are the following:
 ```
 
 ### #type
+
+This property specifies the type of *render element* to be used. There are 2 types that we can use:
+ - generic
+ - form input: This is more complex, it is used for forms. You will need to deal with validation and other aspects.
+
 ### #theme
+
+It specifies that the render array needs to render some kind of data using one of the theme hooks defined.
+
 ### #markup
 
+You can use this property to directly output the markup.
+
+Example: The #markup property takes the simplest render array you will ever see.
+
+```
+return [
+  '#markup' => $this->t('Hello World')
+];
+```
+### Other Properties
+
+The `#plain_text` property is similar to the `#markup# porperty: You can output simple text with it.
  
+## The render pipeline
+
+
+
+
+
