@@ -171,7 +171,76 @@ The `#plain_text` property is similar to the `#markup# porperty: You can output 
  
 ## The render pipeline
 
+We have 2 render pipelines: 
+ 1. Symfony render pipeline
+ 2. Drupal render pipeline
+ 
+Drupal 8 uses many Symfony components:
+ - HTTPKernel component to turn a user request into a response object
+ - Even Dispatcher to dispatch events
+
+Controllers in Drupal 8 can return 2 things:
+ 1. Response objects
+ 2. Render arrays
+ 
+In the case of response objects, nothing has to be done, but in the case of render arrays it will be transformed into a response object traversing a lot of drupal layers.
+For that purpose it will use information of the render array, and each layer sometimes adds new information to that array until we get an actual response object.
+
+Once the process is finished an actual render array that can be transformed to HTML will be created.
+
+## Assets and libraries
+
+Working with CSS and JS files is done via the concepts of Libraries. 
+
+3 steps to make this happen:
+ 1. create your CSS/JS file
+ 2. create a library that includes them
+ 3. attach that library to a render array
+ 
+### Libraries
+ 
+#### Example 1
+ 
+To define a library we can create the following file: `module_name.libraries.yml`
+```
+my-library:
+  version: 1.x
+  css:
+    theme:
+      css/my_library.css: {}
+  js:
+    js/my_library.js: {}
+``` 
+
+where `{}` is for the advances options, and `theme` is defined by SMACSS:
+  - base
+  - layout
+  - component
+  - state
+  - theme
+
+where the latter will be included last.
 
 
+#### Example 2: CDN
 
+```
+angular.angularjs:
+ remote: https://github.com/angular/angular.js
+ (...)
+ js:
+   https://(...)/angular.js: {type: external, minified: true}
+```
 
+For external libraries more metadata is needed.
+
+#### Example 3: Add a dependency
+
+For example to add the jquery dependency:
+
+```
+dependencies:
+  - core/jquery
+```
+
+### Attaching libraries
