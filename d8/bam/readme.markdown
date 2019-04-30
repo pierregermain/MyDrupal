@@ -18,7 +18,7 @@ We will cover:
  - Controllers
  - Composer
  - Custom Code
- - Migrate Modules
+ - Migrate Modules (Upgrading from D7 to D8)
  - Unit and functional testing
  - Plugins
  
