@@ -1128,7 +1128,7 @@ But you can use the Http Kernel to do sub-requests.
 
 In the example `45-subrequest` you will see an admin page embedded in our page.
 
-#T13 Upgrading from D7 to D8
+# T13 Upgrading / Migrationg from D7 to D8
 
 ## About Knowledge
 
