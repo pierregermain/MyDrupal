@@ -244,3 +244,35 @@ dependencies:
 ```
 
 ### Attaching libraries
+
+Common methods:
+
+1. Attaching them to your render array
+
+```
+return [
+  '#theme' => 'some_theme_hook',
+  '#some_variable' => '$some_variable',
+  '#attached' => [
+    'library' => [
+      'my_module/my-library',
+    ],
+  ],
+];
+```
+
+2. Attaching the library to the entire page using `hook_page_attachments();`
+
+```
+function hook_page_attachments(array $attachments) {
+  $attachments['#attached']['library'][] = 'my_module/my-library';
+}
+```
+
+3. Using a preprocess function
+
+```
+function my_module_preprocess_theme_hook(&$variables) {
+  $variables['#attached']['library'][] = 'my_module/my-library';
+}
+```
