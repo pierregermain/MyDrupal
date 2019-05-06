@@ -1,5 +1,4 @@
-# BAM - Drupal 8 Developer Preparation
-
+- [BAM - Drupal 8 Developer Preparation](#bam---drupal-8-developer-preparation)
 - [About Ajax Error](#about-ajax-error)
 - [T1 Intro](#t1-intro)
 - [T2 Build a dummy module](#t2-build-a-dummy-module)
@@ -122,6 +121,7 @@
     + [Updating Permissions](#updating-permissions)
     + [Updating Hook Help](#updating-hook-help)
   * [About hook cron](#about-hook-cron)
+- [T14 Twig](#t14-twig)
   * [Introduction](#introduction-2)
   * [Drupal Twig Coding Standards](#drupal-twig-coding-standards)
   * [Creation of the Template file](#creation-of-the-template-file)
@@ -136,6 +136,7 @@
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
+# BAM - Drupal 8 Developer Preparation
 
 # About Ajax Error
 
@@ -1606,7 +1607,7 @@ and will use routes instead of path.
 
 Just run and debug the code and make changes where you need them.
 
-#T14 Twig
+# T14 Twig
 
 ## Introduction
 
