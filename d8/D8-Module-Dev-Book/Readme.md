@@ -1,6 +1,6 @@
 # Drupal 8 Module Development Notes
 
-#T4 Theming
+# T4 Theming
 
 [TOC GENERATE](https://magnetikonline.github.io/markdown-toc-generate/)
 
@@ -276,3 +276,37 @@ function my_module_preprocess_theme_hook(&$variables) {
   $variables['#attached']['library'][] = 'my_module/my-library';
 }
 ```
+
+# Common Theme Hooks
+
+## Lists
+
+- One of the most common HTML constructs are lists (ordered or unordered).
+- Drupal has always had the `item_list` theme hook:
+  - Defined in the `drupal_common_theme()`
+  - Preprocessed in [`template_preprocess_item_list()`](https://api.drupal.org/api/drupal/core%21includes%21theme.inc/function/template_preprocess_item_list/8.2.x)
+  - Uses `item-list.html.twig` template
+  - Has no default theme suggestions.
+
+
+Imagine you want to show in an `<ul>` the following items:
+
+```
+$items = [
+  'item 1',
+  'item 2',
+];
+```
+
+So you would use the following render array:
+
+```
+return [
+  '#theme' => 'item_list',
+  '#items' => $items,
+];
+```
+
+Keep in mind that:
+ - If you want to use a `ol` then use the `'#list_type' => 'ol'` variable.
+ - If you want to have a title then use `'#title' => 'My title'`
