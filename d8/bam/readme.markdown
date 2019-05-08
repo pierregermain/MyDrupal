@@ -1017,7 +1017,7 @@ If you are curious you will see that the method is in the Drupal.php class
 ```
 
 
-#T11 Symfony Components in Drupal 8
+# T11 Symfony Components in Drupal 8
 
 We will create a new module called `blindd8`
 
