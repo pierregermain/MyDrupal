@@ -310,3 +310,58 @@ return [
 Keep in mind that:
  - If you want to use a `ol` then use the `'#list_type' => 'ol'` variable.
  - If you want to have a title then use `'#title' => 'My title'`
+
+## Links
+
+Important Information:
+  - Preprocessed in [`template_preprocess_links()`](https://api.drupal.org/api/drupal/core%21includes%21theme.inc/function/template_preprocess_links/8.8.x)
+  - Uses `links.html.twig` template.
+  
+Example:
+
+```
+$links = [
+  [
+    'title' => 'Link 1'
+    'url' => Url::fromRoute('<front>'),
+  ],
+  [
+    'title' => 'Link 2'
+    'url' => Url::fromRoute('hello_world.hello'),
+  ],
+];
+
+return [
+  '#theme' => 'links',
+  '#links' => $links,
+  '#set_active_class' => true,
+];
+```
+
+where:
+ - `set_active_class` is to make present `is-active` class on the home page when rendered on the home page
+
+## Tables
+
+Important Information:
+  - Preprocessed in [`template_preprocess_table()`](https://api.drupal.org/api/drupal/core%21includes%21theme.inc/function/template_preprocess_table/8.8.x)
+  - The most important variables are
+    - `header`
+    - `rows`
+    
+Example:
+```
+$header = ['Column 1','Column 2'];
+$rows = [
+  ['Row 1'],['Row 1'],
+  ['Row 2'],['Row 2'],
+];
+
+return [
+  '#theme' => 'table',
+  '#header' => $header,
+  '#rows' => $rows,
+];
+```
+
+# Attributes
