@@ -67,6 +67,7 @@
   * [Parsing generic YAML File as an Array](#parsing-generic-yaml-file-as-an-array)
   * [YAML File for DI's](#yaml-file-for-di-s)
 - [T10 Dependency Injection Container in Drupal 8](#t10-dependency-injection-container-in-drupal-8)
+- [T11 Symfony Components in Drupal 8](#t11-Symfony-Components-in-Drupal-8)
   * [Introduction](#introduction-1)
     + [About Hook Menu](#about-hook-menu)
     + [About PSR-4](#about-psr-4)
@@ -1017,7 +1018,7 @@ If you are curious you will see that the method is in the Drupal.php class
 ```
 
 
-#T11 Symfony Components in Drupal 8
+# T11 Symfony Components in Drupal 8
 
 We will create a new module called `blindd8`
 
