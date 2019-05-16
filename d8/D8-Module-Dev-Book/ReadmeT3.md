@@ -1,6 +1,6 @@
 # Drupal 8 Module Development Notes
 
-#T3 Logging and Mailing
+# T3 Logging and Mailing
  
 [TOC GENERATE](https://magnetikonline.github.io/markdown-toc-generate/)
 
