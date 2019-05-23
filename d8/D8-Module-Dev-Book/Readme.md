@@ -365,3 +365,19 @@ return [
 ```
 
 # Attributes
+
+Most theme hooks have attributes, usually the variable is called `$attributes` or  `$wrapper_attributes`.
+
+Example:
+
+```
+$attributes = [
+  'id' => 'my-id',
+  'class' => ['class-one','class-two'],
+  'data-custom' => 'my custom data value',
+\;
+```
+
+# Theming our Hello World module
+
+Example: `30-hello_world-theming`
