@@ -5,6 +5,13 @@ hello_world.hello_world:
     _title: 'helloWorld'
   requirements:
     _permission: 'access content'
+hello_world.hello_world_component:
+  path: '/hello-world-component'
+  defaults:
+    _controller: '\Drupal\hello_world\Controller\HelloWorldController::helloWorldComponent'
+    _title: 'helloWorldComponent'
+  requirements:
+    _permission: 'access content'
 hello_world.redirect:
   path: '/redirect'
   defaults:

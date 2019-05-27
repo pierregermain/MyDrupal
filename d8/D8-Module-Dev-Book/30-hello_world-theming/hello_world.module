@@ -75,3 +75,44 @@ function hello_world_tokens($type, $tokens, array $data, array $options, \Drupal
     return $replacements;
 }
 
+/**
+ * Implements hook_theme().
+ *
+ * @param $existing
+ * @param $type
+ * @param $theme
+ * @param $path
+ *
+ * @return array
+ */
+function hello_world_theme($existing, $type, $theme, $path) {
+  return [
+    'hello_world_salutation' => [
+      'variables' => ['salutation' => NULL, 'target' => NULL, 'overridden' => FALSE],
+    ],
+  ];
+}
+
+/**
+ * Default preprocessor function for the theme hook.
+ *
+ * @param $variables
+ */
+function template_preprocess_hello_world_salutation(&$variables) {
+  $variables['attributes'] = [
+    'class' => ['salutation'],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function hello_world_theme_suggestions_hello_world_salutation(array $variables) {
+  $suggestions = [];
+
+  if ($variables['overridden'] == TRUE){
+    $suggestions[] = 'hello_world_salutation__overridden';
+  }
+
+  return $suggestions;
+}

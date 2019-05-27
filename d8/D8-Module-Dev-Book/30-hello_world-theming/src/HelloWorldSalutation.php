@@ -51,4 +51,54 @@ EventDispatcherInterface $eventDispatcher) {
     return $this->t('Hello');
 
   }
+
+  /**
+   * Returns a the Salutation render array.
+   */
+  public function getSalutationComponent() {
+    //$this->killSwitch->trigger();
+    $render = [
+      '#theme' => 'hello_world_salutation',
+      //'#salutation' => [
+      //  '#contextual_links' => [
+      //    'hello_world' => [
+      //      'route_parameters' => []
+      //    ],
+      //  ]
+      //],
+      //'#cache' => [
+      //  'max-age' => 0
+      //]
+    ];
+    $config = $this->configFactory->get('hello_world.custom_salutation');
+    //$render['#cache']['tags'] = $config->getCacheTags();
+    $salutation = $config->get('salutation');
+    if ($salutation != "") {
+      //$render['#salutation']['#markup'] = $salutation;
+      $render['#salutation'] = $salutation;
+      $render['#overridden'] = TRUE;
+      return $render;
+    }
+    $time = new \DateTime();
+    $render['#target'] = $this->t('world');
+    //$render['#attached'] = [
+    //  'library' => [
+    //    'hello_world/hello_world_clock'
+    //  ]
+    //];
+    if ((int) $time->format('G') >= 06 && (int) $time->format('G') < 12) {
+      $render['#salutation']['#markup'] = $this->t('Good morning');
+      return $render;
+    }
+    if ((int) $time->format('G') >= 12 && (int) $time->format('G') < 18) {
+      $render['#salutation']['#markup'] = $this->t('Good afternoon');
+      $render['#attached']['drupalSettings']['hello_world']['hello_world_clock']['afternoon'] = TRUE;
+      return $render;
+    }
+    if ((int) $time->format('G') >= 18) {
+      $render['#salutation']['#markup'] = $this->t('Good evening');
+      return $render;
+    }
+  }
+
 }

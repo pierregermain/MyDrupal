@@ -46,6 +46,7 @@ class HelloWorldController extends ControllerBase {
   public function newResponse() {
     return new Response ('my text');
   }
+
   /**
    * Hello.
    *
@@ -57,6 +58,16 @@ class HelloWorldController extends ControllerBase {
       '#type' => 'markup',
       '#markup' => $this->salutation->getSalutation(),
     ];
+  }
+
+  /**
+   * Hello.
+   *
+   * @return string
+   *   Return Hello string.
+   */
+  public function helloWorldComponent() {
+    return $this->salutation->getSalutationComponent();
   }
 
   /**
