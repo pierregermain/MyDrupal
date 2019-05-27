@@ -381,3 +381,81 @@ $attributes = [
 # Theming our Hello World module
 
 Example: `30-hello_world-theming`
+
+We want to wrap our own markup to the `HelloWorldController` output.
+
+We need this output
+```
+<div class="salutation> Good Morning <span class="salutation--target"> world</span></div>
+```
+
+So we implement hook_theme()
+
+```
+function hello_world_theme($existing, $type, $theme, $path) {
+  return [
+    'hello_world_salutation' => [
+      'variables' => ['salutation' => NULL, 'target' => NULL, 'overridden' => FALSE],
+    ],
+  ];
+}
+```
+
+By default this theme hook will look for Twig file with the name `hello-world-salutation.html.twig` inside the `/templates` folder.
+So we crete that file
+
+```
+<div {{ attributes }}>
+  {{ salutation }}
+  {% if target %}
+    <span class="salutation--taget">{{ target }}</span>
+  {% endif %}
+</div>
+```
+
+Keep in mind that the `attributes` array is already predefined in each theme hook and will be converted to the `Attributes` object.
+
+If we want to pass information to the `Attribute` object we can do so from the preprocessor:
+
+```
+function template_preprocess_hello_world_salutation(&$variables) {
+  $variables['attributes'] = [
+    'class' => ['salutation'],
+  ];
+}
+```
+
+We want also add a suggestion to our theme hook, so that we use an other twig file when the boolean value 'overridden' is TRUE
+
+```
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function hello_world_theme_suggestions_HOOK(array $variables) {
+  $suggestions = [];
+  
+  if ($variables['overridden'] == TRUE){
+    $suggestions[] = 'hello_world_salutation__overridden';
+  }
+  
+  return $suggestions;
+}
+```
+Now we can have different templates that render our message:
+```
+hello-world-salutation.html.twig
+hello-world-salutation--overridden.html.twig
+```
+
+## Using our hook
+
+
+We create a new service called `getSalutationComponent()` on our service class `/src/HelloWorldSalutation`.
+We also modify our controller `HelloWorldController` to return the new render array created with a new method called
+`public function helloWorldComponent()`
+We add a new route to test this method
+
+Link to test: 
+http://my-drupal.loc/hello-world-component
+
+
