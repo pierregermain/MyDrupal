@@ -378,9 +378,10 @@ $attributes = [
 \;
 ```
 
-# Theming our Hello World module
+# Theming our Hello World module (and using suggestions)
 
 Example: `30-hello_world-theming`
+Route: `/hello-world-component`
 
 We want to wrap our own markup to the `HelloWorldController` output.
 
@@ -402,7 +403,7 @@ function hello_world_theme($existing, $type, $theme, $path) {
 ```
 
 By default this theme hook will look for Twig file with the name `hello-world-salutation.html.twig` inside the `/templates` folder.
-So we crete that file
+So we create that file
 
 ```
 <div {{ attributes }}>
@@ -425,13 +426,13 @@ function template_preprocess_hello_world_salutation(&$variables) {
 }
 ```
 
-We want also add a suggestion to our theme hook, so that we use an other twig file when the boolean value 'overridden' is TRUE
+We want also add a **suggestion** to our theme hook, so that we use an other twig file when the boolean value 'overridden' is TRUE
 
 ```
 /**
  * Implements hook_theme_suggestions_HOOK().
  */
-function hello_world_theme_suggestions_HOOK(array $variables) {
+function hello_world_theme_suggestions_hello_world_salutation(array $variables) {
   $suggestions = [];
   
   if ($variables['overridden'] == TRUE){
@@ -453,7 +454,7 @@ hello-world-salutation--overridden.html.twig
 We create a new service called `getSalutationComponent()` on our service class `/src/HelloWorldSalutation`.
 We also modify our controller `HelloWorldController` to return the new render array created with a new method called
 `public function helloWorldComponent()`
-We add a new route to test this method
+We add a new route to test this method: `/hello-world-component`
 
 Link to test: 
 http://my-drupal.loc/hello-world-component
