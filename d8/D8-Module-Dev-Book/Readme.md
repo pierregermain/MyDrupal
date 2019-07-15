@@ -442,6 +442,9 @@ function hello_world_theme_suggestions_hello_world_salutation(array $variables) 
   return $suggestions;
 }
 ```
+
+Don't be confused by the use of the word "hook" two times in naming this function. The first "hook" should be replaced with the name of your theme or module. The latter "HOOK" should be replaced with the base name of the template file for which you're suggesting alternatives.
+
 Now we can have different templates that render our message:
 ```
 hello-world-salutation.html.twig

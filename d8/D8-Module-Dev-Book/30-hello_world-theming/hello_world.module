@@ -108,11 +108,17 @@ function template_preprocess_hello_world_salutation(&$variables) {
  * Implements hook_theme_suggestions_HOOK().
  */
 function hello_world_theme_suggestions_hello_world_salutation(array $variables) {
-  $suggestions = [];
+  $suggestions = array();
 
   if ($variables['overridden'] == TRUE){
-    $suggestions[] = 'hello_world_salutation__overridden';
+    $suggestions[] = 'hello_world_salutation__' . 'over';
   }
 
   return $suggestions;
+}
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function hello_world_theme_suggestions_hello_world_salutation_alter(array $suggestions, array $variables) {
+  $suggestions[] = 'hello_world_salutation__' . 'overridden';
 }
