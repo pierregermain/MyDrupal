@@ -119,6 +119,7 @@ function hello_world_theme_suggestions_hello_world_salutation(array $variables) 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
-function hello_world_theme_suggestions_hello_world_salutation_alter(array $suggestions, array $variables) {
+function hello_world_theme_suggestions_hello_world_salutation_alter(array &$suggestions, array $variables) {
   $suggestions[] = 'hello_world_salutation__' . 'overridden';
+  $suggestions[] = 'layout__hello_world_salutation__' . 'overridden';
 }

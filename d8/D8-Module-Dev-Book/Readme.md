@@ -466,3 +466,7 @@ TODO: Use suggestions
 https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!theme.api.php/group/themeable/8.2.x#sec_overriding_theme_hooks
 https://drupalize.me/tutorial/discover-existing-theme-hook-suggestions?p=2512
 
+
+Suggestions using hooks does not work. More info at:
+https://www.drupal.org/node/2911996
+

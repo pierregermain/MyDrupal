@@ -57,7 +57,9 @@ EventDispatcherInterface $eventDispatcher) {
    */
   public function getSalutationComponent() {
     $render = [
-      '#theme' => 'hello_world_salutation',
+      '#theme' => [
+        'hello_world_salutation',
+        ],
     ];
     $config = $this->configFactory->get('hello_world.custom_salutation');
     $salutation = $config->get('salutation');
