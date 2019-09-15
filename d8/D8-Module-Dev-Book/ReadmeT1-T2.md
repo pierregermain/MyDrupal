@@ -36,7 +36,7 @@
   - [Dispatch your own events](#dispatch-your-own-events)
   - [What can Subscribers do](#what-can-subscribers-do)
 
-- [T3 Logging and Mailing]
+- [T3 Logging and Mailing](#t3-logging-and-mailing)
 - [Introduction](#introduction)
 - [Logging](#logging)
   - [The Drupal 8 Logging theory](#the-drupal-8-logging-theory)
