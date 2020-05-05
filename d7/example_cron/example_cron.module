@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * Implements hook_cron().
+ *
+ * hook_cron() is the traditional (pre-Drupal 7) hook for doing "background"
+ * processing. It gets called every time the Drupal cron runs and must decide
+ * what it will do.
+ *
+ * In this example, it does a watchdog() call.
+ */
+
+function example_cron_cron() {
+
+    // This is a silly example of a cron job.
+    // It just makes it obvious that the job has run without
+    // making any changes to your database.
+    watchdog('example_cron', 'example_cron ran');
+
+}

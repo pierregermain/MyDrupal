@@ -1,0 +1,5 @@
+name = Example cron
+description = Example cron.
+package = Example Cron
+core = 7.x
+
