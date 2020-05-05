@@ -1,0 +1,4 @@
+hello_world.hello.title:
+  path: '/hello.title'
+  defaults:
+    _title: 'Our first route'

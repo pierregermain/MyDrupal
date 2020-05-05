@@ -1,0 +1,8 @@
+
+glue.my_controller_hello:
+  path: '/glue/hello/{name}'
+  defaults:
+    _controller: '\Drupal\glue\Controller\MyController::hello'
+    _title: 'My Manual Page'
+  requirements:
+    _permission: 'access content'

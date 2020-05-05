@@ -1,0 +1,60 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * @file
+ * Stores and displays a trail of previously visited pages.
+ */
+
+
+
+/**
+ * Implements hook_help().
+ */
+//function trails_help($path, $arg) {
+function trails_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'trails.settings':
+      return t('This settings page allows you to configure global settings for the Trails module.');
+
+    case 'help.page.trails':
+      $output = '<p>' . t('Trails is a simple module that displays a trail of pages that were last visited.') . '</p>';
+      return $output;
+  }
+}
+
+
+/**
+ * Implements hook_cron().
+ *
+ * See here for more information:
+ * http://api.drupal.org/api/drupal/modules--system--system.api.php/function/hook_cron/7
+ */
+function trails_cron() {
+
+  // Get the trail array.
+  $trail = \Drupal::state()->get('trails.history', array());
+
+  // Get the offset for array_slice, so we can save just last 2 items.
+  $count_minus = count($trail) - 2;
+
+  // Cut out everything but the last 2 visits.
+  $short_trail = array_slice($trail, $count_minus);
+
+  // Save the shorter trail
+  \Drupal::state()->set('trails.history', $short_trail);
+}
+
+/**
+ * Implements hook_theme().
+ */
+function trails_theme() {
+    return [
+        'trails_list' => [
+            'variables' => ['num_items' => NULL, 'items' => NULL],
+            'render element' => 'elements',
+            'template' => 'trails-list',
+        ],
+    ];
+}

@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ *
+ * @see template_preprocess_hello_world_salutation(&$variables)
+ */
+#}
+
+
+<div {{ attributes }}>
+        <p>Original</p>
+    {{ salutation }}
+    {% if target %}
+        <span class="salutation--target">{{ target }}</span>
+    {% endif %}
+</div>
