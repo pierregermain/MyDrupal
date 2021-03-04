@@ -1,4 +1,5 @@
 # MyDrupal
-[Wiki](https://github.com/pierregermain/MyDrupal/wiki)
+
+Welcome to my Drupal [Wiki](https://github.com/pierregermain/MyDrupal/wiki) (Just click the link)
 
 
